@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,11 +27,33 @@ namespace GestionProjets
         public MainWindow()
         {
             this.InitializeComponent();
+           
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "Clicked";
+
+        }
+
+        private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            //change selected item
+            NavigationViewItem selectedItem = navView.SelectedItem as NavigationViewItem;
+            selectedItem.FontSize = 34;
+            // get items
+            var items = navView.MenuItems;
+            //change other items back to normal
+            foreach (NavigationViewItem item in items)
+            {
+                if (!item.Tag.ToString().Equals(selectedItem.Tag.ToString()))
+                {
+                    item.FontSize = 20;
+                }
+            }
+
+
+            contentFrame.Navigate(typeof(BlankPage1));
         }
     }
 }
+
