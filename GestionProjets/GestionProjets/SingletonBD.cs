@@ -13,7 +13,7 @@ namespace GestionProjets
 {
     internal class SingletonBD
     {
-        MySqlConnection con = new MySqlConnection("Server=cours.cegep3r.info;Database=2248734-thibeault-jérémy;Uid=2248734;Pwd=2248734;");
+        MySqlConnection con = new MySqlConnection("Server=cours.cegep3r.info;Database=2248734-jérémy-thibeault;Uid=2248734;Pwd=2248734;");
         static SingletonBD instance = null;
 
         public SingletonBD()
