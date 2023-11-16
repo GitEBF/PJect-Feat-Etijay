@@ -52,12 +52,12 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-            SingletonEmploye singleton = SingletonEmploye.getInstance()
+            SingletonEmploye singleton = SingletonEmploye.getInstance();
             this.Frame.Navigate(typeof(pageGestionEmploye));
 
-            string commandText = "delete from materiel WHERE matricule=" + SingletonEmploye.getInstance().GetEmploye(index).Matricule;
-            bdInstance.edit(commandText);
-            SingletonMateriel.getInstance().supprimer(index);
+            string commandText = "delete from employe WHERE matricule=" + SingletonEmploye.getInstance().GetEmploye(index).Matricule;
+            SingletonBD.getInstance().edit(commandText);
+            SingletonEmploye.getInstance().supprimer(index);
         }
     }
 }

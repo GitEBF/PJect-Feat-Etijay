@@ -50,7 +50,7 @@ namespace GestionProjets
 
         private void lv_liste_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Frame.Navigate(typeof(Page_Visualiser), e.ClickedItem);
+            this.Frame.Navigate(typeof(pageZoomEmploye), e.ClickedItem);
         }
     }
 }

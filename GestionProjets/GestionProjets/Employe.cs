@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,19 @@ namespace GestionProjets
         string matricule, nom, prenom, email, adresse, statut, photo;
         DateTime dateNaissance, dateEmbauche;
         double tauxHoraire;
-        public Employe() { }
+        public Employe(MySqlDataReader r) {
+            this.nom = r.GetString("nom");
+            this.prenom = r.GetString("prenom");
+            this.email = r.GetString("email");
+            this.adresse = r.GetString("adresse");
+            this.statut = r.GetString("statut");
+            this.photo = r.GetString("photo");
+            this.dateEmbauche = r.GetDateTime("dateEmbauche");
+            this.DateNaissance = r.GetDateTime("DateNaissance");
+            this.tauxHoraire = r.GetDouble("tauxHoraire");
+            this.matricule = r.GetString("matricule");
+
+        }
         public Employe(string matricule, string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut) {
             this.matricule = matricule;
             this.nom = nom;

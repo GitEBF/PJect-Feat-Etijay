@@ -11,7 +11,7 @@ namespace GestionProjets
     {
 
         ObservableCollection<Employe> liste;
-        static SingletonEmploye liste = null;
+        static SingletonEmploye instance = null;
         public SingletonEmploye()
         {
             liste = new ObservableCollection<Employe>();
