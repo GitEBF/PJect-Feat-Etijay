@@ -52,5 +52,9 @@ namespace GestionProjets
         {
             liste.RemoveAt(position);
         }
+        public void refresh()
+        {
+            liste.Clear();
+        }
     }
 }

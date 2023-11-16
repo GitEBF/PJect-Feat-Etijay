@@ -43,7 +43,6 @@ namespace GestionProjets
             liste.Add(employe);
         }
 
-
         public void modifier(int position, Employe employe)
         {
             liste[position] = employe;
@@ -51,6 +50,10 @@ namespace GestionProjets
         public void supprimer(int position)
         {
             liste.RemoveAt(position);
+        }
+        public void refresh()
+        {
+            liste.Clear();
         }
     }
 }

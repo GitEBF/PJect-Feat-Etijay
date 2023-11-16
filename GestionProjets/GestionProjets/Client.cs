@@ -8,20 +8,21 @@ namespace GestionProjets
 {
     internal class Client
     {
+        int id;
+        string nom, adresse, numTelephone, email;
         public Client() { }
         public Client(int id, string nom, string adresse, string numTelephone, string email) {
-            id = id;
-            nom = nom;
-            adresse = adresse;
-            numTelephone = numTelephone;
-            email = email;
+            this.id = id;
+            this.nom = nom;
+            this.adresse = adresse;
+            this.numTelephone = numTelephone;
+            this.email = email;
         }
 
-        public int id { get; set; }
-        public string nom { get; set; }
-        public string adresse { get; set; }
-        public string numTelephone { get; set; }
-        public string email { get; set; }
-    
+        public int Id { get => id; set => id = value; }
+        public string Nom { get => nom; set => nom = value; }
+        public string Adresse { get => adresse; set => adresse = value; }
+        public string NumTelephone { get => numTelephone; set => numTelephone = value; }
+        public string Email { get => email; set => email = value; }
     }
 }
