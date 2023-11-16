@@ -63,7 +63,7 @@ namespace GestionProjets
         public void loadAllEmploye()
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT * FROM employé";
+            command.CommandText = "SELECT * FROM employés";
             con.Open();
 
             MySqlDataReader r = command.ExecuteReader();
