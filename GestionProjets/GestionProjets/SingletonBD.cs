@@ -60,7 +60,23 @@ namespace GestionProjets
             con.Close();
         }
 
-        
+        public void loadAllEmploye()
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM employé";
+            con.Open();
+
+            MySqlDataReader r = command.ExecuteReader();
+            SingletonEmploye sEmploye = SingletonEmploye.getInstance();
+            while (r.Read())
+            {
+                Employe employe = new Employe(r);
+                sEmploye.ajouter(employe);
+            }
+
+            r.Close();
+            con.Close();
+        }
 
 
     }
