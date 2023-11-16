@@ -43,6 +43,24 @@ namespace GestionProjets
 
         }
 
+        public void addEmploye(string nom, string prenom, DateTime dateNaissance, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL InsertEmploye(@nom,@prenom,@dateNaissance,@adresse,@dateEmbauche,@tauxHoraire,@photo,@statut)";
+            con.Open();
+            command.Parameters.AddWithValue("@nom", nom);
+            command.Parameters.AddWithValue("@prenom", prenom);
+            command.Parameters.AddWithValue("@dateNaissance", dateNaissance);
+            command.Parameters.AddWithValue("@adresse", adresse);
+            command.Parameters.AddWithValue("@dateEmbauche", dateEmbauche);
+            command.Parameters.AddWithValue("@tauxHoraire", tauxHoraire);
+            command.Parameters.AddWithValue("@photo", photo);
+            command.Parameters.AddWithValue("@statut", statut);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+
+        
 
 
     }
