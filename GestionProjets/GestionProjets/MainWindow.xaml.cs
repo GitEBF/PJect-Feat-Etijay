@@ -32,28 +32,9 @@ namespace GestionProjets
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-
-        }
-
-        private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            //change selected item
-            NavigationViewItem selectedItem = navView.SelectedItem as NavigationViewItem;
-            selectedItem.FontSize = 34;
-            // get items
-            var items = navView.MenuItems;
-            //change other items back to normal
-            foreach (NavigationViewItem item in items)
-            {
-                if (!item.Tag.ToString().Equals(selectedItem.Tag.ToString()))
-                {
-                    item.FontSize = 20;
-                }
-            }
-
-
             contentFrame.Navigate(typeof(BlankPage1));
         }
+
     }
 }
 

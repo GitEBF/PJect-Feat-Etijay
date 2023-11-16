@@ -9,31 +9,32 @@ namespace GestionProjets
 {
     internal class Employe
     {
+        string matricule, nom, prenom, email, adresse, statut, photo;
+        DateTime dateNaissance, dateEmbauche;
+        double tauxHoraire;
         public Employe() { }
         public Employe(string matricule, string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut) {
-            matricule = matricule;
-            nom = nom;
-            prenom = prenom;
-            dateNaissance = dateNaissance;
-            email = email;
-            adresse = adresse;
-            dateEmbauche = dateEmbauche;
-            tauxHoraire = tauxHoraire;
-            photo = photo;
-            statut = statut;
+            this.matricule = matricule;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.dateNaissance = dateNaissance;
+            this.email = email;
+            this.adresse = adresse;
+            this.dateEmbauche = dateEmbauche;
+            this.tauxHoraire = tauxHoraire;
+            this.photo = photo;
+            this.statut = statut;
         }
 
-        public string matricule { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string dateNaissance { get; set; }
-        public string email { get; set; }
-        public string adresse { get; set;}
-        public DateTime dateEmbauche { get; set; }
-        public int tauxHoraire { get; set; }   
-        public string photo { get; set; }
-        public string statut { get; set; }
-
-
+        public string Matricule { get => matricule; set => matricule = value; }
+        public string Nom { get => nom; set => nom = value; }
+        public string Prenom { get => prenom; set => prenom = value; }
+        public string Email { get => email; set => email = value; }
+        public string Adresse { get => adresse; set => adresse = value; }
+        public string Statut { get => statut; set => statut = value; }
+        public string Photo { get => photo; set => photo = value; }
+        public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
+        public DateTime DateEmbauche { get => dateEmbauche; set => dateEmbauche = value; }
+        public double TauxHoraire { get => tauxHoraire; set => tauxHoraire = value; }
     }
 }

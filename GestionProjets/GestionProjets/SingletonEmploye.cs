@@ -9,10 +9,9 @@ namespace GestionProjets
 {
     internal class SingletonEmploye
     {
+
         ObservableCollection<Employe> liste;
-        static SingletonEmploye instance = null;
-
-
+        static SingletonEmploye liste = null;
         public SingletonEmploye()
         {
             liste = new ObservableCollection<Employe>();
