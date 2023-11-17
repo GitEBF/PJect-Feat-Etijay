@@ -35,7 +35,22 @@ namespace GestionProjets
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            contentFrame.Navigate(typeof(BlankPage1));
+            NavigationViewItem selectedNavItem = args.SelectedItem as NavigationViewItem;
+            switch (selectedNavItem.Name)
+            {
+                /*case "NavItem_Creation":
+                    contentFrame.Navigate(typeof());
+                    break;*/
+                case "NavItem_Disposition":
+                    contentFrame.Navigate(typeof(pageGestionEmploye));
+                    break;
+                /*case "NavItem_SaveFile":
+                    contentFrame.Navigate(typeof());
+                    break;
+                case "NavItem_LoadFile":
+                    contentFrame.Navigate(typeof());
+                    break;*/
+            }
         }
 
     }

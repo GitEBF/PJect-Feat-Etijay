@@ -48,9 +48,9 @@ namespace GestionProjets
             lv_liste.ItemsSource = filteredList;
         }
 
-        private void lv_liste_ItemClick(object sender, ItemClickEventArgs e)
+        private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(pageZoomEmploye), e.ClickedItem);
+            this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedIndex);
         }
     }
 }

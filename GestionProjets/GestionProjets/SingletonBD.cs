@@ -60,6 +60,7 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@statut", statut);
             command.ExecuteNonQuery();
             con.Close();
+            LoadAllEmploye();
         }
         public void deleteEmployee(string matricule)
         {
@@ -96,6 +97,7 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@email", email);
             command.ExecuteNonQuery();
             con.Close();
+            LoadAllClient();
         }
         public void updateClient(int id, string nom, string adresse, string numTelephone, string email)
         {
@@ -146,6 +148,7 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@idClient", idClient);
             command.ExecuteNonQuery();
             con.Close();
+            LoadAllProjet();
         }
         public void updateProjet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, int idClient)
         {
@@ -195,6 +198,7 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@nbHeures", nbHeures);
             command.ExecuteNonQuery();
             con.Close();
+            LoadAllEmployeProjet();
         }
         public void updateEmployeProjet(string numProjet, string matriculeEmploye, int nbHeures)
         {

@@ -34,7 +34,7 @@ namespace GestionProjets
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             index = (int)e.Parameter;
-            item = (Employe)e.Parameter;
+            Employe item = SingletonEmploye.getInstance().GetEmploye(index);
             tbl_Matricule.Text = item.Matricule.ToString();
             tbl_NomPrenom.Text = "Nom: " + item.Prenom + ' ' + item.Nom;
             tbl_Email.Text = "Email: " + item.Email;
@@ -52,10 +52,7 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-            SingletonEmploye singleton = SingletonEmploye.getInstance();
             this.Frame.Navigate(typeof(pageGestionEmploye));
-
-            string commandText = "delete from employe WHERE matricule=" + SingletonEmploye.getInstance().GetEmploye(index).Matricule;
             SingletonBD.getInstance().deleteEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
             SingletonEmploye.getInstance().supprimer(index);
         }
