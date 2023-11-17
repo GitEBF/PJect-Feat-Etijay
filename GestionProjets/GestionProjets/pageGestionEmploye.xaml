@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:Page
+<Page
     xmlns:controls="clr-namespace:Microsoft.UI.Xaml.Controls;assembly=Microsoft.WinUI"
     x:Class="GestionProjets.pageGestionEmploye"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,35 +10,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:Grid ColumnDefinitions="0.05*,9*,0.05*" RowDefinitions="0.5*,9*">
-        <controls:Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.2*,5*">
-            <controls:TextBox x:Name="searchBoxMeuble" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Meuble" TextChanged="OnSearchTextChanged" FontSize="27"/>
-            <controls:TextBox x:Name="searchBoxCode" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Code" TextChanged="OnSearchTextChanged" FontSize="27"/>
-        </controls:Grid>
-        <controls:ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <controls:GridView x:Name="lv_liste" HorizontalAlignment="Center" ItemsSource="{}" IsItemClickEnabled="True" ItemClick="lv_liste_ItemClick">
-                <controls:GridView.ItemsPanel>
-                    <controls:ItemsPanelTemplate>
-                        <Vcontrols:ariableSizedWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
-                    </controls:ItemsPanelTemplate>
-                </controls:GridView.ItemsPanel>
-                <controls:GridView.ItemTemplate>
-                    <controls:DataTemplate x:DataType="local:Employe">
-                        <controls:Grid Width="400" Height="Auto" Margin="10">
-                            <controls:Grid Width="400" Height="Auto">
-                                <controls:StackPanel Orientation="Vertical">
-                                    <controls:TextBlock Text="{x:Bind Matricule}" FontSize="27" FontWeight="Bold"/>
-                                    <controls:TextBlock FontSize="23" FontWeight="Bold">
-                                        <controls:Run Text="code : "/>
-                                        <controls:Run Text="{x:Bind Nom}"/>
-                                    </controls:TextBlock>
+    <Grid ColumnDefinitions="0.05*,9*,0.05*" RowDefinitions="0.5*,9*">
+        <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.2*,5*">
+            <TextBox x:Name="searchBoxMeuble" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Meuble" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxCode" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Code" TextChanged="OnSearchTextChanged" FontSize="27"/>
+        </Grid>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <GridView x:Name="lv_liste" HorizontalAlignment="Center" ItemsSource="{}" IsItemClickEnabled="True" ItemClick="lv_liste_ItemClick">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VariableSizedWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Employe">
+                        <Grid Width="400" Height="Auto" Margin="10">
+                            <Grid Width="400" Height="Auto">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{x:Bind Matricule}" FontSize="27" FontWeight="Bold"/>
+                                    <TextBlock FontSize="23" FontWeight="Bold">
+                                        <Run Text="code : "/>
+                                        <Run Text="{x:Bind Nom}"/>
+                                    </TextBlock>
 
-                                </controls:StackPanel>
-                            </controls:Grid>
-                        </controls:Grid>
-                    </controls:DataTemplate>
-                </controls:GridView.ItemTemplate>
-            </controls:GridView>
-        </controls:ScrollViewer>
-    </controls:Grid>
-</controls:Page>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </ScrollViewer>
+    </Grid>
+</Page>
