@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,14 @@ namespace GestionProjets
     {
         int id;
         string nom, adresse, numTelephone, email;
+        public Client(MySqlDataReader r)
+        {
+            this.nom = r.GetString("nom");
+            this.email = r.GetString("email");
+            this.adresse = r.GetString("adresse");
+            this.numTelephone = r.GetString("numTelephone");
+            this.id = r.GetInt16("id");
+        }
         public Client() { }
         public Client(int id, string nom, string adresse, string numTelephone, string email) {
             this.id = id;

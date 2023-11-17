@@ -27,7 +27,10 @@ namespace GestionProjets
         public MainWindow()
         {
             this.InitializeComponent();
-            SingletonBD.getInstance().loadAllEmploye();
+            SingletonBD.getInstance().LoadAllEmploye();
+            SingletonBD.getInstance().LoadAllClient();
+            SingletonBD.getInstance().LoadAllProjet();
+            SingletonBD.getInstance().LoadAllEmployeProjet();
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

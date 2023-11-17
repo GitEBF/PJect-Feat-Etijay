@@ -56,7 +56,7 @@ namespace GestionProjets
             this.Frame.Navigate(typeof(pageGestionEmploye));
 
             string commandText = "delete from employe WHERE matricule=" + SingletonEmploye.getInstance().GetEmploye(index).Matricule;
-            SingletonBD.getInstance().edit(commandText);
+            SingletonBD.getInstance().deleteEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
             SingletonEmploye.getInstance().supprimer(index);
         }
     }

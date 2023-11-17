@@ -21,10 +21,10 @@ namespace GestionProjets
             this.statut = r.GetString("statut");
             this.photo = r.GetString("photo");
             this.dateEmbauche = r.GetDateTime("dateEmbauche");
-            this.DateNaissance = r.GetDateTime("DateNaissance");
+            this.DateNaissance = r.GetDateTime("dateNaissance");
             this.tauxHoraire = r.GetDouble("tauxHoraire");
             this.matricule = r.GetString("matricule");
-
+            this.statut = r.GetString("statut");
         }
         public Employe(string matricule, string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut) {
             this.matricule = matricule;

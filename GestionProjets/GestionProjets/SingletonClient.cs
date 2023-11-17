@@ -53,7 +53,7 @@ namespace GestionProjets
             liste.RemoveAt(position);
         }
 
-        public void drop()
+        public void refresh()
         {
             liste.Clear();
         }
