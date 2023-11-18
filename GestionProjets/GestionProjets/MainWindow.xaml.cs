@@ -24,13 +24,30 @@ namespace GestionProjets
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; private set; }
         public MainWindow()
         {
+            Instance = this;
             this.InitializeComponent();
             SingletonBD.getInstance().LoadAllEmploye();
             SingletonBD.getInstance().LoadAllClient();
             SingletonBD.getInstance().LoadAllProjet();
             SingletonBD.getInstance().LoadAllEmployeProjet();
+            if (SingletonBD.getInstance().checkIfFirstUse())
+            {
+                //contentFrame.Navigate(typeof(pageGestionProjet));
+                if (SingletonBD.getInstance().isUserLoggedIn())
+                {
+                    NavItem_Connexion.Content = "Déconnexion";
+                }
+            } else
+            {
+                //contentFrame.Navigate(typeof(pageConnexion));
+            }
+        }
+        public void UpdateNavItemConnexionContent(string newContent)
+        {
+            NavItem_Connexion.Content = newContent;
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -38,18 +55,21 @@ namespace GestionProjets
             NavigationViewItem selectedNavItem = args.SelectedItem as NavigationViewItem;
             switch (selectedNavItem.Name)
             {
-                /*case "NavItem_Creation":
-                    contentFrame.Navigate(typeof());
-                    break;*/
+                case "NavItem_Creation":
+                    
+                    break;
                 case "NavItem_Disposition":
                     contentFrame.Navigate(typeof(pageGestionEmploye));
                     break;
-                /*case "NavItem_SaveFile":
-                    contentFrame.Navigate(typeof());
+                case "NavItem_SaveFile":
+                    
                     break;
                 case "NavItem_LoadFile":
-                    contentFrame.Navigate(typeof());
-                    break;*/
+                    
+                    break;
+                case "NavItem_Connexion":
+                    contentFrame.Navigate(typeof(pageConnexion));
+                    break;
             }
         }
 
