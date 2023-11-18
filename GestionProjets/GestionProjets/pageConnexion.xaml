@@ -9,7 +9,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock>malllo????</TextBlock>
-    </Grid>
+    <ScrollViewer>
+        <Grid Padding="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Création compte administrateur" x:Name="title" Margin="15" FontSize="40" Grid.ColumnSpan="4" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1" Padding="20">
+                <TextBox x:Name="nomAdd" Header="Nom" VerticalAlignment="Top"/>
+                <TextBlock x:Name="nomErreur" Foreground="Red" FontSize="15" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Padding="20">
+                <TextBox x:Name="passwordAdd" Header="Mot de passe" VerticalAlignment="Top"/>
+                <TextBlock x:Name="passwordErreur" Foreground="Red" FontSize="15" />
+            </StackPanel>
+
+
+            <Button x:Name="btConnexion" Grid.Row="3" HorizontalAlignment="Center" FontSize="20" Background="LightGray" Click="btConnexion_Click">
+                <TextBlock Foreground="Black" x:Name="createText">Créer le compte</TextBlock>
+            </Button>
+
+        </Grid>
+    </ScrollViewer>
 </Page>

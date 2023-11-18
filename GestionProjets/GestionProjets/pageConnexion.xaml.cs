@@ -25,18 +25,53 @@ namespace GestionProjets
     {
         public pageConnexion()
         {
-            MainWindow mainWindow = MainWindow.Instance;
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            MainWindow mainWindow = MainWindow.Instance;
             if (SingletonBD.getInstance().isUserLoggedIn())
             {
-                SingletonBD.getInstance().loginLogout();
+                SingletonBD.getInstance().loginLogout(); 
                 this.Frame.Navigate(typeof(pageGestionEmploye));
                 mainWindow.UpdateNavItemConnexionContent("Connexion");
             }
-            else
+            if (SingletonBD.getInstance().checkIfFirstUse()) {
+                title.Text = "Connexion compte administrateur";
+                createText.Text = "Se connecter";
+            }
+        }
+
+        private void btConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = MainWindow.Instance;
+            if (nomAdd.Text is null) {
+                nomErreur.Text = "Veuillez écrire un nom valide";
+            } else if (passwordAdd.Text is null)
             {
-                SingletonBD.getInstance().loginLogout();
-                mainWindow.UpdateNavItemConnexionContent("Déconnexion");
+                passwordErreur.Text = "Veuillez écrire un mot de passe valide";
+            } else
+            {
+                if (SingletonBD.getInstance().checkIfFirstUse())
+                {
+                    if (SingletonBD.getInstance().Connexion(nomAdd.Text, passwordAdd.Text))
+                    {
+                        SingletonBD.getInstance().loginLogout();
+                        mainWindow.UpdateNavItemConnexionContent("Déconnexion");
+                        this.Frame.Navigate(typeof(pageGestionEmploye));
+                    } else
+                    {
+                        nomErreur.Text = "Le nom ou le mot de passe est invalide";
+                        passwordErreur.Text = "Le nom ou le mot de passe est invalide";
+                    }
+                } else
+                {
+                    SingletonBD.getInstance().createUser(nomAdd.Text, passwordAdd.Text);
+                    mainWindow.UpdateNavItemConnexionContent("Déconnexion");
+                    this.Frame.Navigate(typeof(pageGestionEmploye));
+                }
             }
         }
     }

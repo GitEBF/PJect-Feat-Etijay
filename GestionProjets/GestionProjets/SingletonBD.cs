@@ -274,6 +274,17 @@ namespace GestionProjets
             con.Close();
             return result;
         }
+        public bool Connexion(string name, string password)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL Connexion(@name, @password)";
+            con.Open();
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@password", password);
+            bool result = (bool)command.ExecuteScalar();
+            con.Close();
+            return result;
+        }
         public void loginLogout()
         {
             MySqlCommand command = con.CreateCommand();

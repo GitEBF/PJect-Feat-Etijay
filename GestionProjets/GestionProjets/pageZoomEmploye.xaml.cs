@@ -43,6 +43,10 @@ namespace GestionProjets
             tbl_dateEmbauche.Text = "DateEmbauche: " + item.DateEmbauche;
             tbl_dateNaissance.Text = "DateNaissance: " + item.DateNaissance;
             tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire;
+            if (!SingletonBD.getInstance().isUserLoggedIn())
+            {
+                admin.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
