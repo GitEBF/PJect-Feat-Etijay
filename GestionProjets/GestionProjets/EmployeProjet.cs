@@ -16,7 +16,7 @@ namespace GestionProjets
         {
             this.numProjet = r.GetString("numProjet");
             this.matriculeEmploye = r.GetString("matriculeEmploye");
-            this.nbHeure = r.GetInt16("nbHeure");
+            this.nbHeure = r.GetInt16("nbHeures");
         }
         public EmployeProjet() { }
         public EmployeProjet(string numProjet, string matriculeEmploye, int nbHeure)

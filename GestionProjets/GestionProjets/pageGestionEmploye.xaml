@@ -27,10 +27,10 @@
                         <Grid Width="400" Height="Auto" Margin="10">
                             <Grid Width="400" Height="Auto">
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Matricule}" FontSize="27" FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Nom}" FontSize="27" FontWeight="Bold"/>
                                     <TextBlock FontSize="23" FontWeight="Bold">
                                         <Run Text="code : "/>
-                                        <Run Text="{x:Bind Nom}"/>
+                                        <Run Text="{x:Bind matricule}"/>
                                     </TextBlock>
 
                                 </StackPanel>
