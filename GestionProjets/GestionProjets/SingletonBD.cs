@@ -4,10 +4,12 @@ using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GestionProjets
 {
@@ -293,6 +295,18 @@ namespace GestionProjets
             command.ExecuteNonQuery();
             con.Close();
         }
+
+        public bool CheckSiYFaitDeLoverLeGros(string matriculeEmploye)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL CheckSiYFaitDeLoverLeGros(@matricule)";
+            con.Open();
+            command.Parameters.AddWithValue("@matricule", matriculeEmploye);
+            bool result = (bool)command.ExecuteScalar();
+            con.Close();
+            return result;
+        }
+
 
     }
 }
