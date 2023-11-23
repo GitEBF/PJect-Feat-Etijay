@@ -35,14 +35,14 @@ namespace GestionProjets
             SingletonBD.getInstance().LoadAllEmployeProjet();
             if (SingletonBD.getInstance().checkIfFirstUse())
             {
-                //contentFrame.Navigate(typeof(pageGestionProjet));
+                contentFrame.Navigate(typeof(pageGestionProjet));
                 if (SingletonBD.getInstance().isUserLoggedIn())
                 {
                     NavItem_Connexion.Content = "Déconnexion";
                 }
             } else
             {
-                //contentFrame.Navigate(typeof(pageConnexion));
+                contentFrame.Navigate(typeof(pageConnexion));
             }
         }
         public void UpdateNavItemConnexionContent(string newContent)
@@ -56,13 +56,13 @@ namespace GestionProjets
             switch (selectedNavItem.Name)
             {
                 case "NavItem_Creation":
-                    
+                    contentFrame.Navigate(typeof(pageGestionProjet));
                     break;
                 case "NavItem_Disposition":
                     contentFrame.Navigate(typeof(pageGestionEmploye));
                     break;
                 case "NavItem_SaveFile":
-                    
+                    contentFrame.Navigate(typeof(pageGestionClient));
                     break;
                 case "NavItem_LoadFile":
                     

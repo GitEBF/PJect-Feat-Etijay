@@ -35,7 +35,7 @@ namespace GestionProjets
             if (SingletonBD.getInstance().isUserLoggedIn())
             {
                 SingletonBD.getInstance().loginLogout(); 
-                this.Frame.Navigate(typeof(pageGestionEmploye));
+                this.Frame.Navigate(typeof(pageGestionProjet));
                 mainWindow.UpdateNavItemConnexionContent("Connexion");
             }
             if (SingletonBD.getInstance().checkIfFirstUse()) {
@@ -60,7 +60,7 @@ namespace GestionProjets
                     {
                         SingletonBD.getInstance().loginLogout();
                         mainWindow.UpdateNavItemConnexionContent("Déconnexion");
-                        this.Frame.Navigate(typeof(pageGestionEmploye));
+                        this.Frame.Navigate(typeof(pageGestionProjet));
                     } else
                     {
                         nomErreur.Text = "Le nom ou le mot de passe est invalide";
@@ -70,7 +70,7 @@ namespace GestionProjets
                 {
                     SingletonBD.getInstance().createUser(nomAdd.Text, passwordAdd.Text);
                     mainWindow.UpdateNavItemConnexionContent("Déconnexion");
-                    this.Frame.Navigate(typeof(pageGestionEmploye));
+                    this.Frame.Navigate(typeof(pageGestionProjet));
                 }
             }
         }
