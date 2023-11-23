@@ -23,7 +23,7 @@
         <NavigationView.FooterMenuItems>
             <NavigationViewItem Foreground="{ThemeResource SystemFillColorSuccess}" Background="{ThemeResource SystemFillColorSuccessBackground}" Content="Connexion" x:Name="NavItem_Connexion">
                 <NavigationViewItem.Icon>
-                    <BitmapIcon UriSource="/Assets/loginIcon.png" Foreground="{ThemeResource SystemFillColorSuccess}"/>
+                    <BitmapIcon UriSource="/Assets/loginIcon.png" Foreground="{ThemeResource SystemFillColorSuccess}" x:Name="myBitmapIcon"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.FooterMenuItems>
