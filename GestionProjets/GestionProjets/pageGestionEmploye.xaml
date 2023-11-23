@@ -30,7 +30,7 @@
                                     <TextBlock Text="{x:Bind Nom}" FontSize="27" FontWeight="Bold"/>
                                     <TextBlock FontSize="23" FontWeight="Bold">
                                         <Run Text="code : "/>
-                                        <Run Text="{x:Bind matricule}"/>
+                                        <Run Text="{x:Bind Matricule}"/>
                                     </TextBlock>
 
                                 </StackPanel>
