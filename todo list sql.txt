@@ -1,0 +1,24 @@
+- UML                                                     
+✔ 10 data per table
+- 10 requête sql (5 views, 2 relations, 3 sous-requêtes)
+✔ 5 triggers
+✔ 5 procédures stockées
+- Messages d'erreurs
+- Document :
+	Dans un rapport présentant le projet, on inclura
+	• la représentation UML de la base relationnelle accompagnée d'explications,
+	• le schéma relationnel de la base,
+	• le travail individuel réalisé de chaque co-équipier,
+	• Description des procédures et déclencheurs,
+	• Fichier compressé de tout le code organisé par thème (création de tables, déclencheurs,
+	  fonctions, vues, requêtes, etc.)
+
+
+
+-----------------------------------------------------------------------------------------------------
+Les critères utilisés pour apprécier le projet sont
+	• La qualité générale du rapport (10),
+	• La pertinence des triggers (20),
+	• La complexité et l'exactitude des requêtes (15),
+	• Les vues, fonctions et procédures (45),
+	• L’utilisation de gestionnaire d’erreurs (10).
