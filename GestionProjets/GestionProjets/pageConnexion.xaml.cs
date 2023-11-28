@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,8 +36,11 @@ namespace GestionProjets
             if (SingletonBD.getInstance().isUserLoggedIn())
             {
                 SingletonBD.getInstance().loginLogout(); 
-                this.Frame.Navigate(typeof(pageGestionEmploye));
+                this.Frame.Navigate(typeof(pageGestionProjet));
                 mainWindow.UpdateNavItemConnexionContent("Connexion");
+                var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorSuccess"];
+                var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorSuccessBackground"];
+                mainWindow.UpdateNavItemColor(foreground, background);
             }
             if (SingletonBD.getInstance().checkIfFirstUse()) {
                 title.Text = "Connexion compte administrateur";
@@ -60,7 +64,10 @@ namespace GestionProjets
                     {
                         SingletonBD.getInstance().loginLogout();
                         mainWindow.UpdateNavItemConnexionContent("Déconnexion");
-                        this.Frame.Navigate(typeof(pageGestionEmploye));
+                        var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCritical"];
+                        var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCriticalBackground"];
+                        mainWindow.UpdateNavItemColor(foreground, background);
+                        this.Frame.Navigate(typeof(pageGestionProjet));
                     } else
                     {
                         nomErreur.Text = "Le nom ou le mot de passe est invalide";
@@ -70,7 +77,10 @@ namespace GestionProjets
                 {
                     SingletonBD.getInstance().createUser(nomAdd.Text, passwordAdd.Text);
                     mainWindow.UpdateNavItemConnexionContent("Déconnexion");
-                    this.Frame.Navigate(typeof(pageGestionEmploye));
+                    var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCritical"];
+                    var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCriticalBackground"];
+                    mainWindow.UpdateNavItemColor(foreground, background);
+                    this.Frame.Navigate(typeof(pageGestionProjet));
                 }
             }
         }

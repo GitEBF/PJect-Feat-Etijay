@@ -14,16 +14,16 @@
     SelectionChanged="navView_SelectionChanged" PaneDisplayMode="Left" PaneTitle="Gestion Projets" IsSettingsVisible="False">
         
         <NavigationView.MenuItems>
-            <NavigationViewItem Icon="Save" Content="Projets" x:Name="NavItem_Creation"/>
-            <NavigationViewItem Icon="Home" Content="Employés" x:Name="NavItem_Disposition" />
-            <NavigationViewItem Icon="Download" Content="Clients" x:Name="NavItem_SaveFile" />
+            <NavigationViewItem Icon="Caption" Content="Projets" x:Name="NavItem_Creation"/>
+            <NavigationViewItem Icon="People" Content="Employés" x:Name="NavItem_Disposition" />
+            <NavigationViewItem Icon="OtherUser" Content="Clients" x:Name="NavItem_SaveFile" />
             <NavigationViewItemSeparator/>
             <NavigationViewItem Icon="Upload" Content="Lire CSV" x:Name="NavItem_LoadFile" />
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
             <NavigationViewItem Foreground="{ThemeResource SystemFillColorSuccess}" Background="{ThemeResource SystemFillColorSuccessBackground}" Content="Connexion" x:Name="NavItem_Connexion">
                 <NavigationViewItem.Icon>
-                    <BitmapIcon UriSource="/Assets/loginIcon.png" Foreground="{ThemeResource SystemFillColorSuccess}"/>
+                    <BitmapIcon UriSource="/Assets/loginIcon.png" Foreground="{ThemeResource SystemFillColorSuccess}" x:Name="myBitmapIcon"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.FooterMenuItems>

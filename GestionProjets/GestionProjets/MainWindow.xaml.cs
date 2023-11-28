@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,19 +37,32 @@ namespace GestionProjets
             SingletonBD.getInstance().LoadAllEmployeProjet();
             if (SingletonBD.getInstance().checkIfFirstUse())
             {
-                //contentFrame.Navigate(typeof(pageGestionProjet));
+                contentFrame.Navigate(typeof(pageGestionProjet));
                 if (SingletonBD.getInstance().isUserLoggedIn())
                 {
                     NavItem_Connexion.Content = "Déconnexion";
+                    var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCritical"];
+                    var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCriticalBackground"];
+                    UpdateNavItemColor(foreground, background);
                 }
             } else
             {
-                //contentFrame.Navigate(typeof(pageConnexion));
+                contentFrame.Navigate(typeof(pageConnexion));
             }
         }
         public void UpdateNavItemConnexionContent(string newContent)
         {
             NavItem_Connexion.Content = newContent;
+        }
+
+        public void UpdateNavItemColor(Color foreground, Color background)
+        {
+            var foregroundColor = new SolidColorBrush(foreground);
+            var backgroundColor = new SolidColorBrush(background);
+
+            myBitmapIcon.Foreground = foregroundColor;
+            NavItem_Connexion.Foreground = foregroundColor;
+            NavItem_Connexion.Background = backgroundColor;
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -56,13 +71,13 @@ namespace GestionProjets
             switch (selectedNavItem.Name)
             {
                 case "NavItem_Creation":
-                    
+                    contentFrame.Navigate(typeof(pageGestionProjet));
                     break;
                 case "NavItem_Disposition":
                     contentFrame.Navigate(typeof(pageGestionEmploye));
                     break;
                 case "NavItem_SaveFile":
-                    
+                    contentFrame.Navigate(typeof(pageGestionClient));
                     break;
                 case "NavItem_LoadFile":
                     

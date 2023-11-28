@@ -15,6 +15,9 @@
     <None Remove="BlankPage1.xaml" />
     <None Remove="pageConnexion.xaml" />
     <None Remove="pageCreationEmploye.xaml" />
+    <None Remove="pageGestionClient.xaml" />
+    <None Remove="pageGestionProjet.xaml" />
+    <None Remove="pageZoomProjet.xaml" />
     <None Remove="UserControl1.xaml" />
   </ItemGroup>
 
@@ -45,6 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="pageCreationEmploye.xaml">
+    <Page Update="pageZoomProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pageGestionClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pageGestionProjet.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
