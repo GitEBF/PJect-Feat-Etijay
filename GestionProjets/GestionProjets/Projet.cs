@@ -12,7 +12,8 @@ namespace GestionProjets
     {
         string num, titre, description, statut;
         double budget;
-        int totalSalaire, idClient, nbEmploye;
+        int idClient, nbEmploye;
+        double totalSalaire;
         DateTime dateDebut;
         public Projet(MySqlDataReader r)
         {
@@ -27,7 +28,7 @@ namespace GestionProjets
             this.dateDebut = r.GetDateTime("dateDebut");
         }
         public Projet() { }
-        public Projet(string num,string titre, DateTime dateDebut, string description, int budget, int nbEmploye, int totalSalaire, int idClient, string statut) {
+        public Projet(string num,string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut) {
             this.num = num;
             this.titre = titre;
             this.dateDebut = dateDebut;
@@ -45,7 +46,7 @@ namespace GestionProjets
         public string Statut { get => statut; set => statut = value; }
         public double Budget { get => budget; set => budget = value; }
         public int NbEmploye { get => nbEmploye; set => nbEmploye = value; }
-        public int TotalSalaire { get => totalSalaire; set => totalSalaire = value; }
+        public double TotalSalaire { get => totalSalaire; set => totalSalaire = value; }
         public int IdClient { get => idClient; set => idClient = value; }
         public DateTime DateDebut { get => dateDebut; set => dateDebut = value; }
     }

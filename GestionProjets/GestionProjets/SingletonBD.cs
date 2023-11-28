@@ -296,10 +296,10 @@ namespace GestionProjets
             con.Close();
         }
 
-        public bool CheckSiYFaitDeLoverLeGros(string matriculeEmploye)
+        public bool CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL CheckSiYFaitDeLoverLeGros(@matricule)";
+            command.CommandText = "CALL CheckIfEmployeWorkOnCurrentProject(@matricule)";
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
             bool result = (bool)command.ExecuteScalar();
