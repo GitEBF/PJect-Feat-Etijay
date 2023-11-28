@@ -12,11 +12,13 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="BlankPage1.xaml" />
     <None Remove="pageConnexion.xaml" />
     <None Remove="pageCreationEmploye.xaml" />
     <None Remove="pageGestionClient.xaml" />
     <None Remove="pageGestionProjet.xaml" />
+    <None Remove="pageModifierClient.xaml" />
+    <None Remove="pageModifierProjet.xaml" />
+    <None Remove="PageZoomClient.xaml" />
     <None Remove="pageZoomProjet.xaml" />
     <None Remove="UserControl1.xaml" />
   </ItemGroup>
@@ -45,6 +47,21 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pageModifierProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pageModifierClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pageZoomClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="pageCreationEmploye.xaml">

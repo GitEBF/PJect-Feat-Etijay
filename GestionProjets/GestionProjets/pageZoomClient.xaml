@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="GestionProjets.pageZoomProjet"
+    x:Class="GestionProjets.pageZoomClient"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GestionProjets"
@@ -14,26 +14,16 @@
             <Grid ColumnDefinitions="3*,1*">
                 <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
 
-                    <TextBlock x:Name="tbl_Num" Text="Modele" Margin="0 0 0 0" FontSize="22"/>
+                    <TextBlock x:Name="tbl_Id" Text="Modele" Margin="0 0 0 0" FontSize="22"/>
                     <Rectangle HorizontalAlignment="Stretch" Height="2" Margin="0 0 0 0"/>
 
-                    <TextBlock x:Name="tbl_Titre" Text="Code" Width="320" Margin="10 10 10 10"/>
+                    <TextBlock x:Name="tbl_Nom" Text="Code" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_DateDebut" Text="Meuble" Width="320" Margin="10 10 10 10"/>
+                    <TextBlock x:Name="tbl_Adresse" Text="Meuble" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_Description" Text="Categorie" Width="320" Margin="10 10 10 10"/>
+                    <TextBlock x:Name="tbl_numTelephone" Text="Categorie" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_Budget" Text="Couleur" Width="320" Margin="10 10 10 10"/>
-
-                    <TextBlock x:Name="tbl_NbEmploye" Text="Prix" Width="320" Margin="10 10 10 10"/>
-
-                    <TextBlock x:Name="tbl_TotalSalaire" Text="Prix" Width="320" Margin="10 10 10 10"/>
-
-                    <TextBlock x:Name="tbl_IdClient" Text="Prix" Width="320" Margin="10 10 10 10"/>
-
-                    <TextBlock x:Name="tbl_Statut" Text="Prix" Width="320" Margin="10 10 10 10"/>
-
-                    <Image x:Name="photo" Height="150" />
+                    <TextBlock x:Name="tbl_email" Text="Couleur" Width="320" Margin="10 10 10 10"/>
 
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">

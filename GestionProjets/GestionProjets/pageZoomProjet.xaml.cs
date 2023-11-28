@@ -23,9 +23,42 @@ namespace GestionProjets
     /// </summary>
     public sealed partial class pageZoomProjet : Page
     {
+        Projet item;
+        int index;
         public pageZoomProjet()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            index = (int)e.Parameter;
+            Projet item = SingletonProjet.getInstance().GetProjet(index);
+            tbl_Num.Text = item.Num.ToString();
+            tbl_Titre.Text = "Titre: " + item.Titre;
+            tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
+            tbl_Description.Text = "Description: " + item.Description;
+            tbl_Budget.Text = "Budget: " + item.Budget;
+            tbl_NbEmploye.Text = "Nombre employé: " + item.NbEmploye;
+            tbl_TotalSalaire.Text = "Salaire total: " + item.TotalSalaire;
+            tbl_IdClient.Text = "Id client: " + item.IdClient;
+            tbl_Statut.Text = "Statut: " + item.Statut;
+            if (!SingletonBD.getInstance().isUserLoggedIn())
+            {
+                admin.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void btn_Modifier_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(pageModifierProjet), item);
+        }
+
+        private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(pageGestionProjet));
+            SingletonBD.getInstance().deleteEmployee(SingletonProjet.getInstance().GetProjet(index).Num);
+            SingletonProjet.getInstance().supprimer(index);
         }
     }
 }
