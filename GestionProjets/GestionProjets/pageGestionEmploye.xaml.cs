@@ -28,7 +28,9 @@ namespace GestionProjets
         public pageGestionEmploye()
         {
             this.InitializeComponent();
+            SingletonBD.getInstance().LoadAllEmploye();
             listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

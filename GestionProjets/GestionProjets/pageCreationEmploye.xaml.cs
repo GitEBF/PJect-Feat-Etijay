@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI.Relational;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
@@ -25,6 +26,10 @@ namespace GestionProjets {
     public sealed partial class pageCreationEmploye : Page {
         public pageCreationEmploye() {
             this.InitializeComponent();
+
+            dp_DateNaissance.MaxYear = DateTime.Now.AddYears(-18);
+            dp_DateNaissance.MinYear = DateTime.Now.AddYears(-65+18);
+            dp_DateEmbauche.MaxYear = DateTime.Now;
         }
 
         private void btn_Creer_Click(object sender, RoutedEventArgs e) {
@@ -69,6 +74,11 @@ namespace GestionProjets {
                     tabTxtBlock[2].Text = "Email Invalide";
                     erreur = true;
                 }
+                if (((DateTimeOffset)tabValInsert[8]).DateTime.AddYears(18).Year > ((DateTimeOffset)tabValInsert[4]).DateTime.Year)
+                {
+                    tabTxtBlock[4].Text = "Biggie ye underrage, tu peut pas le faire travailler";
+                    erreur = true;
+                }
 
                 if ((DateTimeOffset.Now - ((DateTimeOffset)tabValInsert[4])).TotalDays < (3 * 365)) {
 
@@ -87,8 +97,10 @@ namespace GestionProjets {
                 dateNaissance = ((DateTimeOffset)tabValInsert[8]).DateTime;
             }
 
+
             if (!erreur) {
                 SingletonBD.getInstance().addEmploye(nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut );
+                this.Frame.Navigate(typeof(pageGestionEmploye));
             }
 
         }

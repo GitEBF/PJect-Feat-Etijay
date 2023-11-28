@@ -35,7 +35,11 @@ namespace GestionProjets
 
         public Client GetClient(int position)
         {
-            return liste[position];
+            if (position >= 0)
+            {
+                return liste[position];
+            }
+            return liste[0];
         }
 
         public void ajouter(Client client)
