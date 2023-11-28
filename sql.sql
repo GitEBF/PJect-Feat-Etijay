@@ -89,7 +89,7 @@ CREATE TRIGGER CheckAgeBeforeInsertEmployes
 BEFORE INSERT ON Employes
 FOR EACH ROW
 BEGIN
-    IF DATEDIFF(CURDATE(), NEW.dateNaissance) < 6570 OR DATEDIFF(CURDATE(), NEW.dateNaissance) > 23725 THEN
+    IF (YEAR(CURDATE()) - YEAR(NEW.dateNaissance)) < 18 OR (YEAR(CURDATE()) - YEAR(NEW.dateNaissance)) > 65 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = "L'âge doit être entre 18 et 65 ans.";
     END IF;

@@ -34,7 +34,7 @@ namespace GestionProjets
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             index = (int)e.Parameter;
-            Employe item = SingletonEmploye.getInstance().GetEmploye(index);
+            item = SingletonEmploye.getInstance().GetEmploye(index);
             tbl_Matricule.Text = item.Matricule.ToString();
             tbl_NomPrenom.Text = "Nom: " + item.Prenom + ' ' + item.Nom;
             tbl_Email.Text = "Email: " + item.Email;
