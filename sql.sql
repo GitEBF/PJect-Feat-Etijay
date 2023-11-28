@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------------------------------- Tables ----------------------------------------------------------------------------------------------------------
+--                                                                   Tables --                                                                  
 
 CREATE TABLE Employes (
     matricule VARCHAR(10) PRIMARY KEY NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Employes (
     adresse VARCHAR(255) NOT NULL,
     dateEmbauche DATE NOT NULL,
     tauxHoraire int NOT NULL,
-    photo VARCHAR(255) NOT NULL,
+    photo VARCHAR(60000) NOT NULL,
     statut VARCHAR(255) NOT NULL DEFAULT 'Journalier'
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE user (
     loged bit DEFAULT 1
 );
 
----------------------------------------------------------------------------------------------------------- Triggers ----------------------------------------------------------------------------------------------------------
+--                                                                   Triggers --                                                                  
 
 DELIMITER //
 CREATE TRIGGER BeforeInsertEmployes
@@ -123,7 +123,32 @@ END;
 //
 DELIMITER ;
 
----------------------------------------------------------------------------------------------------------- Procédures ----------------------------------------------------------------------------------------------------------
+
+
+--                                                                   Functions  
+DELIMITER //                                                        
+CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS BOOLEAN
+BEGIN
+    DECLARE projectCount INT;
+
+    SELECT COUNT(*) INTO projectCount
+    FROM EmployesProjets EP
+    INNER JOIN Projets P ON P.num = EP.numProjet
+    WHERE matriculeEmploye = _matriculeEmploye AND P.statut = 'En cours';
+
+    IF projectCount >= 1 THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END //
+DELIMITER ;
+
+
+
+--                                                                   Procédures --       
+
+
 
 -- Insert
 DELIMITER //
@@ -394,26 +419,16 @@ DELIMITER ;
 
 -- Vérification
 DELIMITER //
-CREATE PROCEDURE CheckSiYFaitDeLoverLeGros(
+CREATE PROCEDURE CheckIfEmployeWorkOnCurrentProject(
     IN _matriculeEmploye VARCHAR(10)
 )
 BEGIN
-    DECLARE projectCount INT;
-
-    SELECT COUNT(*) INTO projectCount
-    FROM EmployesProjets
-    WHERE matriculeEmploye = _matriculeEmploye;
-
-    IF projectCount > 1 THEN
-        SELECT TRUE AS result;
-    ELSE
-        SELECT FALSE AS result;
-    END IF;
+    SELECT * FROM f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye);
 END //
 DELIMITER ;
 
 
----------------------------------------------------------------------------------------------------------- Données ----------------------------------------------------------------------------------------------------------
+--                                                                   Données                                                                 
 
 -- Employé
 CALL InsertEmploye('Pipoco', 'Isaac', 'pipoco@hotmail.music', '2005-01-15', '123 Main St', '2022-01-01', 20, 'https://boroktimes.com/storage/2023/07/channels4_profile.jpeg', 'Permanent');
@@ -465,7 +480,7 @@ CALL InsertEmployeProjet((SELECT num FROM projets LIMIT 1 OFFSET 9),(SELECT matr
 
 
 
----------------------------------------------------------------------------------------------------------- Views ----------------------------------------------------------------------------------------------------------
+--                                                                   Views                                                           
 -- 1. Employés avec leurs projets actuels
 CREATE VIEW View_EmployesProjetsActuels AS
 SELECT
@@ -539,7 +554,7 @@ WHERE
     P.statut = 'Terminé';
 
 
----------------------------------------------------------------------------------------------------------- Requêtes ----------------------------------------------------------------------------------------------------------
+--                                                                   Requêtes --                                                                  
 /*
 -- 1. Liste des employés avec leurs projets actuels
 SELECT * FROM View_EmployesProjetsActuels;
@@ -556,7 +571,7 @@ SELECT * FROM View_ListeEmployesSalaireTotal;
 -- 5. Liste des projets terminés
 SELECT * FROM View_ProjetsTermines;
 
--- 6. 
+-- 6.
 
 -- 7.
 
