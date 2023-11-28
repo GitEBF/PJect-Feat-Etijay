@@ -10,10 +10,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ColumnDefinitions="0.05*,9*,0.05*" RowDefinitions="0.5*,9*">
+    <Grid ColumnDefinitions="0.5*,9*,0.5*" RowDefinitions="0.5*,9*,0.5*">
         <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.2*,5*">
-            <TextBox x:Name="searchBoxMeuble" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Meuble" TextChanged="OnSearchTextChanged" FontSize="27"/>
-            <TextBox x:Name="searchBoxCode" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Code" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxMeuble" Grid.Column="0" Margin="0 5 0 5" PlaceholderText="Cherche par Meuble" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxCode" Grid.Column="2" Margin="0 5 0 5" PlaceholderText="Cherche par Code" TextChanged="OnSearchTextChanged" FontSize="27"/>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <GridView x:Name="lv_liste" HorizontalAlignment="Center" ItemsSource="{x:Bind listeEmploye}" IsItemClickEnabled="True" SelectionChanged="lv_liste_ItemClick">
@@ -40,5 +40,8 @@
                 </GridView.ItemTemplate>
             </GridView>
         </ScrollViewer>
+        <Grid Grid.Column="1" Grid.Row="2" ColumnDefinitions="15*,5*" >
+            <Button Grid.Column="2" Margin="0 5 0 5" x:Name="btn_Ajouter" Content="Ajouter un employé" Click="btn_Ajouter_Click"/>
+        </Grid>
     </Grid>
 </Page>

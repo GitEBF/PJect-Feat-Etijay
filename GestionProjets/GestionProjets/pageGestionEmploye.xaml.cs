@@ -52,5 +52,9 @@ namespace GestionProjets
         {
             this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedIndex);
         }
+
+        private void btn_Ajouter_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(pageCreationEmploye));
+        }
     }
 }

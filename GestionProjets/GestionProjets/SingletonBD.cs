@@ -44,7 +44,7 @@ namespace GestionProjets
 
         // ----------------------------------------------------------------------------------- Employee -------------------------------------------------------------------------------
 
-        public void addEmploye(string nom, string prenom, string email, DateTime dateNaissance, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut)
+        public void addEmploye(string nom, string prenom, string email, DateTime dateNaissance, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "CALL InsertEmploye(@nom,@prenom,@email,@dateNaissance,@adresse,@dateEmbauche,@tauxHoraire,@photo,@statut)";

@@ -26,8 +26,7 @@ namespace GestionProjets
             this.matricule = r.GetString("matricule");
             this.statut = r.GetString("statut");
         }
-        public Employe(string matricule, string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut) {
-            this.matricule = matricule;
+        public Employe(string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, int tauxHoraire, string photo, string statut) {
             this.nom = nom;
             this.prenom = prenom;
             this.dateNaissance = dateNaissance;
@@ -37,6 +36,7 @@ namespace GestionProjets
             this.tauxHoraire = tauxHoraire;
             this.photo = photo;
             this.statut = statut;
+            matricule = "HEHEHEHA";
         }
 
         public string Matricule { get => matricule; set => matricule = value; }
