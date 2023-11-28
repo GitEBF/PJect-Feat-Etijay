@@ -39,11 +39,11 @@ namespace GestionProjets
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchTermMatricule = searchBoxMatricule.Text.ToLower();
+            string searchTermId = searchBoxId.Text.ToLower();
             string searchTermNom = searchBoxNom.Text.ToLower();
 
             var filteredList = listeClient
-                .Where(item => item.Id.ToString().Contains(searchTermMatricule) && item.Nom.ToString().Contains(searchTermNom))
+                .Where(item => item.Id.ToString().Contains(searchTermId) && item.Nom.ToString().Contains(searchTermNom))
                 .ToList();
             lv_liste.ItemsSource = filteredList;
         }

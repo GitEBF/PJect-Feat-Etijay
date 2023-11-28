@@ -11,7 +11,7 @@ namespace GestionProjets
     internal class EmployeProjet
     {
         string numProjet, matriculeEmploye;
-        int nbHeure;
+        double nbHeure;
         public EmployeProjet(MySqlDataReader r)
         {
             this.numProjet = r.GetString("numProjet");
@@ -19,7 +19,7 @@ namespace GestionProjets
             this.nbHeure = r.GetInt16("nbHeures");
         }
         public EmployeProjet() { }
-        public EmployeProjet(string numProjet, string matriculeEmploye, int nbHeure)
+        public EmployeProjet(string numProjet, string matriculeEmploye, double nbHeure)
         {
             this.numProjet = numProjet;
             this.matriculeEmploye = matriculeEmploye;
@@ -28,7 +28,7 @@ namespace GestionProjets
 
         public string NumProjet { get => numProjet; set => numProjet = value; }
         public string MatriculeEmploye { get => matriculeEmploye; set => matriculeEmploye = value; }
-        public int NbHeure { get => nbHeure; set => nbHeure = value; }
+        public double NbHeure { get => nbHeure; set => nbHeure = value; }
      
     }
 }
