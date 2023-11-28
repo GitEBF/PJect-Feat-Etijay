@@ -11,7 +11,7 @@
 
     <Grid ColumnDefinitions="0.05*,9*,0.05*" RowDefinitions="0.5*,9*">
         <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.2*,5*">
-            <TextBox x:Name="searchBoxMatricule" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Matricule" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxId" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Id" TextChanged="OnSearchTextChanged" FontSize="27"/>
             <TextBox x:Name="searchBoxNom" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Nom" TextChanged="OnSearchTextChanged" FontSize="27"/>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
