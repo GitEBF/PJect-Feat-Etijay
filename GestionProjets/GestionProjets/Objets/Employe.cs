@@ -6,27 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionProjets
+namespace GestionProjets.Objets
 {
     internal class Employe
     {
         string matricule, nom, prenom, email, adresse, statut, photo;
         DateTime dateNaissance, dateEmbauche;
         double tauxHoraire;
-        public Employe(MySqlDataReader r) {
-            this.nom = r.GetString("nom");
-            this.prenom = r.GetString("prenom");
-            this.email = r.GetString("email");
-            this.adresse = r.GetString("adresse");
-            this.statut = r.GetString("statut");
-            this.photo = r.GetString("photo");
-            this.dateEmbauche = r.GetDateTime("dateEmbauche");
-            this.DateNaissance = r.GetDateTime("dateNaissance");
-            this.tauxHoraire = r.GetDouble("tauxHoraire");
-            this.matricule = r.GetString("matricule");
-            this.statut = r.GetString("statut");
+        public Employe(MySqlDataReader r)
+        {
+            nom = r.GetString("nom");
+            prenom = r.GetString("prenom");
+            email = r.GetString("email");
+            adresse = r.GetString("adresse");
+            statut = r.GetString("statut");
+            photo = r.GetString("photo");
+            dateEmbauche = r.GetDateTime("dateEmbauche");
+            DateNaissance = r.GetDateTime("dateNaissance");
+            tauxHoraire = r.GetDouble("tauxHoraire");
+            matricule = r.GetString("matricule");
+            statut = r.GetString("statut");
         }
-        public Employe(string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut) {
+        public Employe(string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut)
+        {
             this.nom = nom;
             this.prenom = prenom;
             this.dateNaissance = dateNaissance;

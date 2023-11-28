@@ -1,7 +1,8 @@
 ﻿using Microsoft.WindowsAppSDK.Runtime.Packages;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using System;
+using GestionProjets.Singletons;
+using GestionProjets.Objets;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;

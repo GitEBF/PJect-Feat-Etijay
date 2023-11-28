@@ -12,6 +12,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using GestionProjets.Singletons;
+using GestionProjets.Objets;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,7 +35,7 @@ namespace GestionProjets
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             index = (int)e.Parameter;
-            Projet item = SingletonProjet.getInstance().GetProjet(index);
+            item = SingletonProjet.getInstance().GetProjet(index);
             tbl_Num.Text = item.Num.ToString();
             tbl_Titre.Text = "Titre: " + item.Titre;
             tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
@@ -57,7 +59,7 @@ namespace GestionProjets
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(pageGestionProjet));
-            SingletonBD.getInstance().deleteEmployee(SingletonProjet.getInstance().GetProjet(index).Num);
+            SingletonBD.getInstance().deleteProjet(SingletonProjet.getInstance().GetProjet(index).Num);
             SingletonProjet.getInstance().supprimer(index);
         }
     }

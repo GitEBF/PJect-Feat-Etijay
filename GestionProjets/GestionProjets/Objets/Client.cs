@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionProjets
+namespace GestionProjets.Objets
 {
     internal class Client
     {
@@ -13,14 +13,15 @@ namespace GestionProjets
         string nom, adresse, numTelephone, email;
         public Client(MySqlDataReader r)
         {
-            this.nom = r.GetString("nom");
-            this.email = r.GetString("email");
-            this.adresse = r.GetString("adresse");
-            this.numTelephone = r.GetString("numTelephone");
-            this.id = r.GetInt16("id");
+            nom = r.GetString("nom");
+            email = r.GetString("email");
+            adresse = r.GetString("adresse");
+            numTelephone = r.GetString("numTelephone");
+            id = r.GetInt16("id");
         }
         public Client() { }
-        public Client(int id, string nom, string adresse, string numTelephone, string email) {
+        public Client(int id, string nom, string adresse, string numTelephone, string email)
+        {
             this.id = id;
             this.nom = nom;
             this.adresse = adresse;

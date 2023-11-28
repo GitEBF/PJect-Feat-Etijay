@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GestionProjets.Objets;
 
-namespace GestionProjets
+namespace GestionProjets.Singletons
 {
     internal class SingletonEmployeProjet
     {

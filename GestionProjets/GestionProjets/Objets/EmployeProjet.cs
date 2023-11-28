@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionProjets
+namespace GestionProjets.Objets
 {
     internal class EmployeProjet
     {
@@ -14,9 +14,9 @@ namespace GestionProjets
         double nbHeure;
         public EmployeProjet(MySqlDataReader r)
         {
-            this.numProjet = r.GetString("numProjet");
-            this.matriculeEmploye = r.GetString("matriculeEmploye");
-            this.nbHeure = r.GetInt16("nbHeures");
+            numProjet = r.GetString("numProjet");
+            matriculeEmploye = r.GetString("matriculeEmploye");
+            nbHeure = r.GetInt16("nbHeures");
         }
         public EmployeProjet() { }
         public EmployeProjet(string numProjet, string matriculeEmploye, double nbHeure)
@@ -29,6 +29,6 @@ namespace GestionProjets
         public string NumProjet { get => numProjet; set => numProjet = value; }
         public string MatriculeEmploye { get => matriculeEmploye; set => matriculeEmploye = value; }
         public double NbHeure { get => nbHeure; set => nbHeure = value; }
-     
+
     }
 }

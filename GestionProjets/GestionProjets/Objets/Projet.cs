@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionProjets
+namespace GestionProjets.Objets
 {
     internal class Projet
     {
@@ -17,18 +17,19 @@ namespace GestionProjets
         DateTime dateDebut;
         public Projet(MySqlDataReader r)
         {
-            this.num = r.GetString("num");
-            this.titre = r.GetString("titre");
-            this.description = r.GetString("description");
-            this.statut = r.GetString("statut");
-            this.budget = r.GetDouble("budget");
-            this.nbEmploye = r.GetInt16("nbEmploye");
-            this.totalSalaire = r.GetInt16("totalSalaire");
-            this.idClient = r.GetInt16("idClient");
-            this.dateDebut = r.GetDateTime("dateDebut");
+            num = r.GetString("num");
+            titre = r.GetString("titre");
+            description = r.GetString("description");
+            statut = r.GetString("statut");
+            budget = r.GetDouble("budget");
+            nbEmploye = r.GetInt16("nbEmploye");
+            totalSalaire = r.GetInt16("totalSalaire");
+            idClient = r.GetInt16("idClient");
+            dateDebut = r.GetDateTime("dateDebut");
         }
         public Projet() { }
-        public Projet(string num,string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut) {
+        public Projet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut)
+        {
             this.num = num;
             this.titre = titre;
             this.dateDebut = dateDebut;

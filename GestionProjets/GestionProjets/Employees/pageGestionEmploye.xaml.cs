@@ -13,6 +13,8 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using GestionProjets.Singletons;
+using GestionProjets.Objets;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,19 +24,21 @@ namespace GestionProjets
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class pageGestionProjet : Page
+    public sealed partial class pageGestionEmploye : Page
     {
-        ObservableCollection<Projet> listeProjet = new ObservableCollection<Projet>();
-        public pageGestionProjet()
+        ObservableCollection<Employe> listeEmploye = new ObservableCollection<Employe>();
+        public pageGestionEmploye()
         {
             this.InitializeComponent();
-            listeProjet = SingletonProjet.getInstance().getProjetListe();
+            SingletonBD.getInstance().LoadAllEmploye();
+            listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            listeProjet = SingletonProjet.getInstance().getProjetListe();
-            lv_liste.ItemsSource = listeProjet;
+            listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
+            lv_liste.ItemsSource = listeEmploye;
         }
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
@@ -42,15 +46,19 @@ namespace GestionProjets
             string searchTermMatricule = searchBoxMatricule.Text.ToLower();
             string searchTermNom = searchBoxNom.Text.ToLower();
 
-            var filteredList = listeProjet
-                .Where(item => item.Num.ToLower().Contains(searchTermMatricule) && item.Titre.ToString().Contains(searchTermNom))
+            var filteredList = listeEmploye
+                .Where(item => item.Matricule.ToLower().Contains(searchTermMatricule) && item.Nom.ToString().Contains(searchTermNom))
                 .ToList();
             lv_liste.ItemsSource = filteredList;
         }
 
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(pageZoomProjet), lv_liste.SelectedIndex);
+            this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedIndex);
+        }
+
+        private void btn_Ajouter_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(pageCreationEmploye));
         }
     }
 }
