@@ -171,7 +171,7 @@ namespace GestionProjets
             con.Close();
             LoadAllProjet();
         }
-        public void updateProjet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, int idClient)
+        public void updateProjet(string num, string titre, DateTime dateDebut, string description, double budget, int nbEmploye)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "CALL UpdateProject(@num, @titre, @dateDebut, @description, @budget, @nbEmploye, @idClient)";
@@ -182,7 +182,6 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@description", description);
             command.Parameters.AddWithValue("@budget", budget);
             command.Parameters.AddWithValue("@nbEmploye", nbEmploye);
-            command.Parameters.AddWithValue("@idClient", idClient);
             command.ExecuteNonQuery();
             con.Close();
         }

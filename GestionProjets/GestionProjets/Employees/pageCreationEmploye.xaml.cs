@@ -57,10 +57,10 @@ namespace GestionProjets
             }
 
             if (!erreur) {
-                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{2}$|^[0-9]{1,}$");
+                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
                 Match match = regex.Match((string)tabValInsert[5]);
                 if (match.Success) {
-                    tauxHoraire = double.Parse(match.Value.Replace('.', ','));
+                    tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
 
                 } else {
                     tabTxtBlock[5].Text = "Entrez un prix comme ceci 10000.00 ou 233";
@@ -73,12 +73,12 @@ namespace GestionProjets
                     email = match2.Value;
 
                 } else {
-                    tabTxtBlock[2].Text = "Email Invalide";
+                    tabTxtBlock[2].Text = "Email invalide, il doit être comme ceci: nom@email.com";
                     erreur = true;
                 }
                 if (((DateTimeOffset)tabValInsert[8]).DateTime.AddYears(18).Year > ((DateTimeOffset)tabValInsert[4]).DateTime.Year)
                 {
-                    tabTxtBlock[4].Text = "Biggie ye underrage, tu peut pas le faire travailler";
+                    tabTxtBlock[4].Text = "L'employé ne peux pas être ajouté vu qu'il n'a pas 18 ans lors de son embauche.";
                     erreur = true;
                 }
 
