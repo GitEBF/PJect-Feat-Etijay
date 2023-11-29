@@ -40,7 +40,7 @@
                         <x:String>4</x:String>
                         <x:String>5</x:String>
                     </ComboBox>
-                    <TextBlock x:Name="tblErreur_Statut" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
+                    <TextBlock x:Name="tblErreur_nbEmploye" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
                 </StackPanel>
                 <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">

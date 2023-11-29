@@ -1,4 +1,5 @@
 using GestionProjets.Objets;
+using GestionProjets.Projets;
 using GestionProjets.Singletons;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -57,6 +58,10 @@ namespace GestionProjets
             this.Frame.Navigate(typeof(pageGestionClient));
             SingletonBD.getInstance().deleteClient(SingletonClient.getInstance().GetClient(index).Id);
             SingletonClient.getInstance().supprimer(index);
+        }
+
+        private void btn_Projet_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(pageCreationProjet), item);
         }
     }
 }

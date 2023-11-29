@@ -74,11 +74,11 @@ namespace GestionProjets
 
             if (!erreur)
             {
-                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{2}$|^[0-9]{1,}$");
+                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
                 Match match = regex.Match((string)tabValInsert[5]);
                 if (match.Success)
                 {
-                    tauxHoraire = double.Parse(match.Value.Replace('.', ','));
+                    tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
 
                 }
                 else

@@ -58,25 +58,26 @@ namespace GestionProjets.Projets {
             }
 
             if (!erreur) {
-                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{2}$|^[0-9]{1,}$");
+                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
                 Match match = regex.Match((string)tabValInsert[3]);
                 if (match.Success) {
-                    budget = double.Parse(match.Value.Replace('.', ','));
+
+                    budget = double.Parse(match.Value.Replace(',', '.'));
 
                 } else {
-                    tabTxtBlock[5].Text = "Entrez un prix comme ceci 10000.00 ou 233";
+                    tabTxtBlock[3].Text = "Entrez un prix comme ceci 10000.00 ou 233";
                     erreur = true;
                 }
 
                 titre = (string)tabValInsert[0];
                 dateDebut = ((DateTimeOffset)tabValInsert[1]).DateTime;
                 description = (string)tabValInsert[2];
-                nbEmploye = (int)tabValInsert[4];
+                nbEmploye = int.Parse((String)tabValInsert[4]);
             }
 
 
             if (!erreur) {
-                SingletonBD.getInstance().addProjet(titre, dateDebut, description, budget, nbEmploye, clientTrucBinouche);
+                SingletonBD.getInstance().addProjet(titre, dateDebut, description, budget, nbEmploye, item.Id);
                 this.Frame.Navigate(typeof(pageGestionProjet));
             }
 
