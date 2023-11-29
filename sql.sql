@@ -340,8 +340,7 @@ CREATE PROCEDURE UpdateProject (
     IN _dateDebut DATE,
     IN _description VARCHAR(255),
     IN _budget DOUBLE(16,2),
-    IN _nbEmploye INT,
-    IN _idClient INT
+    IN _nbEmploye INT
 )
 BEGIN
     UPDATE Projets
@@ -350,8 +349,7 @@ BEGIN
         dateDebut = _dateDebut,
         description = _description,
         budget = _budget,
-        nbEmploye = _nbEmploye,
-        idClient = _idClient
+        nbEmploye = _nbEmploye
     WHERE num = _num;
 END //
 DELIMITER ;
@@ -552,7 +550,6 @@ JOIN
     Clients C ON P.idClient = C.id
 WHERE
     P.statut = 'Terminé';
-
 
 --                                                                   Requêtes --                                                                  
 /*

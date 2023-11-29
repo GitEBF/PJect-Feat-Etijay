@@ -1,3 +1,4 @@
+using GestionProjets.Objets;
 using GestionProjets.Singletons;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -81,11 +82,32 @@ namespace GestionProjets
                     contentFrame.Navigate(typeof(pageGestionClient));
                     break;
                 case "NavItem_LoadFile":
-                    
+                    btExport_Click();
                     break;
                 case "NavItem_Connexion":
                     contentFrame.Navigate(typeof(pageConnexion));
                     break;
+            }
+        }
+
+        private async void btExport_Click()
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+            picker.SuggestedFileName = "Projet";
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(new Window());
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+            if (monFichier != null)
+            {
+                List<Projet> liste = new List<Projet>();
+                for (int i = 0; i < SingletonProjet.getInstance().getProjetListe().Count; i++)
+                {
+                    Projet projet = SingletonProjet.getInstance().GetProjet(i);
+                    liste.Add(projet);
+                }
+                string content = string.Join(Environment.NewLine, liste.Select(x => x.ToString()));
+                await Windows.Storage.FileIO.WriteTextAsync(monFichier, content, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
         }
 

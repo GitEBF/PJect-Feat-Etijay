@@ -18,7 +18,7 @@
             <NavigationViewItem Icon="People" Content="Employés" x:Name="NavItem_Disposition" />
             <NavigationViewItem Icon="OtherUser" Content="Clients" x:Name="NavItem_SaveFile" />
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Icon="Upload" Content="Lire CSV" x:Name="NavItem_LoadFile" />
+            <NavigationViewItem Icon="Download" Content="Exporter les projets" x:Name="NavItem_LoadFile"/>
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
             <NavigationViewItem Foreground="{ThemeResource SystemFillColorSuccess}" Background="{ThemeResource SystemFillColorSuccessBackground}" Content="Connexion" x:Name="NavItem_Connexion">
