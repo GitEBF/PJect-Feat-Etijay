@@ -1,4 +1,3 @@
-using GestionProjets.Objets;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -18,37 +17,27 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace GestionProjets
+namespace GestionProjets.Clients
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class pageModifierClient : Page
+    public sealed partial class pageCreationClient : Page
     {
-        Client item;
-        public pageModifierClient()
+        public pageCreationClient()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            item = (Client)e.Parameter;
-            tb_Nom.Text = item.Nom;
-            tb_Adresse.Text = item.Adresse;
-            tb_NumTelephone.Text = item.NumTelephone;
-            tb_Email.Text = item.Email;
-        }
-
-        private void btn_Modifier_Click(object sender, RoutedEventArgs e)
+        private void btn_Creer_Click(object sender, RoutedEventArgs e)
         {
 
             string nom, adresse, numTelephone, email;
             nom = adresse = numTelephone = email = "";
 
-            Object[] tabValInsert = { tb_Nom.Text, tb_Adresse.Text, tb_NumTelephone.Text, tb_Email.Text };
-            string[] tabNom = { "Nom", "Adresse", "Numéro téléphone", "Email" };
-            TextBlock[] tabTxtBlock = { tblErreur_Nom, tblErreur_Adresse, tblErreur_NumTelephone, tblErreur_Email };
+            Object[] tabValInsert = { tb_Nom.Text, tb_Adresse.Text, tb_NumTelephone.Text, tb_Email.Text};
+            string[] tabNom = { "Nom", "Adresse", "Numéro téléphone", "Email"};
+            TextBlock[] tabTxtBlock = { tblErreur_Nom, tblErreur_Adresse, tblErreur_NumTelephone, tblErreur_Email};
             bool erreur = false;
 
             for (int i = 0; i < tabNom.Length; i++)
@@ -98,7 +87,7 @@ namespace GestionProjets
 
             if (!erreur)
             {
-                SingletonBD.getInstance().updateClient(item.Id, nom, adresse, numTelephone, email);
+                SingletonBD.getInstance().addClient(nom, adresse, numTelephone, email);
                 this.Frame.Navigate(typeof(pageGestionClient));
             }
 

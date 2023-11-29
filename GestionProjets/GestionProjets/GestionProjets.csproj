@@ -12,6 +12,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Clients\pageCreationClient.xaml" />
     <None Remove="pageConnexion.xaml" />
     <None Remove="pageCreationEmploye.xaml" />
     <None Remove="pageGestionClient.xaml" />
@@ -92,6 +93,12 @@
   <ItemGroup>
     <Folder Include="Employees\" />
     <Folder Include="Clients\" />
+    <Folder Include="Projets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Clients\pageCreationClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Projets\pageCreationProjet.xaml">

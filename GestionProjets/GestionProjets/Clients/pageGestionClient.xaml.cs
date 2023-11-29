@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
+using GestionProjets.Clients;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,6 +32,7 @@ namespace GestionProjets
         {
             this.InitializeComponent();
             listeClient = SingletonClient.getInstance().getClientListe();
+            SingletonBD.getInstance().LoadAllClient();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,6 +55,11 @@ namespace GestionProjets
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
         {
             this.Frame.Navigate(typeof(pageZoomClient), lv_liste.SelectedIndex);
+        }
+
+        private void btn_Ajouter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(pageCreationClient));
         }
     }
 }
