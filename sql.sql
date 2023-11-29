@@ -8,7 +8,7 @@ CREATE TABLE Employes (
     dateNaissance DATE NOT NULL,
     adresse VARCHAR(255) NOT NULL,
     dateEmbauche DATE NOT NULL,
-    tauxHoraire int NOT NULL,
+    tauxHoraire DOUBLE(16,2) NOT NULL,
     photo VARCHAR(60000) NOT NULL,
     statut VARCHAR(255) NOT NULL DEFAULT 'Journalier'
 );
@@ -28,9 +28,9 @@ CREATE TABLE Projets (
     titre VARCHAR(255) NOT NULL,
     dateDebut DATE NOT NULL,
     description VARCHAR(255) NOT NULL,
-    budget int NOT NULL,
+    budget DOUBLE(16,2) NOT NULL,
     nbEmploye int NOT NULL,
-    totalSalaire int NOT NULL DEFAULT 0,
+    totalSalaire DOUBLE(16,2) NOT NULL DEFAULT 0,
     idClient int NOT NULL,
     statut VARCHAR(255) NOT NULL DEFAULT 'En cours',
     FOREIGN KEY (idClient) REFERENCES Clients (id)
@@ -39,7 +39,7 @@ CREATE TABLE Projets (
 CREATE TABLE EmployesProjets (
     numProjet VARCHAR(11) NOT NULL,
     matriculeEmploye VARCHAR(10) NOT NULL,
-    nbHeures int NOT NULL DEFAULT 0,
+    nbHeures DOUBLE(16,2) NOT NULL DEFAULT 0,
     FOREIGN KEY (numProjet) REFERENCES Projets (num),
     FOREIGN KEY (matriculeEmploye) REFERENCES Employes (matricule),
     PRIMARY KEY (numProjet, matriculeEmploye)
@@ -159,7 +159,7 @@ CREATE PROCEDURE InsertEmploye(
     IN _dateNaissance DATE,
     IN _adresse VARCHAR(255),
     IN _dateEmbauche DATE,
-    IN _tauxHoraire INT,
+    IN _tauxHoraire DOUBLE(16,2),
     IN _photo VARCHAR(255),
     IN _statut VARCHAR(255)
 )
@@ -189,7 +189,7 @@ CREATE PROCEDURE InsertProjet (
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
     IN _description VARCHAR(255),
-    IN _budget INT,
+    IN _budget DOUBLE(16,2),
     IN _nbEmploye INT,
     IN _idClient INT
 )
@@ -205,7 +205,7 @@ DELIMITER //
 CREATE PROCEDURE InsertEmployeProjet(
     IN _numProjet VARCHAR(11),
     IN _matriculeEmploye VARCHAR(10),
-    IN _nbHeures INT
+    IN _nbHeures DOUBLE(16,2)
 )
 BEGIN
     INSERT INTO EmployesProjets (numProjet, matriculeEmploye, nbHeures)
@@ -294,7 +294,7 @@ CREATE PROCEDURE UpdateEmployee (
     IN _dateNaissance DATE,
     IN _adresse VARCHAR(255),
     IN _dateEmbauche DATE,
-    IN _tauxHoraire INT,
+    IN _tauxHoraire DOUBLE(16,2),
     IN _photo VARCHAR(255),
     IN _statut VARCHAR(255)
 )
@@ -339,7 +339,7 @@ CREATE PROCEDURE UpdateProject (
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
     IN _description VARCHAR(255),
-    IN _budget INT,
+    IN _budget DOUBLE(16,2),
     IN _nbEmploye INT,
     IN _idClient INT
 )
@@ -360,7 +360,7 @@ DELIMITER //
 CREATE PROCEDURE UpdateEmployeeProject (
     IN _numProjet VARCHAR(11),
     IN _matriculeEmploye VARCHAR(10),
-    IN _nbHeures INT
+    IN _nbHeures DOUBLE(16,2)
 )
 BEGIN
     UPDATE EmployesProjets
@@ -423,7 +423,7 @@ CREATE PROCEDURE CheckIfEmployeWorkOnCurrentProject(
     IN _matriculeEmploye VARCHAR(10)
 )
 BEGIN
-    SELECT * FROM f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye);
+    SELECT f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye);
 END //
 DELIMITER ;
 

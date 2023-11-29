@@ -119,7 +119,6 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@email", email);
             command.ExecuteNonQuery();
             con.Close();
-            LoadAllClient();
         }
         public void updateClient(int id, string nom, string adresse, string numTelephone, string email)
         {

@@ -10,10 +10,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ColumnDefinitions="0.05*,9*,0.05*" RowDefinitions="0.5*,9*">
-        <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.2*,5*">
-            <TextBox x:Name="searchBoxId" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Id" TextChanged="OnSearchTextChanged" FontSize="27"/>
-            <TextBox x:Name="searchBoxNom" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Nom" TextChanged="OnSearchTextChanged" FontSize="27"/>
+    <Grid ColumnDefinitions="0.5*,9*,0.5*" RowDefinitions="0.6*,9*,1*">
+        <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.5*,5*">
+            <TextBox x:Name="searchBoxId" Grid.Column="0" PlaceholderText="Cherche par Id" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxNom" Grid.Column="2"  PlaceholderText="Cherche par Nom" TextChanged="OnSearchTextChanged" FontSize="27"/>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <GridView x:Name="lv_liste" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionChanged="lv_liste_ItemClick">
@@ -29,10 +29,9 @@
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{x:Bind Nom}" FontSize="27" FontWeight="Bold"/>
                                     <TextBlock FontSize="23" FontWeight="Bold">
-                                  <Run Text="id : "/>
-                                  <Run Text="{x:Bind Id}"/>
+                                      <Run Text="id : "/>
+                                      <Run Text="{x:Bind Id}"/>
                                     </TextBlock>
-
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -40,5 +39,10 @@
                 </GridView.ItemTemplate>
             </GridView>
         </ScrollViewer>
+        <Viewbox Grid.Column="1" Grid.Row="2">
+            <Grid ColumnDefinitions="15*,5*" >
+                <Button Grid.Column="2" Margin="0 5 0 5" x:Name="btn_Ajouter" Content="Ajouter un employé" Click="btn_Ajouter_Click"/>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>
