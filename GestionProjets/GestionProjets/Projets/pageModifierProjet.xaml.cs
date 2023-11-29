@@ -1,3 +1,4 @@
+using GestionProjets.Objets;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -23,9 +25,66 @@ namespace GestionProjets
     /// </summary>
     public sealed partial class pageModifierProjet : Page
     {
+        Projet item;
         public pageModifierProjet()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            item = (Projet)e.Parameter;
+        }
+
+        private void btn_Creer_Click(object sender, RoutedEventArgs e) {
+
+            string titre, description;
+            titre = description = "";
+            int nbEmploye = 1;
+            double budget = 0;
+
+            DateTime dateDebut = DateTime.Now;
+            Object[] tabValInsert = { tb_Titre.Text, dp_DateDebut.SelectedDate, tb_Description.Text, tb_Budget.Text, cb_nbEmploye.SelectedValue };
+            string[] tabNom = { "Titre", "Date de début", "Description", "Budget", "Nombre d'employés" };
+            TextBlock[] tabTxtBlock = { tblErreur_Titre, tblErreur_DateDebut, tblErreur_Description, tblErreur_Budget, tblErreur_nbEmploye };
+            bool erreur = false;
+
+            for (int i = 0; i < tabNom.Length; i++) {
+                tabTxtBlock[i].Text = "";
+                if (tabValInsert[i] == null || string.IsNullOrEmpty(tabValInsert[i].ToString())) {
+                    erreur = true;
+                    tabTxtBlock[i].Text = "Le valeur du champ '" + tabNom[i] + "' est vide.";
+
+                }
+            }
+
+            if (!erreur) {
+                Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
+                Match match = regex.Match((string)tabValInsert[3]);
+                if (match.Success) {
+
+                    budget = double.Parse(match.Value.Replace(',', '.'));
+
+                } else {
+                    tabTxtBlock[3].Text = "Entrez un prix comme ceci 10000.00 ou 233";
+                    erreur = true;
+                }
+
+                titre = (string)tabValInsert[0];
+                dateDebut = ((DateTimeOffset)tabValInsert[1]).DateTime;
+                description = (string)tabValInsert[2];
+                nbEmploye = int.Parse((String)tabValInsert[4]);
+            }
+
+
+            if (!erreur) {
+                SingletonBD.getInstance().updateProjet(item.Num, titre, dateDebut, description, budget, nbEmploye);
+                this.Frame.Navigate(typeof(pageGestionProjet));
+            }
+
+        }
+
+        private void btn_Modifier_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
