@@ -12,8 +12,11 @@
 
     <Grid ColumnDefinitions="0.5*,9*,0.5*" RowDefinitions="0.6*,9*,1*">
         <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.5*,5*">
-            <TextBox x:Name="searchBoxMatricule" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Matricule" TextChanged="OnSearchTextChanged" FontSize="27"/>
-            <TextBox x:Name="searchBoxNom" Grid.Column="2" Grid.Row="0" PlaceholderText="Cherche par Nom" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <TextBox x:Name="searchBoxMatricule" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Titre" TextChanged="OnSearchTextChanged" FontSize="27"/>
+            <ComboBox x:Name="cb_status" Grid.Column="2" Grid.Row="0" PlaceholderText="Status" SelectionChanged="cb_status_SelectionChanged" SelectedValue="En cours" FontSize="27">
+                <x:String>En cours</x:String>
+                <x:String>Terminé</x:String>
+            </ComboBox>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <GridView x:Name="lv_liste" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionChanged="lv_liste_ItemClick">
@@ -41,8 +44,8 @@
             </GridView>
         </ScrollViewer>
         <Viewbox Grid.Column="1" Grid.Row="2">
-            <Grid ColumnDefinitions="15*,5*" >
-                <Button Grid.Column="2" Margin="0 5 0 5" x:Name="btn_Ajouter" Content="Ajouter un Projet" Click="btn_Ajouter_Click"/>
+            <Grid ColumnDefinitions="15*" >
+                <TextBlock Grid.Column="0" Margin="0 5 0 5" x:Name="btn_Ajouter" Text="Pour Créer un projet, allez sur la page client et à partir d'un client cliquez sur 'Créer un projet'."/>
             </Grid>
         </Viewbox>
     </Grid>

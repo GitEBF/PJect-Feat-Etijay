@@ -29,13 +29,19 @@ namespace GestionProjets
         public pageModifierProjet()
         {
             this.InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             item = (Projet)e.Parameter;
+            tb_Titre.Text = item.Titre;
+            tb_Budget.Text = item.Budget.ToString();
+            tb_Description.Text = item.Description;
+            cb_nbEmploye.SelectedValue = item.NbEmploye.ToString();
+            dp_DateDebut.SelectedDate = item.DateDebut;
         }
 
-        private void btn_Creer_Click(object sender, RoutedEventArgs e) {
+        private void btn_Modifier_Click(object sender, RoutedEventArgs e) {
 
             string titre, description;
             titre = description = "";
@@ -80,10 +86,6 @@ namespace GestionProjets
                 SingletonBD.getInstance().updateProjet(item.Num, titre, dateDebut, description, budget, nbEmploye);
                 this.Frame.Navigate(typeof(pageGestionProjet));
             }
-
-        }
-
-        private void btn_Modifier_Click(object sender, RoutedEventArgs e) {
 
         }
     }

@@ -174,7 +174,7 @@ namespace GestionProjets
         public void updateProjet(string num, string titre, DateTime dateDebut, string description, double budget, int nbEmploye)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL UpdateProject(@num, @titre, @dateDebut, @description, @budget, @nbEmploye, @idClient)";
+            command.CommandText = "CALL UpdateProject(@num, @titre, @dateDebut, @description, @budget, @nbEmploye)";
             con.Open();
             command.Parameters.AddWithValue("@num", num);
             command.Parameters.AddWithValue("@titre", titre);

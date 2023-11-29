@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
 using GestionProjets.Projets;
+using Org.BouncyCastle.Asn1.Cmp;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,28 +28,41 @@ namespace GestionProjets
     /// </summary>
     public sealed partial class pageGestionProjet : Page
     {
+        GridView liste = null;
         ObservableCollection<Projet> listeProjet = new ObservableCollection<Projet>();
         public pageGestionProjet()
         {
             this.InitializeComponent();
+            SingletonBD.getInstance().LoadAllProjet();
             listeProjet = SingletonProjet.getInstance().getProjetListe();
+            liste = lv_liste;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             listeProjet = SingletonProjet.getInstance().getProjetListe();
-            lv_liste.ItemsSource = listeProjet;
+            if (liste != null) {
+                liste.ItemsSource = listeProjet;
+            }
+            
+        }
+
+        private void changes() {
+            string searchTermMatricule = searchBoxMatricule.Text.ToLower();
+            string status = cb_status.SelectedValue.ToString();
+
+            var filteredList = listeProjet
+                .Where(item => item.Titre.ToLower().Contains(searchTermMatricule.ToLower()) && item.Statut.ToString() == status)
+                .ToList();
+            if (liste != null) {
+                lv_liste.ItemsSource = filteredList;
+            }
+            
         }
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchTermMatricule = searchBoxMatricule.Text.ToLower();
-            string searchTermNom = searchBoxNom.Text.ToLower();
-
-            var filteredList = listeProjet
-                .Where(item => item.Num.ToLower().Contains(searchTermMatricule) && item.Titre.ToString().Contains(searchTermNom))
-                .ToList();
-            lv_liste.ItemsSource = filteredList;
+            changes();
         }
 
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
@@ -58,6 +72,10 @@ namespace GestionProjets
 
         private void btn_Ajouter_Click(object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(pageCreationProjet));
+        }
+
+        private void cb_status_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            changes();
         }
     }
 }
