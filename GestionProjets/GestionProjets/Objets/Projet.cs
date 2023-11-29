@@ -50,5 +50,9 @@ namespace GestionProjets.Objets
         public double TotalSalaire { get => totalSalaire; set => totalSalaire = value; }
         public int IdClient { get => idClient; set => idClient = value; }
         public DateTime DateDebut { get => dateDebut; set => dateDebut = value; }
+        public override string ToString()
+        {
+            return $"{Num},{Titre},{DateDebut},{Description},{Budget},{NbEmploye},{TotalSalaire},{IdClient},{Statut}";
+        }
     }
 }
