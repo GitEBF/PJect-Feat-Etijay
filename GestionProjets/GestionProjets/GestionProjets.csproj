@@ -20,6 +20,7 @@
     <None Remove="pageModifierProjet.xaml" />
     <None Remove="PageZoomClient.xaml" />
     <None Remove="pageZoomProjet.xaml" />
+    <None Remove="Projets\pageCreationProjet.xaml" />
     <None Remove="UserControl1.xaml" />
   </ItemGroup>
 
@@ -90,8 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Employees\" />
-    <Folder Include="Projets\" />
     <Folder Include="Clients\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Projets\pageCreationProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!-- 

@@ -157,7 +157,7 @@ namespace GestionProjets
 
         // ----------------------------------------------------------------------------------- Project -------------------------------------------------------------------------------
 
-        public void addProjet(string titre, DateTime dateDebut, string description, int budget, int nbEmploye, int idClient)
+        public void addProjet(string titre, DateTime dateDebut, string description, double budget, int nbEmploye, int idClient)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "CALL InsertProjet(@titre, @dateDebut, @description, @budget, @nbEmploye, @idClient)";
