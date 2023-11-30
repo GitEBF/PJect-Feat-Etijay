@@ -73,22 +73,22 @@ namespace GestionProjets
             if (!erreur)
             {
                 Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
-                Match match = regex.Match((string)tabValInsert[5]);
+                Match match = regex.Match((string)tabValInsert[4]);
                 if (match.Success)
                 {
                     tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
                     if (tauxHoraire >= 120) {
                         erreur = true;
-                        tabTxtBlock[5].Text = "Maximum de 120$";
+                        tabTxtBlock[4].Text = "Maximum de 120$";
                     }
                     if (tauxHoraire < 15) {
                         erreur = true;
-                        tabTxtBlock[5].Text = "Minimum de 15$";
+                        tabTxtBlock[4].Text = "Minimum de 15$";
                     }
                 }
                 else
                 {
-                    tabTxtBlock[5].Text = "Entrez un prix comme ceci 10000.00 ou 233";
+                    tabTxtBlock[4].Text = "Entrez un prix comme ceci 10000.00 ou 233";
                     erreur = true;
                 }
 
@@ -130,8 +130,12 @@ namespace GestionProjets
 
             if (!erreur)
             {
-                SingletonBD.getInstance().updateEmploye(item.Matricule, nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut);
-                this.Frame.Navigate(typeof(pageGestionEmploye));
+                string strError = SingletonBD.getInstance().updateEmploye(item.Matricule, nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut);
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionEmploye));
+                }
             }
 
         }

@@ -98,8 +98,12 @@ namespace GestionProjets
 
             if (!erreur)
             {
-                SingletonBD.getInstance().updateClient(item.Id, nom, adresse, numTelephone, email);
-                this.Frame.Navigate(typeof(pageGestionClient));
+                string strError = SingletonBD.getInstance().updateClient(item.Id, nom, adresse, numTelephone, email);
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionClient));
+                }
             }
 
         }

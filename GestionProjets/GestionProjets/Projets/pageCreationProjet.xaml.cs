@@ -77,8 +77,13 @@ namespace GestionProjets.Projets {
 
 
             if (!erreur) {
-                SingletonBD.getInstance().addProjet(titre, dateDebut, description, budget, nbEmploye, item.Id);
-                this.Frame.Navigate(typeof(pageGestionProjet));
+                string strError = SingletonBD.getInstance().addProjet(titre, dateDebut, description, budget, nbEmploye, item.Id);
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionProjet));
+                }
+                    
             }
 
         }
