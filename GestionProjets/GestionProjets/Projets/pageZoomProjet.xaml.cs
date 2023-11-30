@@ -59,12 +59,16 @@ namespace GestionProjets
             SingletonBD.getInstance().LoadAllEmployeProjet();
             ObservableCollection<Employe> listeEmployes = SingletonEmployeProjet.getInstance().GetEmployeFromProject(item);
             for (int i = 1; i <= numberOfTextBlocks; i++) {
-                // Create a TextBlock
                 TextBlock textBlock = new TextBlock();
-                if () // arrange tout ca big, faut tu check si la listeEmployes est assez longue si oui l inscrire sinon mettre rien dans le textBlock
-                textBlock.Text = $"TextBlock {listeEmployes[i-1].Prenom + ' ' + listeEmployes[i-1].Nom}";
+                if (listeEmployes.Count >= i)
+                {
+                    textBlock.Text = $"{listeEmployes[i - 1].Prenom + ' ' + listeEmployes[i - 1].Nom}";
+                }
+                else
+                {
+                    textBlock.Text = "Vide";
+                }
 
-                // Add the TextBlock to the StackPanel
                 stk_employee.Children.Add(textBlock);
             }
         }
