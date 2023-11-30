@@ -65,6 +65,10 @@ namespace GestionProjets
                         erreur = true;
                         tabTxtBlock[5].Text = "Maximum de 120$";
                     }
+                    if (tauxHoraire < 15) {
+                        erreur = true;
+                        tabTxtBlock[5].Text = "Minimum de 15$";
+                    }
 
                 } else {
                     tabTxtBlock[5].Text = "Entrez un prix comme ceci 10000.00 ou 233";
