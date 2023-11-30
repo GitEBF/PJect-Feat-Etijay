@@ -239,6 +239,15 @@ namespace GestionProjets
             command.ExecuteNonQuery();
             con.Close();
         }
+        public void DeleteAllEmployeeProjectByEmployee(string matriculeEmploye)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL DeleteAllEmployeeProjectByEmployee(@matriculeEmploye)";
+            con.Open();
+            command.Parameters.AddWithValue("@matriculeEmploye", matriculeEmploye);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
         public void deleteEmployeeProjectByProject(string numProjet)
         {
             MySqlCommand command = con.CreateCommand();
@@ -314,14 +323,41 @@ namespace GestionProjets
 
         public string getEmployeCurrentProject(string matriculeEmploye)
         {
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule);";
-            con.Open();
-            command.Parameters.AddWithValue("@matricule", matriculeEmploye);
-            string result = (string)command.ExecuteScalar();
-            con.Close();
+            string result = "";
+
+            try
+            {
+                
+                    con.Open();
+
+                    using (MySqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "CheckIfEmployeWorkOnCurrentProject";
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@matricule", matriculeEmploye);
+
+                        var queryResult = command.ExecuteScalar();
+
+                        // Check for DBNull before casting to string
+                        result = (queryResult != DBNull.Value) ? queryResult.ToString() : "";
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (log it, throw it, etc.)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, whether an exception occurs or not
+                con.Close();
+            }
+
             return result;
         }
+
+
 
         public string GetClientNameById(int id)
         {

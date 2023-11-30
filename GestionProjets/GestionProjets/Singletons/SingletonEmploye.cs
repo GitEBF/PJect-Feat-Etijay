@@ -37,7 +37,7 @@ namespace GestionProjets.Singletons
             ObservableCollection<Employe> noProjects = new ObservableCollection<Employe>();
             foreach (Employe item in liste) {
                 string proj = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
-                if (proj == null) {
+                if (proj == "") {
                     noProjects.Add(item);
                 }
             }

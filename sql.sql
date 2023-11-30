@@ -416,6 +416,15 @@ END //
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE DeleteAllEmployeeProjectByEmployee (
+    IN _matriculeEmploye VARCHAR(10)
+)
+BEGIN
+    DELETE FROM EmployesProjets WHERE matriculeEmploye = _matriculeEmploye;
+END //
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE DeleteEmployeeProjectByProject (
     IN _numProjet VARCHAR(11)
 )
@@ -430,7 +439,9 @@ CREATE PROCEDURE CheckIfEmployeWorkOnCurrentProject(
     IN _matriculeEmploye VARCHAR(10)
 )
 BEGIN
-    SELECT f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye);
+    DECLARE result VARCHAR(255);
+    SELECT f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye) INTO result;
+    SELECT result AS result;
 END //
 DELIMITER ;
 

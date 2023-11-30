@@ -103,6 +103,7 @@ namespace GestionProjets
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(pageGestionProjet));
+            SingletonBD.getInstance().deleteEmployeeProjectByProject(SingletonProjet.getInstance().GetProjet(index).Num);
             SingletonBD.getInstance().deleteProjet(SingletonProjet.getInstance().GetProjet(index).Num);
             SingletonProjet.getInstance().supprimer(index);
         }
