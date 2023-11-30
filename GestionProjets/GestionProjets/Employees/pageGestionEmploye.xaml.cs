@@ -39,6 +39,10 @@ namespace GestionProjets
         {
             listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
             lv_liste.ItemsSource = listeEmploye;
+            if (!SingletonBD.getInstance().isUserLoggedIn())
+            {
+                admin.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
