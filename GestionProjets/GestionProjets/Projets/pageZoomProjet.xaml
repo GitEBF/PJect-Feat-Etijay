@@ -34,7 +34,7 @@
                     <TextBlock x:Name="tbl_Statut" Text="Prix" Width="320" Margin="10 10 10 10"/>
 
                 </StackPanel>
-                <StackPanel Grid.Column="1" x:Name="stk_employee" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="1" x:Name="stk_employee"  VerticalAlignment="Center" HorizontalAlignment="Right">
                     
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
