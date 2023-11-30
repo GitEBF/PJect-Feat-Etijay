@@ -40,11 +40,9 @@ namespace GestionProjets
             tb_Prenom.Text = item.Prenom;
             tb_Email.Text = item.Email;
             tb_Adresse.Text = item.Adresse;
-            dp_DateNaissance.SelectedDate = item.DateNaissance;
             tb_TauxHoraire.Text = item.TauxHoraire.ToString();
             tb_Photo.Text = item.Photo;
             cb_Statut.SelectedValue = item.Statut;
-            dp_DateEmbauche.SelectedDate = item.DateEmbauche;
         }
 
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
@@ -53,12 +51,12 @@ namespace GestionProjets
             string nom, prenom, email, adresse, statut, photo;
             nom = prenom = email = adresse = statut = photo = "";
             double tauxHoraire = 0;
-            DateTime dateEmbauche = DateTime.Now;
-            DateTime dateNaissance = DateTime.Now;
+            DateTime dateEmbauche = item.DateEmbauche;
+            DateTime dateNaissance = item.DateNaissance;
 
-            Object[] tabValInsert = { tb_Nom.Text, tb_Prenom.Text, tb_Email.Text, tb_Adresse.Text, dp_DateEmbauche.SelectedDate, tb_TauxHoraire.Text, tb_Photo.Text, cb_Statut.SelectedValue, dp_DateNaissance.SelectedDate };
-            string[] tabNom = { "Nom", "Prenom", "Email", "Adresse", "date d\'embauche", "taux horaire", "Photo", "Statut", "Date de naissance" };
-            TextBlock[] tabTxtBlock = { tblErreur_Nom, tblErreur_Prenom, tblErreur_Email, tblErreur_Adresse, tblErreur_DateEmbauche, tblErreur_TauxHoraire, tblErreur_Photo, tblErreur_Statut, tblErreur_DateNaissance };
+            Object[] tabValInsert = { tb_Nom.Text, tb_Prenom.Text, tb_Email.Text, tb_Adresse.Text, tb_TauxHoraire.Text, tb_Photo.Text, cb_Statut.SelectedValue };
+            string[] tabNom = { "Nom", "Prenom", "Email", "Adresse", "taux horaire", "Photo", "Statut"};
+            TextBlock[] tabTxtBlock = { tblErreur_Nom, tblErreur_Prenom, tblErreur_Email, tblErreur_Adresse, tblErreur_TauxHoraire, tblErreur_Photo, tblErreur_Statut };
             bool erreur = false;
 
             for (int i = 0; i < tabNom.Length; i++)
@@ -83,6 +81,10 @@ namespace GestionProjets
                         erreur = true;
                         tabTxtBlock[5].Text = "Maximum de 120$";
                     }
+                    if (tauxHoraire < 15) {
+                        erreur = true;
+                        tabTxtBlock[5].Text = "Minimum de 15$";
+                    }
                 }
                 else
                 {
@@ -103,24 +105,27 @@ namespace GestionProjets
                     erreur = true;
                 }
 
-                if ((DateTimeOffset.Now - ((DateTimeOffset)tabValInsert[4])).TotalDays < (3 * 365))
+                if ((DateTimeOffset.Now - ((DateTimeOffset)item.DateEmbauche)).TotalDays < (3 * 365))
                 {
-
-                    statut = "Journalier";
+                    if (statut == "Permanent") {
+                        erreur = true;
+                        tabTxtBlock[6].Text = "Il ne peux pas être permanent, car il n'a pas travaillé plus de 3 ans.";
+                    }
+                    statut = tabValInsert[6].ToString();
 
                 }
                 else
                 {
-                    statut = tabValInsert[7].ToString();
+                    statut = tabValInsert[6].ToString();
                 }
 
                 nom = (string)tabValInsert[0];
                 prenom = (string)tabValInsert[1];
                 adresse = (string)tabValInsert[3];
-                dateEmbauche = ((DateTimeOffset)tabValInsert[4]).DateTime;
 
-                photo = (string)tabValInsert[6];
-                dateNaissance = ((DateTimeOffset)tabValInsert[8]).DateTime;
+
+                photo = (string)tabValInsert[5];
+
             }
 
             if (!erreur)
