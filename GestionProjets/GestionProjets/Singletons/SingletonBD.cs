@@ -314,7 +314,7 @@ namespace GestionProjets
             con.Close();
         }
 
-        public string CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
+        public string getEmployeCurrentProject(string matriculeEmploye)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule);";

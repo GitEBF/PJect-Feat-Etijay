@@ -38,12 +38,12 @@ namespace GestionProjets
             item = SingletonProjet.getInstance().GetProjet(index);
             tbl_Num.Text = item.Num.ToString();
             tbl_Titre.Text = "Titre: " + item.Titre;
-            tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
+            tbl_DateDebut.Text = "Date de dÃ©but: " + item.DateDebut;
             tbl_Description.Text = "Description: " + item.Description;
-            tbl_Budget.Text = "Budget: " + item.Budget;
-            tbl_NbEmploye.Text = "Nombre employé: " + item.NbEmploye;
-            tbl_TotalSalaire.Text = "Salaire total: " + item.TotalSalaire;
-            tbl_IdClient.Text = "Nom client: " + SingletonBD.getInstance().GetClientNameById(item.IdClient); 
+            tbl_Budget.Text = "Budget: " + item.Budget.ToString("F2") + "$";
+            tbl_NbEmploye.Text = "Nombre employÃ©: " + item.NbEmploye;
+            tbl_TotalSalaire.Text = "Salaire total: " + item.TotalSalaire.ToString("F2") + "$";
+            tbl_IdClient.Text = "Id client: " + item.IdClient;
             tbl_Statut.Text = "Statut: " + item.Statut;
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {
