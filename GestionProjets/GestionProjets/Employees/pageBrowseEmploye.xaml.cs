@@ -70,12 +70,25 @@ namespace GestionProjets.Employees
                 if (employeModif != null)
                 {
                     // Mode Modifier
-                    
+                    Employe employe = SingletonEmploye.getInstance().GetEmploye(lv_liste.SelectedIndex);
+                    SingletonBD.getInstance().deleteEmployeeProjectByEmployee(item.Num, employeModif.Matricule);
+                    SingletonBD.getInstance().addEmployeProjet(item.Num, employeModif.Matricule, 0);
+                    this.Frame.Navigate(typeof(pageGestionProjet));
                 }
                 else
                 {
                     // Mode Ajouter
-                    
+        
+                    Employe employe = SingletonEmploye.getInstance().GetEmploye(lv_liste.SelectedIndex);
+                    if (SingletonBD.getInstance().getEmployeCurrentProject(employe.Matricule) == "")
+                    {
+                        SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
+                        this.Frame.Navigate(typeof(pageGestionProjet));
+                    }
+                    else
+                    {
+                        tb_info.Text = "Cette employé possède déjà un projet en cours";
+                    }
                 }
             }
         }
