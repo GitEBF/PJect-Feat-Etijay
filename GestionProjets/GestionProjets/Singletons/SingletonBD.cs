@@ -218,7 +218,6 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@nbHeures", nbHeures);
             command.ExecuteNonQuery();
             con.Close();
-            LoadAllEmployeProjet();
         }
         public void updateEmployeProjet(string numProjet, string matriculeEmploye, int nbHeures)
         {

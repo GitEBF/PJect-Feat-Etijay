@@ -34,6 +34,7 @@ namespace GestionProjets
         {
             this.InitializeComponent();
             SingletonBD.getInstance().LoadAllProjet();
+            SingletonBD.getInstance().LoadAllEmployeProjet();
             listeProjet = SingletonProjet.getInstance().getProjetListe();
             liste = lv_liste;
             changes();

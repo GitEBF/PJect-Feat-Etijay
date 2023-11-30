@@ -74,8 +74,15 @@ namespace GestionProjets
                 Button button = new Button();
                 if (listeEmployes.Count >= i)
                 {
-                    Employe employe = listeEmployes[i];
+                    int index = i - 1;
                     button.Content = "Modifier";
+                    button.Click += (sender, e) => {
+                        if (index >= 0 && index < listeEmployes.Count)
+                        {
+                            this.Frame.Navigate(typeof(pageBrowseEmploye), new Tuple<Projet, Employe>(item, listeEmployes[index]));
+                            //on va voir
+                        }
+                    };
                 }
                 else
                 {
