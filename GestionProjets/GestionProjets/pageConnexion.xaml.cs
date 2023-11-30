@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.UI;
 using GestionProjets.Singletons;
+using System.Security.Cryptography;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -48,6 +49,14 @@ namespace GestionProjets
                 createText.Text = "Se connecter";
             }
         }
+        private string HashPasswordMD5(string password)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] hashedBytes = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
 
         private void btConnexion_Click(object sender, RoutedEventArgs e)
         {
@@ -59,9 +68,11 @@ namespace GestionProjets
                 passwordErreur.Text = "Veuillez écrire un mot de passe valide";
             } else
             {
+                string hashedPassword = HashPasswordMD5(passwordAdd.Text);
+
                 if (SingletonBD.getInstance().checkIfFirstUse())
                 {
-                    if (SingletonBD.getInstance().Connexion(nomAdd.Text, passwordAdd.Text))
+                    if (SingletonBD.getInstance().Connexion(nomAdd.Text, hashedPassword))
                     {
                         SingletonBD.getInstance().loginLogout();
                         mainWindow.UpdateNavItemConnexionContent("Déconnexion");
@@ -76,7 +87,7 @@ namespace GestionProjets
                     }
                 } else
                 {
-                    SingletonBD.getInstance().createUser(nomAdd.Text, passwordAdd.Text);
+                    SingletonBD.getInstance().createUser(nomAdd.Text, hashedPassword);
                     mainWindow.UpdateNavItemConnexionContent("Déconnexion");
                     var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCritical"];
                     var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCriticalBackground"];
