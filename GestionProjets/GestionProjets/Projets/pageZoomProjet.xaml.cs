@@ -76,7 +76,6 @@ namespace GestionProjets
                 {
                     Employe employe = listeEmployes[i];
                     button.Content = "Modifier";
-                    button.Click += (sender, e) => { this.Frame.Navigate(typeof(pageBrowseEmploye), item, employe; };
                 }
                 else
                 {
