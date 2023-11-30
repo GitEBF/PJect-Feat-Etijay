@@ -45,6 +45,7 @@
                     <StackPanel >
                         <TextBox x:Name="tb_Description" PlaceholderText="Description" Width="320" Margin="20 20 20 20" TextWrapping="Wrap" AcceptsReturn="True"/>
                         <TextBlock x:Name="tblErreur_Description" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
+                        <TextBlock x:Name="tblGlobal" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
                         <Button Name="btn_Modifier" Content="Modifier" Click="btn_Modifier_Click" HorizontalAlignment="Center" Margin="50 35 10 10" />
 
                     </StackPanel>

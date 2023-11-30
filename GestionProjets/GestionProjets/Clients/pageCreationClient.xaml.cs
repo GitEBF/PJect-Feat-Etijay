@@ -87,8 +87,12 @@ namespace GestionProjets.Clients
 
             if (!erreur)
             {
-                SingletonBD.getInstance().addClient(nom, adresse, numTelephone, email);
-                this.Frame.Navigate(typeof(pageGestionClient));
+                string strError = SingletonBD.getInstance().addClient(nom, adresse, numTelephone, email);
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionClient));
+                }
             }
 
         }

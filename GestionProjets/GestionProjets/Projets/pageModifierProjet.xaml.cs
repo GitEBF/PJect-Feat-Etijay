@@ -18,16 +18,13 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace GestionProjets
-{
+namespace GestionProjets {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class pageModifierProjet : Page
-    {
+    public sealed partial class pageModifierProjet : Page {
         Projet item;
-        public pageModifierProjet()
-        {
+        public pageModifierProjet() {
             this.InitializeComponent();
 
         }
@@ -77,14 +74,23 @@ namespace GestionProjets
 
                 titre = (string)tabValInsert[0];
                 dateDebut = ((DateTimeOffset)tabValInsert[1]).DateTime;
+
                 description = (string)tabValInsert[2];
+                if (description.Length > 800) {
+                    erreur = true;
+                    tabTxtBlock[2].Text = "La description ne peux pas être plus long que 800 caractères.";
+                }
                 nbEmploye = int.Parse((String)tabValInsert[4]);
             }
 
 
             if (!erreur) {
-                SingletonBD.getInstance().updateProjet(item.Num, titre, dateDebut, description, budget, nbEmploye);
-                this.Frame.Navigate(typeof(pageGestionProjet));
+                string strError = SingletonBD.getInstance().updateProjet(item.Num, titre, dateDebut, description, budget, nbEmploye);
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionProjet));
+                }
             }
 
         }

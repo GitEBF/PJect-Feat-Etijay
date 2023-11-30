@@ -109,8 +109,12 @@ namespace GestionProjets
 
 
             if (!erreur) {
-                SingletonBD.getInstance().addEmploye(nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut );
-                this.Frame.Navigate(typeof(pageGestionEmploye));
+                string strError = SingletonBD.getInstance().addEmploye(nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut );
+                if (strError != null) {
+                    tblGlobal.Text = strError;
+                } else {
+                    this.Frame.Navigate(typeof(pageGestionEmploye));
+                }
             }
 
         }
