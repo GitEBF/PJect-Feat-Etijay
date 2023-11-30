@@ -51,6 +51,10 @@ namespace GestionProjets.Employees
                 employeModif = tuple.Item2;
                 tb_info.Text = "Cliquez sur un nom pour modifier l'employé(e) dans le projet.";
             }
+
+            if (listeEmploye.Count == 0) {
+                tb_info.Text = "Aucun employé est disponible pour le moment";
+            }
             
         }
 
