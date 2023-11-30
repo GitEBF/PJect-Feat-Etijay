@@ -45,7 +45,11 @@ namespace GestionProjets
             if (liste != null) {
                 liste.ItemsSource = listeProjet;
             }
-            
+
+            if (!SingletonBD.getInstance().isUserLoggedIn())
+            {
+                admin.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void changes() {

@@ -45,7 +45,7 @@
                 </GridView.ItemTemplate>
             </GridView>
         </ScrollViewer>
-        <Viewbox Grid.Column="1" Grid.Row="2">
+        <Viewbox Grid.Column="1" Grid.Row="2" x:Name="admin">
         <Grid ColumnDefinitions="15*,5*" >
             <Button Grid.Column="2" Margin="0 5 0 5" x:Name="btn_Ajouter" Content="Ajouter un employé" Click="btn_Ajouter_Click"/>
         </Grid>

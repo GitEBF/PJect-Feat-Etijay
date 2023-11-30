@@ -39,6 +39,10 @@ namespace GestionProjets
         {
             listeClient = SingletonClient.getInstance().getClientListe();
             lv_liste.ItemsSource = listeClient;
+            if (!SingletonBD.getInstance().isUserLoggedIn())
+            {
+                admin.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
