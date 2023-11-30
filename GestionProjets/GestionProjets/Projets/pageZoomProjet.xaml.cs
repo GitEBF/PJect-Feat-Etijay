@@ -43,7 +43,7 @@ namespace GestionProjets
             tbl_Budget.Text = "Budget: " + item.Budget;
             tbl_NbEmploye.Text = "Nombre employé: " + item.NbEmploye;
             tbl_TotalSalaire.Text = "Salaire total: " + item.TotalSalaire;
-            tbl_IdClient.Text = "Id client: " + item.IdClient;
+            tbl_IdClient.Text = "Nom client: " + SingletonBD.getInstance().GetClientNameById(item.IdClient); 
             tbl_Statut.Text = "Statut: " + item.Statut;
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {

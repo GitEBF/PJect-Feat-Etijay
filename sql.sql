@@ -145,6 +145,20 @@ END //
 DELIMITER ;
 
 
+DELIMITER //
+CREATE FUNCTION f_GetClientNameById(_clientId INT) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE clientName VARCHAR(255);
+
+    SELECT nom INTO clientName
+    FROM Clients
+    WHERE id = _clientId;
+
+    RETURN clientName;
+END //
+DELIMITER ;
+
+
 
 --                                                                   Procédures --       
 

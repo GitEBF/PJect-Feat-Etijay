@@ -317,10 +317,21 @@ namespace GestionProjets
         public bool CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL CheckIfEmployeWorkOnCurrentProject(@matricule)";
+            command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule)";
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
             bool result = (bool)command.ExecuteScalar();
+            con.Close();
+            return result;
+        }
+
+        public string GetClientNameById(int id)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT f_GetClientNameById(@id) AS NomClient;";
+            con.Open();
+            command.Parameters.AddWithValue("@id", id);
+            string result = (string)command.ExecuteScalar();
             con.Close();
             return result;
         }
