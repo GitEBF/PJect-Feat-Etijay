@@ -27,7 +27,7 @@ CREATE TABLE Projets (
     num VARCHAR(11) PRIMARY KEY NOT NULL,
     titre VARCHAR(255) NOT NULL,
     dateDebut DATE NOT NULL,
-    description VARCHAR(255) NOT NULL,
+    description VARCHAR(10000) NOT NULL,
     budget DOUBLE(16,2) NOT NULL,
     nbEmploye int NOT NULL,
     totalSalaire DOUBLE(16,2) NOT NULL DEFAULT 0,
@@ -197,7 +197,7 @@ DELIMITER //
 CREATE PROCEDURE InsertProjet (
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
-    IN _description VARCHAR(255),
+    IN _description VARCHAR(10000),
     IN _budget DOUBLE(16,2),
     IN _nbEmploye INT,
     IN _idClient INT
@@ -347,7 +347,7 @@ CREATE PROCEDURE UpdateProject (
     IN _num VARCHAR(11),
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
-    IN _description VARCHAR(255),
+    IN _description VARCHAR(10000),
     IN _budget DOUBLE(16,2),
     IN _nbEmploye INT
 )
