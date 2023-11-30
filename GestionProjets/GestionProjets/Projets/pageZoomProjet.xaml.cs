@@ -61,7 +61,8 @@ namespace GestionProjets
             for (int i = 1; i <= numberOfTextBlocks; i++) {
                 // Create a TextBlock
                 TextBlock textBlock = new TextBlock();
-                textBlock.Text = $"TextBlock {listeEmployes[i].Prenom + ' ' + listeEmployes[i].Nom}";
+                if () // arrange tout ca big, faut tu check si la listeEmployes est assez longue si oui l inscrire sinon mettre rien dans le textBlock
+                textBlock.Text = $"TextBlock {listeEmployes[i-1].Prenom + ' ' + listeEmployes[i-1].Nom}";
 
                 // Add the TextBlock to the StackPanel
                 stk_employee.Children.Add(textBlock);
