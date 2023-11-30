@@ -31,8 +31,6 @@
 
                     <TextBlock x:Name="tbl_tauxHoraire" Text="Prix" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_tauxHoraire" Text="Prix" Width="320" Margin="10 10 10 10"/>
-
                     <TextBlock x:Name="tbl_travailSur" Text="Travail présentement sur aucun projet." Width="320" Margin="10 10 10 10"/>
 
                 </StackPanel>
