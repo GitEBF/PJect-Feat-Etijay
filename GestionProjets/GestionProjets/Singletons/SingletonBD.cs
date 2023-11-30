@@ -354,38 +354,24 @@ namespace GestionProjets {
 
         public string getEmployeCurrentProject(string matriculeEmploye)
         {
-            string result = "";
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL CheckIfEmployeWorkOnCurrentProject(@matricule);";
+            con.Open();
+            command.Parameters.AddWithValue("@matricule", matriculeEmploye);
+            string result;
+            
 
-            try
+            object resultObj = command.ExecuteScalar();
+            con.Close();
+            if (resultObj != DBNull.Value)
             {
-
-                    con.Open();
-
-                    using (MySqlCommand command = con.CreateCommand())
-                    {
-                        command.CommandText = "CheckIfEmployeWorkOnCurrentProject";
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@matricule", matriculeEmploye);
-
-                        var queryResult = command.ExecuteScalar();
-
-                        // Check for DBNull before casting to string
-                        result = (queryResult != DBNull.Value) ? queryResult.ToString() : "";
-                    }
-
+                result = (string)resultObj;
+                return result;
             }
-            catch (Exception ex)
+            else
             {
-                // Handle the exception (log it, throw it, etc.)
-                Console.WriteLine("Error: " + ex.Message);
+                return "";
             }
-            finally
-            {
-                // Ensure that the connection is closed, whether an exception occurs or not
-                con.Close();
-            }
-
-            return result;
         }
 
 
