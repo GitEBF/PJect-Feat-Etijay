@@ -79,7 +79,10 @@ namespace GestionProjets
                 if (match.Success)
                 {
                     tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
-
+                    if (tauxHoraire >= 120) {
+                        erreur = true;
+                        tabTxtBlock[5].Text = "Maximum de 120$";
+                    }
                 }
                 else
                 {

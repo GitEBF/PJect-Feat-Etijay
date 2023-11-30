@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,6 +31,7 @@ namespace GestionProjets
         public pageZoomProjet()
         {
             this.InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,13 +43,28 @@ namespace GestionProjets
             tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
             tbl_Description.Text = "Description: " + item.Description;
             tbl_Budget.Text = "Budget: " + item.Budget.ToString("F2") + "$";
-            tbl_NbEmploye.Text = "Nombre employé: " + item.NbEmploye;
+            tbl_NbEmploye.Text = "Nombre max d'employé: " + item.NbEmploye;
             tbl_TotalSalaire.Text = "Salaire total: " + item.TotalSalaire.ToString("F2") + "$";
             tbl_IdClient.Text = "Id client: " + item.IdClient;
             tbl_Statut.Text = "Statut: " + item.Statut;
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {
                 admin.Visibility = Visibility.Collapsed;
+            }
+
+            AddTextBlocksToStackPanel(item.NbEmploye);
+        }
+
+        private void AddTextBlocksToStackPanel(int numberOfTextBlocks) {
+            SingletonBD.getInstance().LoadAllEmployeProjet();
+            ObservableCollection<Employe> listeEmployes = SingletonEmployeProjet.getInstance().GetEmployeFromProject(item);
+            for (int i = 1; i <= numberOfTextBlocks; i++) {
+                // Create a TextBlock
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = $"TextBlock {listeEmployes[i].Prenom + ' ' + listeEmployes[i].Nom}";
+
+                // Add the TextBlock to the StackPanel
+                stk_employee.Children.Add(textBlock);
             }
         }
 

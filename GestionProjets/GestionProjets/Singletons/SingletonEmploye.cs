@@ -33,6 +33,17 @@ namespace GestionProjets.Singletons
             return liste;
         }
 
+        public ObservableCollection<Employe> getEmployeListeNoProjects() {
+            ObservableCollection<Employe> noProjects = new ObservableCollection<Employe>();
+            foreach (Employe item in liste) {
+                string proj = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
+                if (proj == null) {
+                    noProjects.Add(item);
+                }
+            }
+            return noProjects;
+        }
+
         public Employe GetEmploye(int position)
         {
             if (position >= 0)
