@@ -37,7 +37,6 @@
                                         <Run Text="matricule : "/>
                                         <Run Text="{x:Bind Matricule}"/>
                                     </TextBlock>
-
                                 </StackPanel>
                             </Grid>
                         </Grid>
