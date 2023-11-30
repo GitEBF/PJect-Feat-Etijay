@@ -39,7 +39,6 @@ namespace GestionProjets.Employees
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
-            listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
             lv_liste.ItemsSource = listeEmploye;
             if (e.Parameter is Projet projetParam)
             {
@@ -70,10 +69,16 @@ namespace GestionProjets.Employees
                 if (employeModif != null)
                 {
                     // Mode Modifier
-                    Employe employe = SingletonEmploye.getInstance().GetEmploye(lv_liste.SelectedIndex);
-                    SingletonBD.getInstance().deleteEmployeeProjectByEmployee(item.Num, employeModif.Matricule);
-                    SingletonBD.getInstance().addEmployeProjet(item.Num, employeModif.Matricule, 0);
-                    this.Frame.Navigate(typeof(pageGestionProjet));
+                    if (SingletonBD.getInstance().getEmployeCurrentProject(employeModif.Matricule) == "")
+                    {
+                        SingletonBD.getInstance().deleteEmployeeProjectByEmployee(item.Num, employeModif.Matricule);
+                        SingletonBD.getInstance().addEmployeProjet(item.Num, employeModif.Matricule, 0);
+                        this.Frame.Navigate(typeof(pageGestionProjet));
+                    }
+                    else
+                    {
+                        tb_info.Text = "Cette employé possède déjà un projet en cours";
+                    }
                 }
                 else
                 {

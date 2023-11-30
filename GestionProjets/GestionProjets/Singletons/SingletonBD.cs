@@ -169,7 +169,6 @@ namespace GestionProjets
             command.Parameters.AddWithValue("@idClient", idClient);
             command.ExecuteNonQuery();
             con.Close();
-            LoadAllProjet();
         }
         public void updateProjet(string num, string titre, DateTime dateDebut, string description, double budget, int nbEmploye)
         {
