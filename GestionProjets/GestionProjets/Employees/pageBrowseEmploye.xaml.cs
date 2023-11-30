@@ -27,6 +27,9 @@ namespace GestionProjets.Employees
     public sealed partial class pageBrowseEmploye : Page
     {
         ObservableCollection<Employe> listeEmploye = new ObservableCollection<Employe>();
+        Projet item;
+        Employe employeModif;
+        int index;
 
         public pageBrowseEmploye()
         {
@@ -38,6 +41,18 @@ namespace GestionProjets.Employees
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             listeEmploye = SingletonEmploye.getInstance().getEmployeListe();
             lv_liste.ItemsSource = listeEmploye;
+            if (e.Parameter is Projet projetParam)
+            {
+                item = projetParam;
+                tb_info.Text = "Cliquez sur un nom pour ajouter un/une employé(e) au projet.";
+            }
+            else if (e.Parameter is Tuple<Projet, Employe> tuple)
+            {
+                item = tuple.Item1;
+                employeModif = tuple.Item2;
+                tb_info.Text = "Cliquez sur un nom pour modifier l'employé(e) dans le projet.";
+            }
+            
         }
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e) {
@@ -50,7 +65,20 @@ namespace GestionProjets.Employees
         }
 
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e) {
-            this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedIndex);
+            if (item != null)
+            {
+                if (employeModif != null)
+                {
+                    // Mode Modifier
+                    
+                }
+                else
+                {
+                    // Mode Ajouter
+                    
+                }
+            }
         }
+
     }
 }

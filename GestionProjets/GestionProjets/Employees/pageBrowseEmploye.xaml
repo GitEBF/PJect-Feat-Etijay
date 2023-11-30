@@ -13,8 +13,9 @@
         <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*">
             <TextBox x:Name="searchBoxNom" Grid.Column="0"  PlaceholderText="Cherche par Nom" TextChanged="OnSearchTextChanged" FontSize="27"/>
         </Grid>
+        <TextBlock x:Name="mallo"></TextBlock>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <GridView x:Name="lv_liste" HorizontalAlignment="Center" ItemsSource="{x:Bind listeEmploye}" IsItemClickEnabled="True" SelectionChanged="lv_liste_ItemClick">
+            <GridView x:Name="lv_liste" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionChanged="lv_liste_ItemClick">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VariableSizedWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
