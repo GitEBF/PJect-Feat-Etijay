@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
-    <Folder Include="Projets\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Employees\pageBrowseEmploye.xaml">

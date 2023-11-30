@@ -37,6 +37,9 @@
                 <StackPanel Grid.Column="1" x:Name="stk_employee"  VerticalAlignment="Center" HorizontalAlignment="Right">
                     
                 </StackPanel>
+                <StackPanel Grid.Column="2" x:Name="stk_buttonEmployee"  VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Click="btn_Supprimer_Click"/>
                     <Button x:Name="btn_Modifier" Content="Modifier" Click="btn_Modifier_Click"/>

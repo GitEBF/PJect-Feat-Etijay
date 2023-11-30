@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
 using System.Collections.ObjectModel;
+using GestionProjets.Employees;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -68,8 +69,23 @@ namespace GestionProjets
                 {
                     textBlock.Text = "Vide";
                 }
-
+                textBlock.Margin = new Thickness(5);
                 stk_employee.Children.Add(textBlock);
+                Button button = new Button();
+                if (listeEmployes.Count >= i)
+                {
+                    Employe employe = listeEmployes[i];
+                    button.Content = "Modifier";
+                    button.Click += (sender, e) => { this.Frame.Navigate(typeof(pageBrowseEmploye), item, employe; };
+                }
+                else
+                {
+                    button.Content = "Ajouter";
+                    button.Click += (sender, e) => { this.Frame.Navigate(typeof(pageBrowseEmploye), item); };
+                }
+                button.FontSize = 9;
+                button.Margin = new Thickness(5);
+                stk_buttonEmployee.Children.Add(button);
             }
         }
 
