@@ -30,7 +30,7 @@
                         <Grid Width="400" Height="Auto" Margin="10">
                             <Grid Width="400" Height="Auto">
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Titre}" FontSize="27" FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Titre}" FontSize="27" FontWeight="Bold" TextWrapping="Wrap"/>
                                     <TextBlock FontSize="23" FontWeight="Bold">
                                       <Run Text="numéro : "/>
                                       <Run Text="{x:Bind Num}"/>

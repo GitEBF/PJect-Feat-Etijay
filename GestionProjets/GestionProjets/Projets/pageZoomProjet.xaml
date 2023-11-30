@@ -10,8 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid ColumnDefinitions="0.5*,6*,0.5*" RowDefinitions="0.1*,3*,0.1*">
-        <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
-            <Grid ColumnDefinitions="3*,1*">
+        <Viewbox Stretch="Uniform"  Grid.Column="1" Grid.Row="1">
+            <Grid ColumnDefinitions="3*, 1*, 1.5*">
                 <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
 
                     <TextBlock x:Name="tbl_Num" Text="Modele" Margin="0 0 0 0" FontSize="22"/>
@@ -33,8 +33,9 @@
 
                     <TextBlock x:Name="tbl_Statut" Text="Prix" Width="320" Margin="10 10 10 10"/>
 
-                    <Image x:Name="photo" Height="150" />
-
+                </StackPanel>
+                <StackPanel Grid.Column="1" x:Name="stk_employee" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Click="btn_Supprimer_Click"/>
