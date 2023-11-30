@@ -314,13 +314,13 @@ namespace GestionProjets
             con.Close();
         }
 
-        public bool CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
+        public string CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule)";
+            command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule);";
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
-            bool result = (bool)command.ExecuteScalar();
+            string result = (string)command.ExecuteScalar();
             con.Close();
             return result;
         }
@@ -328,7 +328,7 @@ namespace GestionProjets
         public string GetClientNameById(int id)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_GetClientNameById(@id) AS NomClient;";
+            command.CommandText = "SELECT f_GetClientNameById(@id);";
             con.Open();
             command.Parameters.AddWithValue("@id", id);
             string result = (string)command.ExecuteScalar();

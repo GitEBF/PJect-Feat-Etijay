@@ -126,21 +126,16 @@ DELIMITER ;
 
 
 --                                                                   Functions  
-DELIMITER //                                                        
-CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS BOOLEAN
+DELIMITER //
+CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS VARCHAR(255)
 BEGIN
-    DECLARE projectCount INT;
-
-    SELECT COUNT(*) INTO projectCount
+    DECLARE projetName VARCHAR(255);
+    SELECT P.titre INTO projetName
     FROM EmployesProjets EP
     INNER JOIN Projets P ON P.num = EP.numProjet
     WHERE matriculeEmploye = _matriculeEmploye AND P.statut = 'En cours';
 
-    IF projectCount >= 1 THEN
-        RETURN TRUE;
-    ELSE
-        RETURN FALSE;
-    END IF;
+    RETURN projetName;
 END //
 DELIMITER ;
 
