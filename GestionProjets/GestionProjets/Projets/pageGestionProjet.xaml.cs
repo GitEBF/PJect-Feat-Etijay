@@ -36,6 +36,7 @@ namespace GestionProjets
             SingletonBD.getInstance().LoadAllProjet();
             listeProjet = SingletonProjet.getInstance().getProjetListe();
             liste = lv_liste;
+            changes();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
