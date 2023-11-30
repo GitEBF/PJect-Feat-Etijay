@@ -314,13 +314,13 @@ namespace GestionProjets
             con.Close();
         }
 
-        public bool CheckIfEmployeWorkOnCurrentProject(string matriculeEmploye)
+        public string getEmployeCurrentProject(string matriculeEmploye)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "CALL CheckIfEmployeWorkOnCurrentProject(@matricule)";
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
-            bool result = (bool)command.ExecuteScalar();
+            string result = (string)command.ExecuteScalar();
             con.Close();
             return result;
         }

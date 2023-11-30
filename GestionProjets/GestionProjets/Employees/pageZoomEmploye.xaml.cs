@@ -44,7 +44,9 @@ namespace GestionProjets
             tbl_Statut.Text = "Statut: " + item.Statut;
             tbl_dateEmbauche.Text = "DateEmbauche: " + item.DateEmbauche;
             tbl_dateNaissance.Text = "DateNaissance: " + item.DateNaissance;
-            tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire;
+            tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire.ToString("F2") + "$";
+            string projectName = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
+            tbl_travailSur.Text = "L'employé travail présentement sur le projet: " + projectName;
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {
                 admin.Visibility = Visibility.Collapsed;
