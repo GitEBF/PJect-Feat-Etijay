@@ -1,17 +1,17 @@
-- UML                                                     
+✔ UML                                                     
 ✔ 10 data per table
 - 10 requête sql (5 views, 2 relations, 3 sous-requêtes)
 ✔ 5 triggers
 ✔ 5 procédures stockées
-- Messages d'erreurs
+✔ 5 functions
+✔ Messages d'erreurs
 - Document :
 	Dans un rapport présentant le projet, on inclura
 	• la représentation UML de la base relationnelle accompagnée d'explications,
 	• le schéma relationnel de la base,
 	• le travail individuel réalisé de chaque co-équipier,
 	• Description des procédures et déclencheurs,
-	• Fichier compressé de tout le code organisé par thème (création de tables, déclencheurs,
-	  fonctions, vues, requêtes, etc.)
+	• Fichier compressé de tout le code organisé par thème (création de tables, déclencheurs, fonctions, vues, requêtes, etc.)
 
 
 

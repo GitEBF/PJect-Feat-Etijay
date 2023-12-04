@@ -387,6 +387,14 @@ namespace GestionProjets {
             return result;
         }
 
+        public void UpdateProjetStatus(string num)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL UpdateProjectStatus(@num);";
+            con.Open();
+            command.Parameters.AddWithValue("@num", num);
+            con.Close();
+        }
 
     }
 }
