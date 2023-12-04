@@ -52,7 +52,7 @@ CREATE TABLE user (
     loged bit DEFAULT 1
 );
 
--- Triggers --                                                                  
+--                                                                   Triggers --                                                                  
 
 DELIMITER //
 CREATE TRIGGER BeforeInsertEmployes
@@ -232,10 +232,6 @@ CREATE PROCEDURE CreateUser(
     IN _password VARCHAR(255)
 )
 BEGIN
-    DECLARE CONTINUE HANDLER FOR 1062
-    BEGIN
-        SELECT 'Un user avec le même nom ne peux pas exister';
-    END;
     INSERT INTO user (name, password)
     VALUES (_name, _password);
 END //

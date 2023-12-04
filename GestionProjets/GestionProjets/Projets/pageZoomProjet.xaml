@@ -41,6 +41,7 @@
 
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
+					<Button x:Name="btn_State" Content="Fermer le projet" Click="btn_State_Click"/>
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Click="btn_Supprimer_Click"/>
                     <Button x:Name="btn_Modifier" Content="Modifier" Click="btn_Modifier_Click"/>
                 </StackPanel>

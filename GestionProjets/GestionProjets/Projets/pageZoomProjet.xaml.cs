@@ -95,6 +95,11 @@ namespace GestionProjets
             }
         }
 
+        private void btn_State_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(pageZoomProjet), item);
+        }
+
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(pageModifierProjet), item);
