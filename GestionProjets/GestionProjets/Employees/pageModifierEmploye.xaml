@@ -30,10 +30,6 @@
                     <TextBlock x:Name="tblErreur_Adresse" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBlock x:Name="tbl_DateNaissance" Text="Date de naissance" HorizontalAlignment="Center" FontSize="15"/>
-                    <DatePicker x:Name="dp_DateNaissance" Width="320" Margin="20 20 20 20"/>
-                    <TextBlock x:Name="tblErreur_DateNaissance" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
-
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0">
 
@@ -56,10 +52,6 @@
                     <!-- Juste la pour faire beau biggie -->
                     <TextBlock x:Name="tblErreur__" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
-
-                    <TextBlock x:Name="tbl_DateEmbauche" Text="Date d'embauche" HorizontalAlignment="Center" FontSize="15"/>
-                    <DatePicker  x:Name="dp_DateEmbauche" Width="320" Margin="20 20 20 20"/>
-                    <TextBlock x:Name="tblErreur_DateEmbauche" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
                 </StackPanel>
                 <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">

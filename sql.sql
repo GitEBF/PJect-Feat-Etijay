@@ -1,4 +1,4 @@
---                                                                   Tables --                                                                  
+--                                                                   Tables --
 
 CREATE TABLE Employes (
     matricule VARCHAR(10) PRIMARY KEY NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Projets (
     num VARCHAR(11) PRIMARY KEY NOT NULL,
     titre VARCHAR(255) NOT NULL,
     dateDebut DATE NOT NULL,
-    description VARCHAR(10000) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     budget DOUBLE(16,2) NOT NULL,
     nbEmploye int NOT NULL,
     totalSalaire DOUBLE(16,2) NOT NULL DEFAULT 0,
@@ -89,7 +89,7 @@ CREATE TRIGGER CheckAgeBeforeInsertEmployes
 BEFORE INSERT ON Employes
 FOR EACH ROW
 BEGIN
-    IF (YEAR(CURDATE()) - YEAR(NEW.dateNaissance)) < 18 OR (YEAR(CURDATE()) - YEAR(NEW.dateNaissance)) > 65 THEN
+    IF DATEDIFF(CURDATE(), NEW.dateNaissance) < 6570 OR DATEDIFF(CURDATE(), NEW.dateNaissance) > 23725 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = "L'âge doit être entre 18 et 65 ans.";
     END IF;
@@ -125,37 +125,28 @@ DELIMITER ;
 
 
 
---                                                                   Functions  
+--                                                                   Functions
 DELIMITER //
-CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS VARCHAR(255)
+CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS BOOLEAN
 BEGIN
-    DECLARE projetName VARCHAR(255);
-    SELECT P.titre INTO projetName
+    DECLARE projectCount INT;
+
+    SELECT COUNT(*) INTO projectCount
     FROM EmployesProjets EP
     INNER JOIN Projets P ON P.num = EP.numProjet
     WHERE matriculeEmploye = _matriculeEmploye AND P.statut = 'En cours';
 
-    RETURN projetName;
-END //
-DELIMITER ;
-
-
-DELIMITER //
-CREATE FUNCTION f_GetClientNameById(_clientId INT) RETURNS VARCHAR(255)
-BEGIN
-    DECLARE clientName VARCHAR(255);
-
-    SELECT nom INTO clientName
-    FROM Clients
-    WHERE id = _clientId;
-
-    RETURN clientName;
+    IF projectCount >= 1 THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
 END //
 DELIMITER ;
 
 
 
---                                                                   Procédures --       
+--                                                                   Procédures --
 
 
 
@@ -197,7 +188,7 @@ DELIMITER //
 CREATE PROCEDURE InsertProjet (
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
-    IN _description VARCHAR(10000),
+    IN _description VARCHAR(255),
     IN _budget DOUBLE(16,2),
     IN _nbEmploye INT,
     IN _idClient INT
@@ -214,7 +205,7 @@ DELIMITER //
 CREATE PROCEDURE InsertEmployeProjet(
     IN _numProjet VARCHAR(11),
     IN _matriculeEmploye VARCHAR(10),
-    IN _nbHeures DOUBLE(16,2)
+    IN _nbHeures INT
 )
 BEGIN
     INSERT INTO EmployesProjets (numProjet, matriculeEmploye, nbHeures)
@@ -222,6 +213,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
 
 -- User
 
@@ -296,7 +288,7 @@ END //
 DELIMITER ;
 
 
--- Update 
+-- Update
 
 DELIMITER //
 CREATE PROCEDURE UpdateEmployee (
@@ -351,9 +343,10 @@ CREATE PROCEDURE UpdateProject (
     IN _num VARCHAR(11),
     IN _titre VARCHAR(255),
     IN _dateDebut DATE,
-    IN _description VARCHAR(10000),
+    IN _description VARCHAR(255),
     IN _budget DOUBLE(16,2),
-    IN _nbEmploye INT
+    IN _nbEmploye INT,
+    IN _idClient INT
 )
 BEGIN
     UPDATE Projets
@@ -362,10 +355,24 @@ BEGIN
         dateDebut = _dateDebut,
         description = _description,
         budget = _budget,
-        nbEmploye = _nbEmploye
+        nbEmploye = _nbEmploye,
+        idClient = _idClient
     WHERE num = _num;
 END //
 DELIMITER ;
+
+CREATE PROCEDURE UpdateProjectStatus (
+    IN _num VARCHAR(11)
+)
+BEGIN
+    UPDATE Projets
+    SET
+        statut = 'Terminé'
+    WHERE num = _num;
+END //
+DELIMITER ;
+
+
 
 DELIMITER //
 CREATE PROCEDURE UpdateEmployeeProject (
@@ -387,6 +394,7 @@ CREATE PROCEDURE DeleteEmployee (
     IN _matricule VARCHAR(10)
 )
 BEGIN
+    DELETE FROM EmployesProjets WHERE matriculeEmploye = _matricule;
     DELETE FROM Employes WHERE matricule = _matricule;
 END //
 DELIMITER ;
@@ -430,16 +438,17 @@ DELIMITER ;
 
 -- Vérification
 DELIMITER //
-CREATE PROCEDURE CheckIfEmployeWorkOnCurrentProject(
-    IN _matriculeEmploye VARCHAR(10)
+CREATE PROCEDURE CheckIfEmployeeWorkOnCurrentProject(
+    IN _matriculeEmployee VARCHAR(10)
 )
 BEGIN
-    SELECT f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye);
+    SELECT f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmployee) AS result;
 END //
 DELIMITER ;
 
 
---                                                                   Données                                                                 
+
+--                                                                   Données
 
 -- Employé
 CALL InsertEmploye('Pipoco', 'Isaac', 'pipoco@hotmail.music', '2005-01-15', '123 Main St', '2022-01-01', 20, 'https://boroktimes.com/storage/2023/07/channels4_profile.jpeg', 'Permanent');
@@ -491,7 +500,7 @@ CALL InsertEmployeProjet((SELECT num FROM projets LIMIT 1 OFFSET 9),(SELECT matr
 
 
 
---                                                                   Views                                                           
+--                                                                   Views
 -- 1. Employés avec leurs projets actuels
 CREATE VIEW View_EmployesProjetsActuels AS
 SELECT
@@ -564,7 +573,8 @@ JOIN
 WHERE
     P.statut = 'Terminé';
 
---                                                                   Requêtes --                                                                  
+
+--                                                                   Requêtes --
 /*
 -- 1. Liste des employés avec leurs projets actuels
 SELECT * FROM View_EmployesProjetsActuels;
@@ -585,7 +595,7 @@ SELECT * FROM View_ProjetsTermines;
 
 -- 7.
 
--- 8. 
+-- 8.
 
 -- 9.
 

@@ -61,6 +61,7 @@ namespace GestionProjets
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(pageGestionEmploye));
+            SingletonBD.getInstance().DeleteAllEmployeeProjectByEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
             SingletonBD.getInstance().deleteEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
             SingletonEmploye.getInstance().supprimer(index);
         }

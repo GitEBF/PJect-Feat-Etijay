@@ -64,18 +64,16 @@ namespace GestionProjets {
             return null;
         }
 
-        public string updateEmploye(string matricule, string nom, string prenom, string email, DateTime dateNaissance, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut) {
+        public string updateEmploye(string matricule, string nom, string prenom, string email, string adresse, double tauxHoraire, string photo, string statut) {
             try {
                 MySqlCommand command = con.CreateCommand();
-                command.CommandText = "CALL UpdateEmployee(@matricule,@nom,@prenom,@email,@dateNaissance,@adresse,@dateEmbauche,@tauxHoraire,@photo,@statut)";
+                command.CommandText = "CALL UpdateEmployee(@matricule,@nom,@prenom,@email,@adresse,@tauxHoraire,@photo,@statut)";
                 con.Open();
                 command.Parameters.AddWithValue("@matricule", matricule);
                 command.Parameters.AddWithValue("@nom", nom);
                 command.Parameters.AddWithValue("@prenom", prenom);
                 command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@dateNaissance", dateNaissance);
                 command.Parameters.AddWithValue("@adresse", adresse);
-                command.Parameters.AddWithValue("@dateEmbauche", dateEmbauche);
                 command.Parameters.AddWithValue("@tauxHoraire", tauxHoraire);
                 command.Parameters.AddWithValue("@photo", photo);
                 command.Parameters.AddWithValue("@statut", statut);
@@ -277,17 +275,23 @@ namespace GestionProjets {
                 con.Close();
             }
         }
-        public void deleteEmployeeProjectByProject(string numProjet) {
-            try {
-                MySqlCommand command = con.CreateCommand();
-                command.CommandText = "CALL DeleteEmployeeProjectByProject(@numProjet)";
-                con.Open();
-                command.Parameters.AddWithValue("@numProjet", numProjet);
-                command.ExecuteNonQuery();
-            } catch (Exception ex) {
-            } finally {
-                con.Close();
-            }
+        public void DeleteAllEmployeeProjectByEmployee(string matriculeEmploye)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL DeleteAllEmployeeProjectByEmployee(@matriculeEmploye)";
+            con.Open();
+            command.Parameters.AddWithValue("@matriculeEmploye", matriculeEmploye);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+        public void deleteEmployeeProjectByProject(string numProjet)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL DeleteEmployeeProjectByProject(@numProjet)";
+            con.Open();
+            command.Parameters.AddWithValue("@numProjet", numProjet);
+            command.ExecuteNonQuery();
+            con.Close();
         }
 
         public void LoadAllEmployeProjet() {
@@ -346,17 +350,32 @@ namespace GestionProjets {
             con.Close();
         }
 
-        public string getEmployeCurrentProject(string matriculeEmploye) {
+        public string getEmployeCurrentProject(string matriculeEmploye)
+        {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_CheckIfEmployeWorkOnCurrentProject(@matricule);";
+            command.CommandText = "CALL CheckIfEmployeWorkOnCurrentProject(@matricule);";
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
-            string result = (string)command.ExecuteScalar();
+            string result;
+            
+
+            object resultObj = command.ExecuteScalar();
             con.Close();
-            return result;
+            if (resultObj != DBNull.Value)
+            {
+                result = (string)resultObj;
+                return result;
+            }
+            else
+            {
+                return "";
+            }
         }
 
-        public string GetClientNameById(int id) {
+
+
+        public string GetClientNameById(int id)
+        {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "SELECT f_GetClientNameById(@id);";
             con.Open();
@@ -366,6 +385,14 @@ namespace GestionProjets {
             return result;
         }
 
+        public void UpdateProjetStatus(string num)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "CALL UpdateProjectStatus(@num);";
+            con.Open();
+            command.Parameters.AddWithValue("@num", num);
+            con.Close();
+        }
 
     }
 }
