@@ -70,23 +70,21 @@ namespace GestionProjets.Employees
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e) {
             if (item != null)
             {
+                Employe employe = SingletonEmploye.getInstance().getEmployeNoProjects(lv_liste.SelectedIndex);
                 if (employeModif != null)
                 {
                     
                         SingletonBD.getInstance().deleteEmployeeProjectByEmployee(item.Num, employeModif.Matricule);
-                        SingletonBD.getInstance().addEmployeProjet(item.Num, employeModif.Matricule, 0);
+                        SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
                         this.Frame.Navigate(typeof(pageGestionProjet));
                     
                     
                 }
                 else
                 {
-                    // Mode Ajouter
-        
-                    Employe employe = SingletonEmploye.getInstance().GetEmploye(lv_liste.SelectedIndex);
-                  
-                        SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
-                        this.Frame.Navigate(typeof(pageGestionProjet));
+                    
+                    SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
+                    this.Frame.Navigate(typeof(pageGestionProjet));
                     
                 }
             }
