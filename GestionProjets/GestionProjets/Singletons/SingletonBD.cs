@@ -64,18 +64,16 @@ namespace GestionProjets {
             return null;
         }
 
-        public string updateEmploye(string matricule, string nom, string prenom, string email, DateTime dateNaissance, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut) {
+        public string updateEmploye(string matricule, string nom, string prenom, string email, string adresse, double tauxHoraire, string photo, string statut) {
             try {
                 MySqlCommand command = con.CreateCommand();
-                command.CommandText = "CALL UpdateEmployee(@matricule,@nom,@prenom,@email,@dateNaissance,@adresse,@dateEmbauche,@tauxHoraire,@photo,@statut)";
+                command.CommandText = "CALL UpdateEmployee(@matricule,@nom,@prenom,@email,@adresse,@tauxHoraire,@photo,@statut)";
                 con.Open();
                 command.Parameters.AddWithValue("@matricule", matricule);
                 command.Parameters.AddWithValue("@nom", nom);
                 command.Parameters.AddWithValue("@prenom", prenom);
                 command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@dateNaissance", dateNaissance);
                 command.Parameters.AddWithValue("@adresse", adresse);
-                command.Parameters.AddWithValue("@dateEmbauche", dateEmbauche);
                 command.Parameters.AddWithValue("@tauxHoraire", tauxHoraire);
                 command.Parameters.AddWithValue("@photo", photo);
                 command.Parameters.AddWithValue("@statut", statut);

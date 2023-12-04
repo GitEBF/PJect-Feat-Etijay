@@ -51,8 +51,6 @@ namespace GestionProjets
             string nom, prenom, email, adresse, statut, photo;
             nom = prenom = email = adresse = statut = photo = "";
             double tauxHoraire = 0;
-            DateTime dateEmbauche = item.DateEmbauche;
-            DateTime dateNaissance = item.DateNaissance;
 
             Object[] tabValInsert = { tb_Nom.Text, tb_Prenom.Text, tb_Email.Text, tb_Adresse.Text, tb_TauxHoraire.Text, tb_Photo.Text, cb_Statut.SelectedValue };
             string[] tabNom = { "Nom", "Prenom", "Email", "Adresse", "taux horaire", "Photo", "Statut"};
@@ -130,7 +128,7 @@ namespace GestionProjets
 
             if (!erreur)
             {
-                string strError = SingletonBD.getInstance().updateEmploye(item.Matricule, nom, prenom, email, dateNaissance, adresse, dateEmbauche, tauxHoraire, photo, statut);
+                string strError = SingletonBD.getInstance().updateEmploye(item.Matricule, nom, prenom, email, adresse, tauxHoraire, photo, statut);
                 if (strError != null) {
                     tblGlobal.Text = strError;
                 } else {
