@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -34,6 +35,7 @@ namespace GestionProjets
         {
             Instance = this;
             this.InitializeComponent();
+            SingletonMainWindow.getInstance(this);
             SingletonBD.getInstance().LoadAllEmploye();
             SingletonBD.getInstance().LoadAllClient();
             SingletonBD.getInstance().LoadAllProjet();
@@ -58,6 +60,12 @@ namespace GestionProjets
             NavItem_Connexion.Content = newContent;
         }
 
+        public async void ChangeSelectedItem()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            navView.SelectedItem = null;
+        }
+
         public void UpdateNavItemColor(Color foreground, Color background)
         {
             var foregroundColor = new SolidColorBrush(foreground);
@@ -71,27 +79,31 @@ namespace GestionProjets
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             NavigationViewItem selectedNavItem = args.SelectedItem as NavigationViewItem;
-            switch (selectedNavItem.Name)
+            if (selectedNavItem != null)
             {
-                case "NavItem_Creation":
-                    contentFrame.Navigate(typeof(pageGestionProjet));
-                    break;
-                case "NavItem_Disposition":
-                    contentFrame.Navigate(typeof(pageGestionEmploye));
-                    break;
-                case "NavItem_SaveFile":
-                    contentFrame.Navigate(typeof(pageGestionClient));
-                    break;
-                case "NavItem_LoadFile":
-                    if (activePane == false) {
-                        activePane = true;
+                switch (selectedNavItem.Name)
+                {
+                    case "NavItem_Creation":
+                        contentFrame.Navigate(typeof(pageGestionProjet));
+                        break;
+                    case "NavItem_Disposition":
+                        contentFrame.Navigate(typeof(pageGestionEmploye));
+                        break;
+                    case "NavItem_SaveFile":
+                        contentFrame.Navigate(typeof(pageGestionClient));
+                        break;
+                    case "NavItem_LoadFile":
+                        if (activePane == false)
+                        {
+                            activePane = true;
 
-                        btExport_Click();
-                    }
-                    break;
-                case "NavItem_Connexion":
-                    contentFrame.Navigate(typeof(pageConnexion));
-                    break;
+                            btExport_Click();
+                        }
+                        break;
+                    case "NavItem_Connexion":
+                        contentFrame.Navigate(typeof(pageConnexion));
+                        break;
+                }
             }
         }
 
@@ -123,7 +135,6 @@ namespace GestionProjets
             //écrit dans le fichier chacune des lignes du tableau
             //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
-
     }
 }
 

@@ -11,7 +11,7 @@
     
 
     <NavigationView x:Name="navView"  SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed"
-    SelectionChanged="navView_SelectionChanged" PaneDisplayMode="Left" PaneTitle="Gestion Projets" IsSettingsVisible="False">
+    SelectionChanged="navView_SelectionChanged" PaneDisplayMode="Left" PaneTitle="Gestion Projets" IsSettingsVisible="False" >
         
         <NavigationView.MenuItems>
             <NavigationViewItem Icon="Caption" Content="Projets" x:Name="NavItem_Creation"/>
