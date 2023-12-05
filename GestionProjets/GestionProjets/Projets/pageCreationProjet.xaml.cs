@@ -62,7 +62,7 @@ namespace GestionProjets.Projets {
                 Match match = regex.Match((string)tabValInsert[3]);
                 if (match.Success) {
 
-                    budget = double.Parse(match.Value.Replace(',', '.'));
+                    budget = double.Parse(match.Value.Replace('.', ','));
 
                 } else {
                     tabTxtBlock[3].Text = "Entrez un prix comme ceci 10000.00 ou 233";

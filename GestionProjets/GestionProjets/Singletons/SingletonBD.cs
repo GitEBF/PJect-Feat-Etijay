@@ -357,8 +357,6 @@ namespace GestionProjets {
             con.Open();
             command.Parameters.AddWithValue("@matricule", matriculeEmploye);
             string result;
-            
-
             object resultObj = command.ExecuteScalar();
             con.Close();
             if (resultObj != DBNull.Value)
@@ -388,9 +386,10 @@ namespace GestionProjets {
         public void UpdateProjetStatus(string num)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL UpdateProjectStatus(@num);";
+            command.CommandText = "CALL UpdateProjectStatus('@num');";
             con.Open();
             command.Parameters.AddWithValue("@num", num);
+            command.ExecuteNonQuery();
             con.Close();
         }
 
