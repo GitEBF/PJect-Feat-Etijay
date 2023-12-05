@@ -74,7 +74,7 @@ namespace GestionProjets
                 Match match = regex.Match((string)tabValInsert[4]);
                 if (match.Success)
                 {
-                    tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
+                    tauxHoraire = double.Parse(match.Value.Replace('.', ','));
                     if (tauxHoraire >= 120) {
                         erreur = true;
                         tabTxtBlock[4].Text = "Maximum de 120$";

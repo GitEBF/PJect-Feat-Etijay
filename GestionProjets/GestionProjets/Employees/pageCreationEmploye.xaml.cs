@@ -60,7 +60,7 @@ namespace GestionProjets
                 Regex regex = new Regex("^[0-9]{1,}[.,][0-9]{1,2}$|^[0-9]{1,}$");
                 Match match = regex.Match((string)tabValInsert[5]);
                 if (match.Success) {
-                    tauxHoraire = double.Parse(match.Value.Replace(',', '.'));
+                    tauxHoraire = double.Parse(match.Value.Replace('.', ','));
                     if (tauxHoraire >= 120) {
                         erreur = true;
                         tabTxtBlock[5].Text = "Maximum de 120$";
