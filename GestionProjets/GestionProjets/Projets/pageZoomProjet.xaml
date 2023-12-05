@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GestionProjets"
+    xmlns:Objets="using:GestionProjets.Objets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -39,12 +40,43 @@
 
 
                 </Grid>
-                <Grid Grid.Row="1" RowDefinitions="6*,0.5*" ColumnDefinitions="1*,1*">
-                    <StackPanel Grid.Column="0" x:Name="stk_employee"  VerticalAlignment="Center" HorizontalAlignment="Center">
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" x:Name="stk_buttonEmployee"  VerticalAlignment="Center" HorizontalAlignment="Center">
-                    </StackPanel>
-                </Grid>
+                
+                <StackPanel  Grid.Row="1">
+                    <Button x:Name="btn_Ajouter" Content="Ajouter" Click="btn_Ajouter_Click"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <GridView x:Name="lv_liste" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionChanged="lv_liste_SelectionChanged">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VariableSizedWrapGrid MaximumRowsOrColumns="1" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="Objets:EmployeProjet">
+                                    <Grid Width="600" Height="Auto" Margin="10">
+                                        <Grid Width="600" Height="Auto">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{x:Bind NomEmploye}" FontSize="15" FontWeight="Bold"/>
+                                                <TextBlock FontSize="10" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 10 0">
+                                                <Run Text="Nombres heures: "/>
+                                                <Run Text="{x:Bind NbHeure}"/>
+                                                </TextBlock>
+                                                <TextBlock x:Name="salaire" FontSize="10" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 10 0">
+                                                    <Run Text="Salaire total: "/>
+                                                    <Run Text="{x:Bind SalaireTotal}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </ScrollViewer>
+                </StackPanel>
+                
+
+
+
+
                 <StackPanel x:Name="admin" Grid.Row="2">
                     <Button x:Name="btn_State" Content="Fermer le projet" Click="btn_State_Click"/>
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Click="btn_Supprimer_Click"/>

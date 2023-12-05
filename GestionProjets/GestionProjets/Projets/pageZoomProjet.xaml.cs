@@ -29,6 +29,7 @@ namespace GestionProjets
     {
         Projet item;
         int index;
+        ObservableCollection<EmployeProjet> listeEmployes;
         public pageZoomProjet()
         {
             this.InitializeComponent();
@@ -56,46 +57,11 @@ namespace GestionProjets
             {
                 btn_State.Visibility = Visibility.Collapsed;
             }
-
-            AddTextBlocksToStackPanel(item.NbEmploye);
-        }
-
-        private void AddTextBlocksToStackPanel(int numberOfTextBlocks) {
-            SingletonBD.getInstance().LoadAllEmployeProjet();
-            ObservableCollection<Employe> listeEmployes = SingletonEmployeProjet.getInstance().GetEmployeFromProject(item);
-            for (int i = 1; i <= numberOfTextBlocks; i++) {
-                TextBlock textBlock = new TextBlock();
-                if (listeEmployes.Count >= i)
-                {
-                    textBlock.Text = $"{listeEmployes[i - 1].Prenom + ' ' + listeEmployes[i - 1].Nom}";
-                }
-                else
-                {
-                    textBlock.Text = "Vide";
-                }
-                textBlock.Margin = new Thickness(5);
-                stk_employee.Children.Add(textBlock);
-                Button button = new Button();
-                if (listeEmployes.Count >= i)
-                {
-                    int index = i - 1;
-                    button.Content = "Modifier";
-                    button.Click += (sender, e) => {
-                        if (index >= 0 && index < listeEmployes.Count)
-                        {
-                            this.Frame.Navigate(typeof(pageBrowseEmploye), new Tuple<Projet, Employe>(item, listeEmployes[index]));
-                            //on va voir
-                        }
-                    };
-                }
-                else
-                {
-                    button.Content = "Ajouter";
-                    button.Click += (sender, e) => { this.Frame.Navigate(typeof(pageBrowseEmploye), item); };
-                }
-                button.FontSize = 9;
-                button.Margin = new Thickness(5);
-                stk_buttonEmployee.Children.Add(button);
+            listeEmployes = SingletonEmployeProjet.getInstance().GetEmployeFromProject(item);
+            lv_liste.ItemsSource = listeEmployes;
+            if (lv_liste.Items.Count >= item.NbEmploye)
+            {
+                btn_Ajouter.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -117,6 +83,16 @@ namespace GestionProjets
             SingletonBD.getInstance().deleteEmployeeProjectByProject(SingletonProjet.getInstance().GetProjet(index).Num);
             SingletonBD.getInstance().deleteProjet(SingletonProjet.getInstance().GetProjet(index).Num);
             SingletonProjet.getInstance().supprimer(index);
+        }
+
+        private void lv_liste_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btn_Ajouter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(pageBrowseEmploye), item);
         }
     }
 }

@@ -53,6 +53,18 @@ namespace GestionProjets.Singletons
             return liste[0];
         }
 
+        public Employe GetEmployeWithMatricule(string matricule)
+        {
+            foreach (Employe item in liste)
+            {
+                if (item.Matricule == matricule)
+                {
+                    return item;
+                }
+            }
+            return liste[0];
+        }
+
         public Employe getEmployeNoProjects(int position)
         {
             ObservableCollection<Employe> noProjects = new ObservableCollection<Employe>();

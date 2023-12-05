@@ -52,7 +52,7 @@ CREATE TABLE user (
     loged bit DEFAULT 1
 );
 
--- Triggers --                                                                  
+--                                                                   Triggers --
 
 DELIMITER //
 CREATE TRIGGER BeforeInsertEmployes
@@ -144,6 +144,18 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION f_GetEmployeNameByMatricule(_matricule VARCHAR(255)) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE employeName VARCHAR(255);
+
+    SELECT nom INTO employeName
+    FROM Employes
+    WHERE matricule = _matricule;
+
+    RETURN employeName;
+END //
+DELIMITER ;
 
 
 --                                                                   Procédures --
@@ -224,10 +236,6 @@ CREATE PROCEDURE CreateUser(
     IN _password VARCHAR(255)
 )
 BEGIN
-    DECLARE CONTINUE HANDLER FOR 1062
-    BEGIN
-        SELECT 'Un user avec le même nom ne peux pas exister';
-    END;
     INSERT INTO user (name, password)
     VALUES (_name, _password);
 END //
@@ -296,9 +304,7 @@ CREATE PROCEDURE UpdateEmployee (
     IN _nom VARCHAR(255),
     IN _prenom VARCHAR(255),
     IN _email VARCHAR(255),
-    IN _dateNaissance DATE,
     IN _adresse VARCHAR(255),
-    IN _dateEmbauche DATE,
     IN _tauxHoraire DOUBLE(16,2),
     IN _photo VARCHAR(255),
     IN _statut VARCHAR(255)
@@ -309,9 +315,7 @@ BEGIN
         nom = _nom,
         prenom = _prenom,
         email = _email,
-        dateNaissance = _dateNaissance,
         adresse = _adresse,
-        dateEmbauche = _dateEmbauche,
         tauxHoraire = _tauxHoraire,
         photo = _photo,
         statut = _statut

@@ -34,20 +34,14 @@ namespace GestionProjets.Singletons
             return liste;
         }
 
-        public ObservableCollection<Employe> GetEmployeFromProject(Projet projet) {
-            ObservableCollection<Employe> employeListe = new ObservableCollection<Employe>();
-            ObservableCollection<Employe> allEmployeListe = SingletonEmploye.getInstance().getEmployeListe();
+        public ObservableCollection<EmployeProjet> GetEmployeFromProject(Projet projet) {
+            ObservableCollection<EmployeProjet> empl = new ObservableCollection<EmployeProjet>();
             foreach (EmployeProjet item in liste) {
                 if (item.NumProjet == projet.Num) {
-                    foreach (Employe employee in allEmployeListe) {
-                        if (employee.Matricule == item.MatriculeEmploye) {
-                            employeListe.Add(employee);
-                        }
-                    }
+                    empl.Add(item);
                 }
             }
-
-            return employeListe;
+            return empl;
         }
 
         public EmployeProjet GetEmployeProjet(int position)

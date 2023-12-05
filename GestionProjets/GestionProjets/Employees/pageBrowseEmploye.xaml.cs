@@ -45,12 +45,7 @@ namespace GestionProjets.Employees
                 item = projetParam;
                 tb_info.Text = "Cliquez sur un nom pour ajouter un/une employé(e) au projet.";
             }
-            else if (e.Parameter is Tuple<Projet, Employe> tuple)
-            {
-                item = tuple.Item1;
-                employeModif = tuple.Item2;
-                tb_info.Text = "Cliquez sur un nom pour modifier l'employé(e) dans le projet.";
-            }
+            
 
             if (listeEmploye.Count == 0) {
                 tb_info.Text = "Aucun employé est disponible pour le moment";
@@ -70,23 +65,10 @@ namespace GestionProjets.Employees
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e) {
             if (item != null)
             {
-                Employe employe = SingletonEmploye.getInstance().getEmployeNoProjects(lv_liste.SelectedIndex);
-                if (employeModif != null)
-                {
-                    
-                        SingletonBD.getInstance().deleteEmployeeProjectByEmployee(item.Num, employeModif.Matricule);
-                        SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
-                        this.Frame.Navigate(typeof(pageGestionProjet));
-                    
-                    
-                }
-                else
-                {
-                    
+                    Employe employe = SingletonEmploye.getInstance().getEmployeNoProjects(lv_liste.SelectedIndex);
                     SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
                     this.Frame.Navigate(typeof(pageGestionProjet));
-                    
-                }
+                  
             }
         }
 
