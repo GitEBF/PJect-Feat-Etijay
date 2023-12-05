@@ -51,6 +51,8 @@ namespace GestionProjets
             {
                 admin.Visibility = Visibility.Collapsed;
             }
+
+            SingletonMainWindow.getInstance().MainWindow.ChangeSelectedItem();
         }
 
         private void changes() {
