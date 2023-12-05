@@ -52,6 +52,10 @@ namespace GestionProjets
             {
                 admin.Visibility = Visibility.Collapsed;
             }
+            if (item.Statut == "Terminé")
+            {
+                btn_State.Visibility = Visibility.Collapsed;
+            }
 
             AddTextBlocksToStackPanel(item.NbEmploye);
         }
@@ -97,7 +101,9 @@ namespace GestionProjets
 
         private void btn_State_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(pageZoomProjet), item);
+            tbl_Statut.Text = "Statut: Terminé";
+            btn_State.Visibility = Visibility.Collapsed;
+            SingletonBD.getInstance().UpdateProjetStatus(item.Num);
         }
 
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
