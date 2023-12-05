@@ -39,8 +39,8 @@ namespace GestionProjets
         {
             index = (int)e.Parameter;
             item = SingletonProjet.getInstance().GetProjet(index);
-            tbl_Num.Text = item.Num.ToString();
-            tbl_Titre.Text = "Titre: " + item.Titre;
+            tbl_Num.Text = "N. " + item.Num.ToString();
+            tbl_Titre.Text = item.Titre;
             tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
             tbl_Description.Text = "Description: " + item.Description;
             tbl_Budget.Text = "Budget: " + item.Budget.ToString("F2") + "$";

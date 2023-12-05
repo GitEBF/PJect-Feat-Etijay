@@ -9,43 +9,63 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ColumnDefinitions="0.5*,6*,0.5*" RowDefinitions="0.1*,3*,0.1*">
-        <Viewbox Stretch="Uniform"  Grid.Column="1" Grid.Row="1">
-            <Grid ColumnDefinitions="3*, 1*, 1.5*">
-                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+    <Grid ColumnDefinitions="0.1*,3*,0.1*" RowDefinitions="0.1,2.5*,0.1*">
+        <Viewbox Stretch="Uniform"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
+            <Grid RowDefinitions="3*, 1.5*, 1*">
+                <Grid Grid.Row="0" RowDefinitions="6*,0.5*" ColumnDefinitions="1*,1*">
 
-                    <TextBlock x:Name="tbl_Num" Text="Modele" Margin="0 0 0 0" FontSize="22"/>
-                    <Rectangle HorizontalAlignment="Stretch" Height="2" Margin="0 0 0 0"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <TextBlock Grid.Column="1" x:Name="tbl_Num" Text="" Width="320" Margin="10 10 10 10" FontSize="22" HorizontalAlignment="Right"/>
+                        <Rectangle HorizontalAlignment="Stretch" Height="2" Margin="0 0 0 0"/>
+                        <TextBlock Grid.Column="1" x:Name="tbl_DateDebut" Text="" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_Titre" Text="Code" Width="320" Margin="10 10 10 10"/>
+                        <TextBlock Grid.Column="1" x:Name="tbl_NbEmploye" Text="" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_DateDebut" Text="Meuble" Width="320" Margin="10 10 10 10"/>
+                        <TextBlock  Grid.Column="1" x:Name="tbl_Statut" Text="" Width="320" Margin="10 10 10 10"/>
+                        
+                    </StackPanel>
 
-                    <TextBlock x:Name="tbl_Description" Text="Categorie" Width="320" Margin="10 10 10 10"/>
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <TextBlock Grid.Column="0" x:Name="tbl_Titre" Text="" Margin="0 0 0 0" FontSize="22"/>
 
-                    <TextBlock x:Name="tbl_Budget" Text="Couleur" Width="320" Margin="10 10 10 10"/>
+                        <TextBlock Grid.Column="0" x:Name="tbl_Budget" Text="" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_NbEmploye" Text="Prix" Width="320" Margin="10 10 10 10"/>
+                        <TextBlock Grid.Column="0" x:Name="tbl_TotalSalaire" Text="" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_TotalSalaire" Text="Prix" Width="320" Margin="10 10 10 10"/>
+                        <TextBlock  Grid.Column="0" x:Name="tbl_IdClient" Text="" Width="320" Margin="10 10 10 10"/>
+                    </StackPanel>
 
-                    <TextBlock x:Name="tbl_IdClient" Text="Prix" Width="320" Margin="10 10 10 10"/>
+                    <TextBlock Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" x:Name="tbl_Description" Text="" Width="320" Margin="10 10 10 10"/>
 
-                    <TextBlock x:Name="tbl_Statut" Text="Prix" Width="320" Margin="10 10 10 10"/>
 
-                </StackPanel>
-                <StackPanel Grid.Column="1" x:Name="stk_employee"  VerticalAlignment="Center" HorizontalAlignment="Right">
-                    
-                </StackPanel>
-                <StackPanel Grid.Column="2" x:Name="stk_buttonEmployee"  VerticalAlignment="Center" HorizontalAlignment="Right">
-
-                </StackPanel>
-                <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
-					<Button x:Name="btn_State" Content="Fermer le projet" Click="btn_State_Click"/>
+                </Grid>
+                <Grid Grid.Row="1" RowDefinitions="6*,0.5*" ColumnDefinitions="1*,1*">
+                    <StackPanel Grid.Column="0" x:Name="stk_employee"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" x:Name="stk_buttonEmployee"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                    </StackPanel>
+                </Grid>
+                <StackPanel x:Name="admin" Grid.Row="2">
+                    <Button x:Name="btn_State" Content="Fermer le projet" Click="btn_State_Click"/>
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Click="btn_Supprimer_Click"/>
                     <Button x:Name="btn_Modifier" Content="Modifier" Click="btn_Modifier_Click"/>
                 </StackPanel>
             </Grid>
         </Viewbox>
     </Grid>
+<!--
+                    </Grid>
+               
+                    
+                </StackPanel>
+                
+
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
+
+                </StackPanel>
+    
+    
+    
+    -->
 </Page>
