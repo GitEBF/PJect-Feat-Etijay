@@ -58,7 +58,7 @@ namespace GestionProjets
 
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedIndex);
+            this.Frame.Navigate(typeof(pageZoomEmploye), lv_liste.SelectedItem);
         }
 
         private void btn_Ajouter_Click(object sender, RoutedEventArgs e) {

@@ -27,7 +27,6 @@ namespace GestionProjets
     public sealed partial class pageZoomEmploye : Page
     {
         Employe item;
-        int index;
         public pageZoomEmploye()
         {
             this.InitializeComponent();
@@ -35,8 +34,7 @@ namespace GestionProjets
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            index = (int)e.Parameter;
-            item = SingletonEmploye.getInstance().GetEmploye(index);
+            item = (Employe)e.Parameter;
             tbl_Matricule.Text = item.Matricule.ToString();
             tbl_NomPrenom.Text = "Nom: " + item.Prenom + ' ' + item.Nom;
             tbl_Email.Text = "Email: " + item.Email;
@@ -60,10 +58,9 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().DeleteAllEmployeeProjectByEmployee(item.Matricule);
+            SingletonBD.getInstance().deleteEmployee(item.Matricule);
             this.Frame.Navigate(typeof(pageGestionEmploye));
-            SingletonBD.getInstance().DeleteAllEmployeeProjectByEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
-            SingletonBD.getInstance().deleteEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
-            SingletonEmploye.getInstance().supprimer(index);
         }
     }
 }
