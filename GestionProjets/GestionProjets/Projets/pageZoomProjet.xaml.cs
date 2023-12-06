@@ -52,6 +52,8 @@ namespace GestionProjets
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {
                 admin.Visibility = Visibility.Collapsed;
+                btn_Ajouter.Visibility = Visibility.Collapsed;
+                btn_State.Visibility = Visibility.Collapsed;
             }
             if (item.Statut == "Terminé")
             {
