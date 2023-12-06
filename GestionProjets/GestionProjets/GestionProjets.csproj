@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Clients\pageCreationClient.xaml" />
+    <None Remove="ContentDialogEmployeProjet.xaml" />
     <None Remove="Employees\pageBrowseEmploye.xaml" />
     <None Remove="pageConnexion.xaml" />
     <None Remove="pageCreationEmploye.xaml" />
@@ -93,6 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ContentDialogEmployeProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Employees\pageBrowseEmploye.xaml">

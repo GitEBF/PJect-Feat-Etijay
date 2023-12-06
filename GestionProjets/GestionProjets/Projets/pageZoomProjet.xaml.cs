@@ -28,7 +28,6 @@ namespace GestionProjets
     public sealed partial class pageZoomProjet : Page
     {
         Projet item;
-        int index;
         ObservableCollection<EmployeProjet> listeEmployes;
         public pageZoomProjet()
         {
@@ -38,8 +37,7 @@ namespace GestionProjets
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            index = (int)e.Parameter;
-            item = SingletonProjet.getInstance().GetProjet(index);
+            item = (Projet)e.Parameter;
             tbl_Num.Text = "N. " + item.Num.ToString();
             tbl_Titre.Text = item.Titre;
             tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
@@ -79,10 +77,9 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().deleteEmployeeProjectByProject(item.Num);
+            SingletonBD.getInstance().deleteProjet(item.Num);
             this.Frame.Navigate(typeof(pageGestionProjet));
-            SingletonBD.getInstance().deleteEmployeeProjectByProject(SingletonProjet.getInstance().GetProjet(index).Num);
-            SingletonBD.getInstance().deleteProjet(SingletonProjet.getInstance().GetProjet(index).Num);
-            SingletonProjet.getInstance().supprimer(index);
         }
 
         private void lv_liste_SelectionChanged(object sender, SelectionChangedEventArgs e)
