@@ -386,7 +386,7 @@ namespace GestionProjets {
         public void UpdateProjetStatus(string num)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL UpdateProjectStatus('@num');";
+            command.CommandText = "CALL UpdateProjectStatus(@num);";
             con.Open();
             command.Parameters.AddWithValue("@num", num);
             command.ExecuteNonQuery();
