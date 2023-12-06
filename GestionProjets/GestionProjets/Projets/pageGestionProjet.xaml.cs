@@ -54,6 +54,7 @@ namespace GestionProjets
             }
 
             SingletonMainWindow.getInstance().MainWindow.ChangeSelectedItem();
+            changes();
         }
 
         private void changes() {
