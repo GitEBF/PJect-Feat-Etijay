@@ -30,7 +30,8 @@ namespace GestionProjets {
         public void LoadAll(string tableName, Action<MySqlDataReader> table) {
             using MySqlCommand command = con.CreateCommand();
             con.Open();
-            command.CommandText = $"SELECT * FROM {tableName}";
+            command.CommandText = "CALL LoadAll(@tableName)";
+            command.Parameters.AddWithValue("@tableName", tableName);
 
             using MySqlDataReader r = command.ExecuteReader();
             while (r.Read()) {

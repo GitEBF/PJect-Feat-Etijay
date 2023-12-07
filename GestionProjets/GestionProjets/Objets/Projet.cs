@@ -27,7 +27,7 @@ namespace GestionProjets.Objets
             totalSalaire = r.GetInt16("totalSalaire");
             idClient = r.GetInt16("idClient");
             dateDebut = r.GetDateTime("dateDebut");
-            nomClient = SingletonBD.getInstance().GetClientNameById(idClient);
+            nomClient = SingletonClient.getInstance().GetClientWithId(idClient);
         }
         public Projet() { }
         public Projet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut, string nomClient)
