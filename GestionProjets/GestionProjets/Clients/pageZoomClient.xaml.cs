@@ -54,6 +54,7 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().DeleteProjectsByClient(item.Id);
             SingletonBD.getInstance().deleteClient(item.Id);
             this.Frame.Navigate(typeof(pageGestionClient));
         }

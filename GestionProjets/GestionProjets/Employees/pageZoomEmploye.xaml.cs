@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.WindowsAppSDK.Runtime.Packages;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -43,6 +44,7 @@ namespace GestionProjets
             tbl_dateEmbauche.Text = "DateEmbauche: " + item.DateEmbauche;
             tbl_dateNaissance.Text = "DateNaissance: " + item.DateNaissance;
             tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire.ToString("F2") + "$";
+            photo.Source = new BitmapImage(new Uri(item.Photo, UriKind.Absolute));
             string projectName = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
             tbl_travailSur.Text = "L'employé travail présentement sur le projet: " + projectName;
             if (!SingletonBD.getInstance().isUserLoggedIn())
