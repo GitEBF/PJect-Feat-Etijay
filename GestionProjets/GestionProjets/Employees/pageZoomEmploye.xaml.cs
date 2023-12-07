@@ -46,8 +46,8 @@ namespace GestionProjets
             tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire.ToString("F2") + "$";
             try {
                 photo.Source = new BitmapImage(new Uri(item.Photo, UriKind.Absolute));
-            } catch { 
-                
+            } catch {
+                photoError.Text = "L'image est indisponible";
             }
             
             string projectName = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
