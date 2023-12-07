@@ -57,7 +57,7 @@
 
                     
                     <TextBlock x:Name="tbl_DateEmbauche" Text="Date d'embauche" HorizontalAlignment="Center" FontSize="15"/>
-                    <DatePicker  x:Name="dp_DateEmbauche" Width="320" Margin="20 20 20 20"/>
+                    <DatePicker  x:Name="dp_DateEmbauche" Width="320" Margin="20 35 20 20"/>
                     <TextBlock x:Name="tblErreur_DateEmbauche" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
                     
                 </StackPanel>
