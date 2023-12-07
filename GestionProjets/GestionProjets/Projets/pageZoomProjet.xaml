@@ -10,13 +10,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ColumnDefinitions="0.1*,3*,0.1*" RowDefinitions="0.1,2.5*,0.1*">
+    <Grid ColumnDefinitions="0.1*,3*,0.1*" RowDefinitions="0.1,2.5*,0.1*" x:Name="GridBase">
         <Viewbox Stretch="Uniform"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
             <Grid RowDefinitions="5*, 1.5*, 1*">
                 <Grid Grid.Row="0" RowDefinitions="6*,2*" ColumnDefinitions="1*,1*">
 
                     <StackPanel Grid.Column="1" Grid.Row="0">
                         <TextBlock Grid.Column="1" x:Name="tbl_Num" Text="" Width="320" Margin="0 0 0 0" FontSize="22" HorizontalAlignment="Right" HorizontalTextAlignment="Right"/>
+                        <Rectangle HorizontalAlignment="Stretch" Height="4" Fill="#80000000" Margin="0 5 0 5"/>
                         <TextBlock Grid.Column="1" x:Name="tbl_DateDebut" Text="" Width="320" Margin="10 10 10 10" HorizontalAlignment="Right" HorizontalTextAlignment="Right"/>
 
                         <TextBlock Grid.Column="1" x:Name="tbl_NbEmploye" Text="" Width="320" Margin="10 10 10 10" HorizontalAlignment="Right" HorizontalTextAlignment="Right"/>
@@ -31,7 +32,7 @@
 
                     <StackPanel Grid.Column="0" Grid.Row="0">
                         <TextBlock Grid.Column="0" x:Name="tbl_Titre" Text="" Margin="0 0 0 0" FontSize="22"/>
-
+                        <Rectangle HorizontalAlignment="Stretch" Height="4" Fill="#80000000" Margin="0 5 0 5"/>
                         <TextBlock Grid.Column="0" x:Name="tbl_Budget" Text="" Width="320" Margin="10 10 10 10"/>
 
                         <TextBlock Grid.Column="0" x:Name="tbl_TotalSalaire" Text="" Width="320" Margin="10 10 10 10"/>

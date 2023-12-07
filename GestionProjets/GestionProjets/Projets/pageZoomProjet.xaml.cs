@@ -65,11 +65,24 @@ namespace GestionProjets
             }
         }
 
-        private void btn_State_Click(object sender, RoutedEventArgs e)
+        private async void btn_State_Click(object sender, RoutedEventArgs e)
         {
-            tbl_Statut.Text = "Statut: Terminé";
-            btn_State.Visibility = Visibility.Collapsed;
-            SingletonBD.getInstance().UpdateProjetStatus(item.Num);
+            try {
+                ContentDialogFermerProjet dialog = new ContentDialogFermerProjet();
+                dialog.XamlRoot = GridBase.XamlRoot;
+                dialog.Title = "Fermer le projet";
+                dialog.PrimaryButtonText = "Oui";
+                dialog.SecondaryButtonText = "Non";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+
+                ContentDialogResult resultat = await dialog.ShowAsync();
+                if (resultat == ContentDialogResult.Primary) {
+                    tbl_Statut.Text = "Statut: Terminé";
+                    btn_State.Visibility = Visibility.Collapsed;
+                    SingletonBD.getInstance().UpdateProjetStatus(item.Num);
+                }
+            } catch {
+            }
         }
 
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
