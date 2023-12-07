@@ -390,19 +390,6 @@ namespace GestionProjets {
             }
         }
 
-
-
-        public string GetClientNameById(int id)
-        {
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_GetClientNameById(@id);";
-            con.Open();
-            command.Parameters.AddWithValue("@id", id);
-            string result = (string)command.ExecuteScalar();
-            con.Close();
-            return result;
-        }
-
         public void UpdateProjetStatus(string num)
         {
             MySqlCommand command = con.CreateCommand();
