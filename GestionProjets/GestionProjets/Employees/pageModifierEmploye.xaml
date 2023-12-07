@@ -14,34 +14,34 @@
             <Grid ColumnDefinitions="2*,2*" RowDefinitions="9*, 1*">
                 <StackPanel Grid.Column="0" Grid.Row="0">
 
-                    <TextBox x:Name="tb_Nom" PlaceholderText="Nom" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Nom" Header="Nom" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Nom" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Prenom" PlaceholderText="Prenom" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Prenom" Header="Prenom" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Prenom" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Email" PlaceholderText="Email" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Email" Header="Email" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Email" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Adresse" PlaceholderText="Adresse" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Adresse" Header="Adresse" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Adresse" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0">
 
-                    <TextBox x:Name="tb_TauxHoraire" PlaceholderText="TauxHoraire $$$" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_TauxHoraire" Header="TauxHoraire $$$" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_TauxHoraire" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Photo" PlaceholderText="Photo" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Photo" Header="Photo" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Photo" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <ComboBox x:Name="cb_Statut" PlaceholderText="Statut" Width="320" Margin="20 20 20 20">
+                    <ComboBox x:Name="cb_Statut" Header="Statut" Width="320" Margin="20 20 20 20">
                         <x:String>Journalier</x:String>
                         <x:String>Permanent</x:String>
                     </ComboBox>

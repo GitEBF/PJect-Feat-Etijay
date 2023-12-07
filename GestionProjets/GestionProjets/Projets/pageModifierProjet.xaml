@@ -14,7 +14,7 @@
             <Grid ColumnDefinitions="2*,2*" RowDefinitions="5*, 1*">
                 <StackPanel Grid.Column="0" Grid.Row="0">
 
-                    <TextBox x:Name="tb_Titre" PlaceholderText="Titre" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Titre" Header="Titre" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Titre" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
@@ -25,13 +25,12 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0">
 
-                    <TextBox x:Name="tb_Budget" PlaceholderText="Budget $$$" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Budget" Header="Budget $$$" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Budget" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
 
-                    <TextBlock x:Name="tb__"/>
-                    <ComboBox x:Name="cb_nbEmploye" PlaceholderText="Nombre d'employés" Width="320" Margin="20 20 20 20">
+                    <ComboBox x:Name="cb_nbEmploye" Header="Nombre d'employés" Width="320" Margin="20 10 20 20">
                         <x:String>1</x:String>
                         <x:String>2</x:String>
                         <x:String>3</x:String>
@@ -43,7 +42,7 @@
                 </StackPanel>
                 <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
                     <StackPanel >
-                        <TextBox x:Name="tb_Description" PlaceholderText="Description" Width="320" Margin="20 20 20 20" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <TextBox x:Name="tb_Description" Header="Description" Width="320" Margin="20 20 20 20" TextWrapping="Wrap" AcceptsReturn="True"/>
                         <TextBlock x:Name="tblErreur_Description" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
                         <TextBlock x:Name="tblGlobal" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
                         <Button Name="btn_Modifier" Content="Modifier" Click="btn_Modifier_Click" HorizontalAlignment="Center" Margin="50 35 10 10" />
