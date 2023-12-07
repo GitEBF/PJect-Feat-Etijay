@@ -223,6 +223,25 @@ namespace GestionProjets {
             }
         }
 
+        public void DeleteProjectsByClient(int id)
+        {
+            try
+            {
+                MySqlCommand command = con.CreateCommand();
+                command.CommandText = "CALL DeleteProjectsByClient(@id)";
+                con.Open();
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public void LoadAllProjet() {
             SingletonProjet sProjet = SingletonProjet.getInstance();
             sProjet.refresh();

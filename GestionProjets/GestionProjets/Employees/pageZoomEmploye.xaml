@@ -34,8 +34,10 @@
                     <TextBlock x:Name="tbl_travailSur" Text="Travail présentement sur aucun projet." Width="550" Margin="10 10 10 10"/>
                 
                 </StackPanel>
-                <StackPanel Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
+                <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Image x:Name="photo" Height="150" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="admin">
                     <Button x:Name="btn_Supprimer" Content="Supprimer" Margin="10 10 10 10" Click="btn_Supprimer_Click"/>
                     <Button x:Name="btn_Modifier" Content="Modifier " Margin="10 10 10 10" Click="btn_Modifier_Click"/>
                 </StackPanel>
