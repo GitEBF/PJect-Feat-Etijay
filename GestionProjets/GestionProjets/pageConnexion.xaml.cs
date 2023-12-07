@@ -63,12 +63,12 @@ namespace GestionProjets
             MainWindow mainWindow = MainWindow.Instance;
             if (nomAdd.Text is null) {
                 nomErreur.Text = "Veuillez écrire un nom valide";
-            } else if (passwordAdd.Text is null)
+            } else if (passwordAdd.Password is null)
             {
                 passwordErreur.Text = "Veuillez écrire un mot de passe valide";
             } else
             {
-                string hashedPassword = HashPasswordMD5(passwordAdd.Text);
+                string hashedPassword = HashPasswordMD5(passwordAdd.Password);
 
                 if (SingletonBD.getInstance().checkIfFirstUse())
                 {
