@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Media;
+﻿using GestionProjets.Singletons;
+using Microsoft.UI.Xaml.Media;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace GestionProjets.Objets
 {
     internal class Projet
     {
-        string num, titre, description, statut;
+        string num, titre, description, statut, nomClient;
         double budget;
         int idClient, nbEmploye;
         double totalSalaire;
@@ -26,9 +27,10 @@ namespace GestionProjets.Objets
             totalSalaire = r.GetInt16("totalSalaire");
             idClient = r.GetInt16("idClient");
             dateDebut = r.GetDateTime("dateDebut");
+            nomClient = SingletonBD.getInstance().GetClientNameById(idClient);
         }
         public Projet() { }
-        public Projet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut)
+        public Projet(string num, string titre, DateTime dateDebut, string description, int budget, int nbEmploye, double totalSalaire, int idClient, string statut, string nomClient)
         {
             this.num = num;
             this.titre = titre;
@@ -39,6 +41,7 @@ namespace GestionProjets.Objets
             this.totalSalaire = totalSalaire;
             this.idClient = idClient;
             this.statut = statut;
+            this.nomClient = nomClient;
         }
 
         public string Num { get => num; set => num = value; }
@@ -50,9 +53,10 @@ namespace GestionProjets.Objets
         public double TotalSalaire { get => totalSalaire; set => totalSalaire = value; }
         public int IdClient { get => idClient; set => idClient = value; }
         public DateTime DateDebut { get => dateDebut; set => dateDebut = value; }
+        public string NomClient { get => nomClient; set => nomClient = value; }
         public override string ToString()
         {
-            return $"{Num},{Titre},{DateDebut},{Description},{Budget},{NbEmploye},{TotalSalaire},{IdClient},{Statut}";
+            return $"{Num},{Titre},{DateDebut},{Description},{Budget},{NbEmploye},{TotalSalaire},{IdClient},{Statut},{nomClient}";
         }
     }
 }
