@@ -98,6 +98,7 @@ namespace GestionProjets
                             activePane = true;
 
                             btExport_Click();
+                            
                         }
                         break;
                     case "NavItem_Connexion":
@@ -118,19 +119,48 @@ namespace GestionProjets
             //crée le fichier
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
-            var lines = SingletonProjet.getInstance().getProjetListe()
-                .Select(projet => string.Join(",",
-        "\"" + (projet.Num) + "\"",
-        "\"" + (projet.Titre) + "\"",
-        "\"" + (projet.Budget) + "\"",
-        "\"" + (projet.Statut) + "\"",
-        "\"" + (projet.IdClient) + "\"",
-        "\"" + (projet.DateDebut) + "\"",
-        "\"" + (projet.Description) + "\"",
-        "\"" + (projet.NbEmploye) + "\"",
-        "\"" + (projet.TotalSalaire) + "\""));
+            var lines = new List<string>();
 
-            await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            // Add CSV header line
+            string header = string.Join(",",
+                "\"Num\"",
+                "\"Titre\"",
+                "\"Budget\"",
+                "\"Statut\"",
+                "\"IdClient\"",
+                "\"DateDebut\"",
+                "\"Description\"",
+                "\"NbEmploye\"",
+                "\"TotalSalaire\"");
+            lines.Add(header);
+
+            // Add data lines
+            lines.AddRange(SingletonProjet.getInstance().getProjetListe()
+                .Select(projet => string.Join(",",
+                    "\"" + projet.Num + "\"",
+                    "\"" + projet.Titre + "\"",
+                    "\"" + projet.Budget + "\"",
+                    "\"" + projet.Statut + "\"",
+                    "\"" + projet.IdClient + "\"",
+                    "\"" + projet.DateDebut + "\"",
+                    "\"" + projet.Description + "\"",
+                    "\"" + projet.NbEmploye + "\"",
+                    "\"" + projet.TotalSalaire + "\"")));
+
+            // Now 'lines' contains both the header and the data lines
+
+            try {
+                if (monFichier != null) {
+                    await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                }
+                
+            } catch { 
+            
+            } finally {
+
+                activePane = false;
+            }
+            
 
             //écrit dans le fichier chacune des lignes du tableau
             //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);

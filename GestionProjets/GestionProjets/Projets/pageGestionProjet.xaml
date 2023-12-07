@@ -9,7 +9,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <Page.Resources>
+        <local:ConverteurArgent x:Key="Convertisseur"/>
+    </Page.Resources>
+    
     <Grid ColumnDefinitions="0.5*,9*,0.5*" RowDefinitions="0.6*,9*,1*">
         <Grid Grid.Column="1" Grid.Row="0" ColumnDefinitions="5*, 0.5*,5*">
             <TextBox x:Name="searchBoxMatricule" Grid.Column="0" Grid.Row="0" PlaceholderText="Cherche par Titre" TextChanged="OnSearchTextChanged" FontSize="27"/>
@@ -30,9 +34,9 @@
                         <Grid Width="600" Height="Auto" Margin="10" RowDefinitions="1.5*,1*,1*,1*">
                             <StackPanel Orientation="Horizontal" Grid.Row="0">
                                 <TextBlock Text="{x:Bind Titre}" FontSize="27" FontWeight="Bold" TextTrimming="WordEllipsis" VerticalAlignment="Center"/>
-                                <TextBlock FontSize="21" FontWeight="Bold" HorizontalTextAlignment="Right" VerticalAlignment="Center">
-                                      <Run Text="Num : "/>
-                                      <Run Text="{x:Bind Num}"/>
+                                <TextBlock FontSize="21" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 0 0">
+                                        <Run Text="Num : "/>
+                                        <Run Text="{x:Bind Num}"/>
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
@@ -50,7 +54,7 @@
                             <StackPanel Orientation="Horizontal" Grid.Row="3">
                                 <TextBlock FontSize="17" FontWeight="Bold">
                            <Run Text="Budget : "/>
-                           <Run Text="{x:Bind Budget}"/>
+                           <Run Text="{x:Bind Budget, Mode=OneWay, Converter={StaticResource Convertisseur}}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
