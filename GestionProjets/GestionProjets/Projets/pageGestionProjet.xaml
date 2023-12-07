@@ -27,16 +27,32 @@
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="Objets:Projet">
-                        <Grid Width="400" Height="Auto" Margin="10">
-                            <Grid Width="400" Height="Auto">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Titre}" FontSize="27" FontWeight="Bold" TextWrapping="Wrap"/>
-                                    <TextBlock FontSize="23" FontWeight="Bold">
-                                      <Run Text="numéro : "/>
+                        <Grid Width="600" Height="Auto" Margin="10" RowDefinitions="1.5*,1*,1*,1*">
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock Text="{x:Bind Titre}" FontSize="27" FontWeight="Bold" TextTrimming="WordEllipsis" VerticalAlignment="Center"/>
+                                <TextBlock FontSize="21" FontWeight="Bold" HorizontalTextAlignment="Right" VerticalAlignment="Center">
+                                      <Run Text="Num : "/>
                                       <Run Text="{x:Bind Num}"/>
-                                    </TextBlock>
-                                </StackPanel>
-                            </Grid>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock FontSize="17" FontWeight="Bold">
+                                  <Run Text="Client : "/>
+                                  <Run Text="{x:Bind IdClient}"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                <TextBlock FontSize="17" FontWeight="Bold">
+                           <Run Text="Date de début : "/>
+                           <Run Text="{x:Bind DateDebut}"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                                <TextBlock FontSize="17" FontWeight="Bold">
+                           <Run Text="Budget : "/>
+                           <Run Text="{x:Bind Budget}"/>
+                                </TextBlock>
+                            </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>

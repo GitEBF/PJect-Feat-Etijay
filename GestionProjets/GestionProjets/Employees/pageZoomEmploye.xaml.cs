@@ -44,7 +44,12 @@ namespace GestionProjets
             tbl_dateEmbauche.Text = "DateEmbauche: " + item.DateEmbauche;
             tbl_dateNaissance.Text = "DateNaissance: " + item.DateNaissance;
             tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire.ToString("F2") + "$";
-            photo.Source = new BitmapImage(new Uri(item.Photo, UriKind.Absolute));
+            try {
+                photo.Source = new BitmapImage(new Uri(item.Photo, UriKind.Absolute));
+            } catch { 
+                
+            }
+            
             string projectName = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
             tbl_travailSur.Text = "L'employé travail présentement sur le projet: " + projectName;
             if (!SingletonBD.getInstance().isUserLoggedIn())
