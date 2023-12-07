@@ -76,7 +76,8 @@
                                                 </TextBlock>
                                                 <TextBlock x:Name="tauxHoraire" FontSize="10" FontWeight="Bold" Margin="10 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right">
                                                     <Run Text="Taux horaire: "/>
-                                                    <Run Text="{x:Bind SalaireEmploye}"/>
+                                                    <Run Text="{x:Bind SalaireEmploye, Mode=OneWay, Converter={StaticResource Convertisseur}}"/>
+                                                    <Run Text="/ h"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </Grid>
