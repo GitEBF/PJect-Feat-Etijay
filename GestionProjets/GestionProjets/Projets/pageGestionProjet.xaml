@@ -38,7 +38,7 @@
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
                                 <TextBlock FontSize="17" FontWeight="Bold">
                                   <Run Text="Client : "/>
-                                  <Run Text="{x:Bind IdClient}"/>
+                                  <Run Text="{x:Bind NomClient}"/>
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Grid.Row="2">
