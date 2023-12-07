@@ -109,31 +109,39 @@ namespace GestionProjets
 
         private async void btExport_Click()
         {
-            var picker = new Windows.Storage.Pickers.FileSavePicker();
-            picker.SuggestedFileName = "Projet";
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(new Window());
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
-            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+            try
+            {
+                var picker = new Windows.Storage.Pickers.FileSavePicker();
+                picker.SuggestedFileName = "Projet";
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(new Window());
+                WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+                picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
 
-            //crée le fichier
-            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+                //crée le fichier
+                Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
-            var lines = SingletonProjet.getInstance().getProjetListe()
-                .Select(projet => string.Join(",",
-        "\"" + (projet.Num) + "\"",
-        "\"" + (projet.Titre) + "\"",
-        "\"" + (projet.Budget) + "\"",
-        "\"" + (projet.Statut) + "\"",
-        "\"" + (projet.IdClient) + "\"",
-        "\"" + (projet.DateDebut) + "\"",
-        "\"" + (projet.Description) + "\"",
-        "\"" + (projet.NbEmploye) + "\"",
-        "\"" + (projet.TotalSalaire) + "\""));
+                var lines = SingletonProjet.getInstance().getProjetListe()
+                    .Select(projet => string.Join(",",
+                    "\"" + (projet.Num) + "\"",
+                    "\"" + (projet.Titre) + "\"",
+                    "\"" + (projet.Budget) + "\"",
+                    "\"" + (projet.Statut) + "\"",
+                    "\"" + (projet.IdClient) + "\"",
+                    "\"" + (projet.DateDebut) + "\"",
+                    "\"" + (projet.Description) + "\"",
+                    "\"" + (projet.NbEmploye) + "\"",
+                    "\"" + (projet.TotalSalaire) + "\""));
 
-            await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
 
-            //écrit dans le fichier chacune des lignes du tableau
-            //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                //écrit dans le fichier chacune des lignes du tableau
+                //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }
