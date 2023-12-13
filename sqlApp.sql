@@ -1,5 +1,8 @@
---                                                                   Tables --                                                                  
+--                                                                   Tables
 
+
+
+-- Création de la table employé
 CREATE TABLE Employes (
     matricule VARCHAR(10) PRIMARY KEY NOT NULL,
     nom VARCHAR(255) NOT NULL,
@@ -13,6 +16,7 @@ CREATE TABLE Employes (
     statut VARCHAR(255) NOT NULL DEFAULT 'Journalier'
 );
 
+-- Création de la table clients
 CREATE TABLE Clients (
     id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nom VARCHAR(255) NOT NULL,
@@ -21,8 +25,10 @@ CREATE TABLE Clients (
     email VARCHAR(255) NOT NULL
 );
 
+-- Mettre le premier id de client à 100
 ALTER TABLE Clients AUTO_INCREMENT=100;
 
+-- Création de la table projet
 CREATE TABLE Projets (
     num VARCHAR(11) PRIMARY KEY NOT NULL,
     titre VARCHAR(255) NOT NULL,
@@ -36,6 +42,7 @@ CREATE TABLE Projets (
     FOREIGN KEY (idClient) REFERENCES Clients (id)
 );
 
+-- Création de la table liaison entre employé et projet
 CREATE TABLE EmployesProjets (
     numProjet VARCHAR(11) NOT NULL,
     matriculeEmploye VARCHAR(10) NOT NULL,
@@ -45,6 +52,7 @@ CREATE TABLE EmployesProjets (
     PRIMARY KEY (numProjet, matriculeEmploye)
 );
 
+-- Création de la table user
 CREATE TABLE user (
     id INT DEFAULT 1,
     name VARCHAR(255),
@@ -52,8 +60,9 @@ CREATE TABLE user (
     loged bit DEFAULT 1
 );
 
---                                                                   Triggers --                                                                  
+--                                                                   Triggers --
 
+-- Un trigger qui génère aléatoirement le matricule d'un employé
 DELIMITER //
 CREATE TRIGGER BeforeInsertEmployes
 BEFORE INSERT ON Employes
@@ -64,6 +73,7 @@ END;
 //
 DELIMITER ;
 
+-- Un trigger qui génère aléatoirement le numoré d'un projet
 DELIMITER //
 CREATE TRIGGER BeforeInsertProjets
 BEFORE INSERT ON Projets
@@ -74,6 +84,7 @@ END;
 //
 DELIMITER ;
 
+-- Un trigger qui met à jour le salaire d'un projet en function du nombre d'heure travaillé par un employé ajouté au projet
 DELIMITER //
 CREATE TRIGGER AfterInsertEmployesProjets
 AFTER INSERT ON EmployesProjets
@@ -84,6 +95,7 @@ END;
 //
 DELIMITER ;
 
+-- Un trigger qui vérifie si la personne est assez âgé pour travailler, sinon cela génère un code d'erreur
 DELIMITER //
 CREATE TRIGGER CheckAgeBeforeInsertEmployes
 BEFORE INSERT ON Employes
@@ -97,6 +109,7 @@ END;
 //
 DELIMITER ;
 
+-- Un trigger qui vérifie si la date d'embauche est dans le futur, sinon cela génère un code d'erreur
 DELIMITER //
 CREATE TRIGGER CheckDateEmbaucheBeforeInsertEmployes
 BEFORE INSERT ON Employes
@@ -110,6 +123,7 @@ END;
 //
 DELIMITER ;
 
+-- Un trigger qui vérifie si le taux horaire de la personne respecte les normes, sinon cela génère un code d'erreur
 DELIMITER //
 CREATE TRIGGER CheckTauxHoraireBeforeInsertEmployes
 BEFORE INSERT ON Employes
@@ -125,7 +139,9 @@ DELIMITER ;
 
 
 
---                                                                   Functions  
+--                                                                   Functions
+
+-- Une function qui retourne si un employé travaille actuellement sur un projet
 DELIMITER //
 CREATE FUNCTION f_CheckIfEmployeWorkOnCurrentProject(_matriculeEmploye VARCHAR(255)) RETURNS VARCHAR(255)
 BEGIN
@@ -139,7 +155,7 @@ BEGIN
 END //
 DELIMITER ;
 
-
+-- Une function qui retourne le nom d'un client en fonction de l'id donné
 DELIMITER //
 CREATE FUNCTION f_GetClientNameById(_clientId INT) RETURNS VARCHAR(255)
 BEGIN
@@ -153,13 +169,73 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une function qui retourne le nom d'un employé en fonction du matricule donné
+DELIMITER //
+CREATE FUNCTION f_GetEmployeNameByMatricule(_matricule VARCHAR(255)) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE employeName VARCHAR(255);
+
+    SELECT nom INTO employeName
+    FROM Employes
+    WHERE matricule = _matricule;
+
+    RETURN employeName;
+END //
+DELIMITER ;
+
+-- Une function qui retourne le budget total d'un client en fonction de son id
+DELIMITER //
+CREATE FUNCTION f_GetClientBudgetTotal(_idClient INT) RETURNS DOUBLE(16, 2)
+BEGIN
+    DECLARE budgetTotal DOUBLE(16,2);
+
+    SELECT COALESCE(SUM(budget), 0) INTO budgetTotal
+    FROM Projets
+    WHERE idClient = _idClient;
+
+    RETURN budgetTotal;
+END //
+DELIMITER ;
+
+-- Une function qui retourne la durée en jour d'un projet en fonction de son numéro
+DELIMITER //
+CREATE FUNCTION f_GetProjetDuree(_numProjet VARCHAR(11)) RETURNS INT
+BEGIN
+    DECLARE dureeProjet INT;
+
+    SELECT DATEDIFF(CURDATE(), dateDebut) INTO dureeProjet
+    FROM Projets
+    WHERE num = _numProjet AND statut = 'En cours';
+
+    RETURN dureeProjet;
+END //
+DELIMITER ;
+
+-- Une function qui retourne le nombre d'employé qui travaille actuellement sur un projet choisi par son numéro
+DELIMITER //
+CREATE FUNCTION f_GetProjetNbEmployes(_numProjet VARCHAR(11)) RETURNS INT
+BEGIN
+    DECLARE nbEmployes INT;
+
+    SELECT COUNT(DISTINCT matriculeEmploye) INTO nbEmployes
+    FROM EmployesProjets
+    WHERE numProjet = _numProjet;
+
+    RETURN nbEmployes;
+END //
+DELIMITER ;
 
 
---                                                                   Procédures --       
+
+
+
+--                                                                   Procédures --
 
 
 
 -- Insert
+
+-- Une procédure qui sert à créer un nouveau employé
 DELIMITER //
 CREATE PROCEDURE InsertEmploye(
     IN _nom VARCHAR(255),
@@ -178,6 +254,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à créer un nouveau client
 DELIMITER //
 CREATE PROCEDURE InsertClient (
     IN _nom VARCHAR(255),
@@ -192,6 +269,7 @@ END //
 
 DELIMITER ;
 
+-- Une procédure qui sert à créer un nouveau projet
 DELIMITER //
 
 CREATE PROCEDURE InsertProjet (
@@ -209,6 +287,7 @@ END //
 
 DELIMITER ;
 
+-- Une procédure qui sert à créer une nouvelle liaison entre employé et projet
 DELIMITER //
 
 CREATE PROCEDURE InsertEmployeProjet(
@@ -225,6 +304,7 @@ DELIMITER ;
 
 -- User
 
+-- Une procédure qui sert à créer un nouveau user
 DELIMITER //
 
 CREATE PROCEDURE CreateUser(
@@ -238,6 +318,7 @@ END //
 
 DELIMITER ;
 
+-- Une procédure qui sert à regarder si c'est la première fois qu'on utilise l'application
 DELIMITER //
 
 CREATE PROCEDURE CheckIfFirstUse()
@@ -251,6 +332,7 @@ END //
 
 DELIMITER ;
 
+-- Une procédure qui sert à regarder si l'user est login ou non
 DELIMITER //
 
 CREATE PROCEDURE IsUserLoggedIn()
@@ -264,6 +346,7 @@ END //
 
 DELIMITER ;
 
+-- Une procédure qui sert à connecter ou déconnecter un utilisateur
 DELIMITER //
 
 CREATE PROCEDURE LoginLogout()
@@ -277,6 +360,7 @@ BEGIN
     END IF;
 END //
 
+-- Une procédure qui gère la connexion
 DELIMITER //
 
 CREATE PROCEDURE Connexion(
@@ -292,8 +376,9 @@ END //
 DELIMITER ;
 
 
--- Update 
+-- Update
 
+-- Une procédure qui sert à modifier un employé existant
 DELIMITER //
 CREATE PROCEDURE UpdateEmployee (
     IN _matricule VARCHAR(10),
@@ -323,6 +408,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à modifier un client existant
 DELIMITER //
 CREATE PROCEDURE UpdateClient (
     IN _id INT,
@@ -342,6 +428,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à modifier un projet existant
 DELIMITER //
 CREATE PROCEDURE UpdateProject (
     IN _num VARCHAR(11),
@@ -363,6 +450,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à modifier une liaison entre employé et projet existant
 DELIMITER //
 CREATE PROCEDURE UpdateEmployeeProject (
     IN _numProjet VARCHAR(11),
@@ -378,6 +466,7 @@ DELIMITER ;
 
 -- Delete
 
+-- Une procédure qui sert à supprimer un employé existant
 DELIMITER //
 CREATE PROCEDURE DeleteEmployee (
     IN _matricule VARCHAR(10)
@@ -387,6 +476,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à supprimer un client existant
 DELIMITER //
 CREATE PROCEDURE DeleteClient (
     IN _id INT
@@ -396,6 +486,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à supprimer un projet existant
 DELIMITER //
 CREATE PROCEDURE DeleteProject (
     IN _num VARCHAR(11)
@@ -405,6 +496,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à supprimer une laison entre employé et projet existante par employé
 DELIMITER //
 CREATE PROCEDURE DeleteEmployeeProjectByEmployee (
     IN _numProjet VARCHAR(11),
@@ -415,6 +507,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Une procédure qui sert à supprimer une laison entre employé et projet existante par projet
 DELIMITER //
 CREATE PROCEDURE DeleteEmployeeProjectByProject (
     IN _numProjet VARCHAR(11)
@@ -425,6 +518,8 @@ END //
 DELIMITER ;
 
 -- Vérification
+
+-- Une procédure qui sert à regarder si un employé travaille sur un projet en cours
 DELIMITER //
 CREATE PROCEDURE CheckIfEmployeWorkOnCurrentProject(
     IN _matriculeEmploye VARCHAR(10)
@@ -435,7 +530,7 @@ END //
 DELIMITER ;
 
 
---                                                                   Données                                                                 
+--                                                                   Données
 
 -- Employé
 CALL InsertEmploye('Pipoco', 'Isaac', 'pipoco@hotmail.music', '2005-01-15', '123 Main St', '2022-01-01', 20, 'https://boroktimes.com/storage/2023/07/channels4_profile.jpeg', 'Permanent');
@@ -487,8 +582,9 @@ CALL InsertEmployeProjet((SELECT num FROM projets LIMIT 1 OFFSET 9),(SELECT matr
 
 
 
---                                                                   Views                                                           
--- 1. Employés avec leurs projets actuels
+--                                                                   Views
+-- 1. View qui génère la liste des employés avec leurs projets actuels
+-- Relation
 CREATE VIEW View_EmployesProjetsActuels AS
 SELECT
     E.nom,
@@ -503,46 +599,45 @@ JOIN
     Projets P ON EP.numProjet = P.num;
 
 -- 2. Liste clients avec le nombre de projets en cours
+-- Sous-requête
 CREATE VIEW View_ListeClientsNbProjets AS
 SELECT
     C.nom,
-    COUNT(P.num) AS nb_projets_en_cours
-FROM
-    Clients C
-LEFT JOIN
-    Projets P ON C.id = P.idClient
-WHERE
-    P.statut = 'En cours'
-GROUP BY
-    C.nom, C.id;
+    (
+        SELECT COUNT(P.num)
+        FROM Projets P
+        WHERE P.idClient = C.id AND P.statut = 'En cours'
+    ) AS nb_projets_en_cours
+FROM Clients C;
 
 -- 3. Liste projets avec le nombre total d'heures travaillées
+-- Sous-requête
 CREATE VIEW View_ProjetsNbHeuresTotal AS
 SELECT
     P.titre,
-    SUM(EP.nbHeures) AS total_heures_travaillees
-FROM
-    Projets P
-LEFT JOIN
-    EmployesProjets EP ON P.num = EP.numProjet
-GROUP BY
-    P.titre, P.num;
+    (
+        SELECT SUM(EP.nbHeures)
+        FROM EmployesProjets EP
+        WHERE EP.numProjet = P.num
+    ) AS total_heures_travaillees
+FROM Projets P;
 
 -- 4. Liste des employés avec leur salaire total
+-- Sous-requête
 CREATE VIEW View_ListeEmployesSalaireTotal AS
 SELECT
     E.matricule,
     E.nom,
     E.prenom,
-    SUM(EP.nbHeures * E.tauxHoraire) AS salaire_total
-FROM
-    Employes E
-JOIN
-    EmployesProjets EP ON E.matricule = EP.matriculeEmploye
-GROUP BY
-    E.matricule, E.nom, E.prenom;
+    (
+        SELECT SUM(EP.nbHeures * E.tauxHoraire)
+        FROM EmployesProjets EP
+        WHERE EP.matriculeEmploye = E.matricule
+    ) AS salaire_total
+FROM Employes E;
 
 -- 5. Liste des projets terminés
+-- Relation
 CREATE VIEW View_ProjetsTermines AS
 SELECT
     P.titre,
@@ -560,11 +655,11 @@ JOIN
 WHERE
     P.statut = 'Terminé';
 
---                                                                   Requêtes --                                                                  
+--                                                                   Requêtes --
 /*
 -- 1. Liste des employés avec leurs projets actuels
-SELECT * FROM View_EmployesProjetsActuels;
 
+SELECT * FROM View_EmployesProjetsActuels;
 -- 2. Liste des clients avec leur nombre de projets en cours
 SELECT * FROM View_ListeClientsNbProjets;
 
@@ -577,13 +672,46 @@ SELECT * FROM View_ListeEmployesSalaireTotal;
 -- 5. Liste des projets terminés
 SELECT * FROM View_ProjetsTermines;
 
--- 6.
+-- 6. Liste des clients avec leur budget total
+SELECT
+    C.nom AS client,
+    f_GetClientBudgetTotal(C.id) AS budget_total
+FROM
+    Clients C;
 
--- 7.
+-- 7. Liste des projets avec leur durée en jour
+SELECT
+    P.titre AS projet,
+    f_GetProjetDuree(P.num) AS duree_en_jours
+FROM
+    Projets P
+WHERE
+    P.statut = 'En cours';
+-- 8. Liste des projets avec le nombre d'employé qui travaille sur le projet
+SELECT
+    P.titre AS projet,
+    f_GetProjetNbEmployes(P.num) AS nb_employes
+FROM
+    Projets P;
 
--- 8. 
+-- 9. Liste des projets avec le % du budget utilisé
+SELECT
+    titre AS projet,
+    statut,
+    (totalSalaire / budget) * 100 AS pourcentage_avancement
+FROM
+    Projets;
 
--- 9.
-
--- 10.
+-- 10. Liste des employés qui ne travaille sur aucun projet
+SELECT
+    E.nom,
+    E.prenom
+FROM
+    Employes E
+WHERE
+    NOT EXISTS (
+        SELECT 1
+        FROM EmployesProjets EP
+        WHERE E.matricule = EP.matriculeEmploye
+    );
 */
