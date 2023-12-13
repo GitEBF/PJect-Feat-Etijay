@@ -14,19 +14,19 @@
             <Grid ColumnDefinitions="2*,2*" RowDefinitions="9*, 1*">
                 <StackPanel Grid.Column="0" Grid.Row="0">
 
-                    <TextBox x:Name="tb_Nom" PlaceholderText="Nom" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Nom" Header="Nom" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Nom" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Adresse" PlaceholderText="Adresse" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Adresse" Header="Adresse" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Adresse" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_NumTelephone" PlaceholderText="Numéro téléphone" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_NumTelephone" Header="Numéro téléphone" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_NumTelephone" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
 
-                    <TextBox x:Name="tb_Email" PlaceholderText="Email" Width="320" Margin="20 20 20 20"/>
+                    <TextBox x:Name="tb_Email" Header="Email" Width="320" Margin="20 20 20 20"/>
                     <TextBlock x:Name="tblErreur_Email" HorizontalAlignment="Center" FontSize="15" Foreground="red" />
 
                 </StackPanel>

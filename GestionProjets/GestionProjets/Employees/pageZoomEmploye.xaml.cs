@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.WindowsAppSDK.Runtime.Packages;
 using GestionProjets.Singletons;
 using GestionProjets.Objets;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,7 +28,6 @@ namespace GestionProjets
     public sealed partial class pageZoomEmploye : Page
     {
         Employe item;
-        int index;
         public pageZoomEmploye()
         {
             this.InitializeComponent();
@@ -35,8 +35,7 @@ namespace GestionProjets
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            index = (int)e.Parameter;
-            item = SingletonEmploye.getInstance().GetEmploye(index);
+            item = (Employe)e.Parameter;
             tbl_Matricule.Text = item.Matricule.ToString();
             tbl_NomPrenom.Text = "Nom: " + item.Prenom + ' ' + item.Nom;
             tbl_Email.Text = "Email: " + item.Email;
@@ -45,6 +44,12 @@ namespace GestionProjets
             tbl_dateEmbauche.Text = "DateEmbauche: " + item.DateEmbauche;
             tbl_dateNaissance.Text = "DateNaissance: " + item.DateNaissance;
             tbl_tauxHoraire.Text = "TauxHoraire: " + item.TauxHoraire.ToString("F2") + "$";
+            try {
+                photo.Source = new BitmapImage(new Uri(item.Photo, UriKind.Absolute));
+            } catch {
+                photoError.Text = "L'image est indisponible";
+            }
+            
             string projectName = SingletonBD.getInstance().getEmployeCurrentProject(item.Matricule);
             tbl_travailSur.Text = "L'employé travail présentement sur le projet: " + projectName;
             if (!SingletonBD.getInstance().isUserLoggedIn())
@@ -60,10 +65,9 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().DeleteAllEmployeeProjectByEmployee(item.Matricule);
+            SingletonBD.getInstance().deleteEmployee(item.Matricule);
             this.Frame.Navigate(typeof(pageGestionEmploye));
-            SingletonBD.getInstance().DeleteAllEmployeeProjectByEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
-            SingletonBD.getInstance().deleteEmployee(SingletonEmploye.getInstance().GetEmploye(index).Matricule);
-            SingletonEmploye.getInstance().supprimer(index);
         }
     }
 }

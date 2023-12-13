@@ -43,6 +43,18 @@ namespace GestionProjets.Singletons
             return liste[0];
         }
 
+        public string GetClientWithId(int id)
+        {
+            foreach (Client item in liste)
+            {
+                if (item.Id == id)
+                {
+                    return item.Nom;
+                }
+            }
+            return liste[0].Nom;
+        }
+
         public void ajouter(Client client)
         {
             liste.Add(client);

@@ -28,7 +28,6 @@ namespace GestionProjets
     public sealed partial class pageZoomProjet : Page
     {
         Projet item;
-        int index;
         ObservableCollection<EmployeProjet> listeEmployes;
         public pageZoomProjet()
         {
@@ -38,8 +37,7 @@ namespace GestionProjets
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            index = (int)e.Parameter;
-            item = SingletonProjet.getInstance().GetProjet(index);
+            item = (Projet)e.Parameter;
             tbl_Num.Text = "N. " + item.Num.ToString();
             tbl_Titre.Text = item.Titre;
             tbl_DateDebut.Text = "Date de début: " + item.DateDebut;
@@ -52,6 +50,8 @@ namespace GestionProjets
             if (!SingletonBD.getInstance().isUserLoggedIn())
             {
                 admin.Visibility = Visibility.Collapsed;
+                btn_Ajouter.Visibility = Visibility.Collapsed;
+                btn_State.Visibility = Visibility.Collapsed;
             }
             if (item.Statut == "Terminé")
             {
@@ -65,11 +65,24 @@ namespace GestionProjets
             }
         }
 
-        private void btn_State_Click(object sender, RoutedEventArgs e)
+        private async void btn_State_Click(object sender, RoutedEventArgs e)
         {
-            tbl_Statut.Text = "Statut: Terminé";
-            btn_State.Visibility = Visibility.Collapsed;
-            SingletonBD.getInstance().UpdateProjetStatus(item.Num);
+            try {
+                ContentDialogFermerProjet dialog = new ContentDialogFermerProjet();
+                dialog.XamlRoot = GridBase.XamlRoot;
+                dialog.Title = "Fermer le projet";
+                dialog.PrimaryButtonText = "Oui";
+                dialog.SecondaryButtonText = "Non";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+
+                ContentDialogResult resultat = await dialog.ShowAsync();
+                if (resultat == ContentDialogResult.Primary) {
+                    tbl_Statut.Text = "Statut: Terminé";
+                    btn_State.Visibility = Visibility.Collapsed;
+                    SingletonBD.getInstance().UpdateProjetStatus(item.Num);
+                }
+            } catch {
+            }
         }
 
         private void btn_Modifier_Click(object sender, RoutedEventArgs e)
@@ -79,10 +92,9 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().deleteEmployeeProjectByProject(item.Num);
+            SingletonBD.getInstance().deleteProjet(item.Num);
             this.Frame.Navigate(typeof(pageGestionProjet));
-            SingletonBD.getInstance().deleteEmployeeProjectByProject(SingletonProjet.getInstance().GetProjet(index).Num);
-            SingletonBD.getInstance().deleteProjet(SingletonProjet.getInstance().GetProjet(index).Num);
-            SingletonProjet.getInstance().supprimer(index);
         }
 
         private void lv_liste_SelectionChanged(object sender, SelectionChangedEventArgs e)

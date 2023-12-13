@@ -62,12 +62,28 @@ namespace GestionProjets.Employees
             lv_liste.ItemsSource = filteredList;
         }
 
-        private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e) {
+        private async void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e) {
             if (item != null)
-            {
+            {       
+                try {
                     Employe employe = SingletonEmploye.getInstance().getEmployeNoProjects(lv_liste.SelectedIndex);
-                    SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, 0);
+                    string titre = "Veuillez mettre les heures que " + employe.Prenom + " à travailler dans le projet " + item.Titre;
+                    ContentDialogEmployeProjet dialog = new ContentDialogEmployeProjet(titre);
+                    dialog.XamlRoot = GridBase.XamlRoot;
+                    dialog.Title = "Ajout d'un employé.";
+                    dialog.PrimaryButtonText = "Accepter";
+                    dialog.SecondaryButtonText = "Canceller";
+                    dialog.DefaultButton = ContentDialogButton.Primary;
+
+                    ContentDialogResult resultat = await dialog.ShowAsync();
+                    if (resultat == ContentDialogResult.Primary && dialog.Accepted) {
+                        SingletonBD.getInstance().addEmployeProjet(item.Num, employe.Matricule, dialog.NbHeures);
+                    }
+                    
                     this.Frame.Navigate(typeof(pageGestionProjet));
+                } catch { 
+                }
+     
                   
             }
         }

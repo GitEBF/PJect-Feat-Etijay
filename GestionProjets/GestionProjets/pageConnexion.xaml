@@ -29,7 +29,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="2" Padding="20">
-                <TextBox x:Name="passwordAdd" Header="Mot de passe" VerticalAlignment="Top"/>
+                <PasswordBox x:Name="passwordAdd" Header="Mot de passe" VerticalAlignment="Top"/>
                 <TextBlock x:Name="passwordErreur" Foreground="Red" FontSize="15" />
             </StackPanel>
 

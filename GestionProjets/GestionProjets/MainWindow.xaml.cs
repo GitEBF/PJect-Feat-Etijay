@@ -45,7 +45,7 @@ namespace GestionProjets
                 contentFrame.Navigate(typeof(pageGestionProjet));
                 if (SingletonBD.getInstance().isUserLoggedIn())
                 {
-                    NavItem_Connexion.Content = "Déconnexion";
+                    NavItem_Connexion.Content = "Dï¿½connexion";
                     var foreground = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCritical"];
                     var background = (Color)Microsoft.UI.Xaml.Application.Current.Resources["SystemFillColorCriticalBackground"];
                     UpdateNavItemColor(foreground, background);
@@ -98,6 +98,7 @@ namespace GestionProjets
                             activePane = true;
 
                             btExport_Click();
+                            
                         }
                         break;
                     case "NavItem_Connexion":
@@ -109,31 +110,68 @@ namespace GestionProjets
 
         private async void btExport_Click()
         {
-            var picker = new Windows.Storage.Pickers.FileSavePicker();
-            picker.SuggestedFileName = "Projet";
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(new Window());
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
-            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+            try
+            {
+                var picker = new Windows.Storage.Pickers.FileSavePicker();
+                picker.SuggestedFileName = "Projet";
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(new Window());
+                WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+                picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
 
-            //crée le fichier
-            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+                //crï¿½e le fichier
+                Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
-            var lines = SingletonProjet.getInstance().getProjetListe()
+            var lines = new List<string>();
+
+            // Add CSV header line
+            string header = string.Join(",",
+                "\"Num\"",
+                "\"Titre\"",
+                "\"Budget\"",
+                "\"Statut\"",
+                "\"IdClient\"",
+                "\"DateDebut\"",
+                "\"Description\"",
+                "\"NbEmploye\"",
+                "\"TotalSalaire\"");
+            lines.Add(header);
+
+            // Add data lines
+            lines.AddRange(SingletonProjet.getInstance().getProjetListe()
                 .Select(projet => string.Join(",",
-        "\"" + (projet.Num) + "\"",
-        "\"" + (projet.Titre) + "\"",
-        "\"" + (projet.Budget) + "\"",
-        "\"" + (projet.Statut) + "\"",
-        "\"" + (projet.IdClient) + "\"",
-        "\"" + (projet.DateDebut) + "\"",
-        "\"" + (projet.Description) + "\"",
-        "\"" + (projet.NbEmploye) + "\"",
-        "\"" + (projet.TotalSalaire) + "\""));
+                    "\"" + projet.Num + "\"",
+                    "\"" + projet.Titre + "\"",
+                    "\"" + projet.Budget + "\"",
+                    "\"" + projet.Statut + "\"",
+                    "\"" + projet.IdClient + "\"",
+                    "\"" + projet.DateDebut + "\"",
+                    "\"" + projet.Description + "\"",
+                    "\"" + projet.NbEmploye + "\"",
+                    "\"" + projet.TotalSalaire + "\"")));
 
-            await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            // Now 'lines' contains both the header and the data lines
 
-            //écrit dans le fichier chacune des lignes du tableau
-            //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            try {
+                if (monFichier != null) {
+                    await Windows.Storage.FileIO.WriteTextAsync(monFichier, string.Join(Environment.NewLine, lines), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                }
+                
+            } catch { 
+            
+            } finally {
+
+                activePane = false;
+            }
+            
+
+                //ï¿½crit dans le fichier chacune des lignes du tableau
+                //await Windows.Storage.FileIO.WriteLinesAsync(monFichier, SingletonProjet.getInstance().getProjetListe().ToList().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }

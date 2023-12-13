@@ -30,7 +30,8 @@ namespace GestionProjets {
         public void LoadAll(string tableName, Action<MySqlDataReader> table) {
             using MySqlCommand command = con.CreateCommand();
             con.Open();
-            command.CommandText = $"SELECT * FROM {tableName}";
+            command.CommandText = "CALL LoadAll(@tableName)";
+            command.Parameters.AddWithValue("@tableName", tableName);
 
             using MySqlDataReader r = command.ExecuteReader();
             while (r.Read()) {
@@ -223,6 +224,25 @@ namespace GestionProjets {
             }
         }
 
+        public void DeleteProjectsByClient(int id)
+        {
+            try
+            {
+                MySqlCommand command = con.CreateCommand();
+                command.CommandText = "CALL DeleteProjectsByClient(@id)";
+                con.Open();
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public void LoadAllProjet() {
             SingletonProjet sProjet = SingletonProjet.getInstance();
             sProjet.refresh();
@@ -370,23 +390,10 @@ namespace GestionProjets {
             }
         }
 
-
-
-        public string GetClientNameById(int id)
-        {
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT f_GetClientNameById(@id);";
-            con.Open();
-            command.Parameters.AddWithValue("@id", id);
-            string result = (string)command.ExecuteScalar();
-            con.Close();
-            return result;
-        }
-
         public void UpdateProjetStatus(string num)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "CALL UpdateProjectStatus('@num');";
+            command.CommandText = "CALL UpdateProjectStatus(@num);";
             con.Open();
             command.Parameters.AddWithValue("@num", num);
             command.ExecuteNonQuery();

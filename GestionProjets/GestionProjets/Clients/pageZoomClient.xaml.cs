@@ -35,8 +35,7 @@ namespace GestionProjets
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            index = (int)e.Parameter;
-            item = SingletonClient.getInstance().GetClient(index);
+            item = (Client)e.Parameter;
             tbl_Id.Text = item.Id.ToString();
             tbl_Nom.Text = "Nom: " + item.Nom;
             tbl_Adresse.Text = "Adresse: " + item.Adresse;
@@ -55,9 +54,9 @@ namespace GestionProjets
 
         private void btn_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonBD.getInstance().DeleteProjectsByClient(item.Id);
+            SingletonBD.getInstance().deleteClient(item.Id);
             this.Frame.Navigate(typeof(pageGestionClient));
-            SingletonBD.getInstance().deleteClient(SingletonClient.getInstance().GetClient(index).Id);
-            SingletonClient.getInstance().supprimer(index);
         }
 
         private void btn_Projet_Click(object sender, RoutedEventArgs e) {

@@ -79,10 +79,34 @@ CREATE TRIGGER AfterInsertEmployesProjets
 AFTER INSERT ON EmployesProjets
 FOR EACH ROW
 BEGIN
-    UPDATE Projets SET totalSalaire = totalSalaire + (NEW.nbHeures * (SELECT tauxHoraire FROM Employes WHERE matricule = NEW.matriculeEmploye)) WHERE num = NEW.numProjet;
+    UPDATE Projets SET totalSalaire = (NEW.nbHeures * (SELECT tauxHoraire FROM Employes WHERE matricule = NEW.matriculeEmploye)) WHERE num = NEW.numProjet;
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER BeforeInsertEmployesProjets
+BEFORE INSERT ON employesprojets
+FOR EACH ROW
+BEGIN
+    SET NEW.salaireTotalPayer = (NEW.nbHeures * (SELECT tauxHoraire FROM Employes WHERE matricule = NEW.matriculeEmploye));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER AfterUpdateEmployesProjets
+AFTER UPDATE
+ON employesprojets
+FOR EACH ROW
+BEGIN
+    UPDATE Projets 
+    SET totalSalaire = totalSalaire + salaireTotalPayer
+    WHERE num = NEW.numProjet;
+END;
+//
+DELIMITER ;
+
 
 DELIMITER //
 CREATE TRIGGER CheckAgeBeforeInsertEmployes

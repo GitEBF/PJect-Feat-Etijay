@@ -30,6 +30,7 @@ namespace GestionProjets
     {
         GridView liste = null;
         ObservableCollection<Projet> listeProjet = new ObservableCollection<Projet>();
+        ObservableCollection<Projet> filteredList ;
         public pageGestionProjet()
         {
             this.InitializeComponent();
@@ -53,15 +54,17 @@ namespace GestionProjets
             }
 
             SingletonMainWindow.getInstance().MainWindow.ChangeSelectedItem();
+            changes();
         }
 
         private void changes() {
             string searchTermMatricule = searchBoxMatricule.Text.ToLower();
             string status = cb_status.SelectedValue.ToString();
 
-            var filteredList = listeProjet
-                .Where(item => item.Titre.ToLower().Contains(searchTermMatricule.ToLower()) && item.Statut.ToString() == status)
-                .ToList();
+            filteredList = new ObservableCollection<Projet>(
+               listeProjet
+                   .Where(item => item.Titre.ToLower().Contains(searchTermMatricule.ToLower()) && item.Statut.ToString() == status)
+           );
             if (liste != null) {
                 lv_liste.ItemsSource = filteredList;
             }
@@ -75,7 +78,7 @@ namespace GestionProjets
 
         private void lv_liste_ItemClick(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(pageZoomProjet), lv_liste.SelectedIndex);
+            this.Frame.Navigate(typeof(pageZoomProjet), lv_liste.SelectedItem);
         }
 
         private void btn_Ajouter_Click(object sender, RoutedEventArgs e) {
